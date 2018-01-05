@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BE1526714AFEDAD6A45A290 /* Pods_ARMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */; };
+		491EB1CB6CC39FF7D90A55B5 /* Pods_ARMonitoringTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */; };
+		4F507E51665F2DC8178B77D7 /* Pods_ARMonitoringUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97C7D1DFB315EB0C5BB167F /* Pods_ARMonitoringUITests.framework */; };
 		82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D1220002ABC00005705 /* AppDelegate.swift */; };
 		82E91D1520002ABC00005705 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 82E91D1420002ABC00005705 /* art.scnassets */; };
 		82E91D1720002ABC00005705 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D1620002ABC00005705 /* ViewController.swift */; };
@@ -15,6 +18,7 @@
 		82E91D1F20002ABC00005705 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82E91D1D20002ABC00005705 /* LaunchScreen.storyboard */; };
 		82E91D2A20002ABC00005705 /* ARMonitoringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D2920002ABC00005705 /* ARMonitoringTests.swift */; };
 		82E91D3520002ABC00005705 /* ARMonitoringUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D3420002ABC00005705 /* ARMonitoringUITests.swift */; };
+		82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D4220002D7600005705 /* ConnectionTestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		245F119FF2755A99F08448D9 /* Pods-ARMonitoringTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests.debug.xcconfig"; sourceTree = "<group>"; };
+		27A5A8D54E89F60A827A9956 /* Pods-ARMonitoring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoring.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring.debug.xcconfig"; sourceTree = "<group>"; };
+		7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoringTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E91D0F20002ABC00005705 /* ARMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E91D1220002ABC00005705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82E91D1420002ABC00005705 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -49,6 +56,13 @@
 		82E91D3020002ABC00005705 /* ARMonitoringUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARMonitoringUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E91D3420002ABC00005705 /* ARMonitoringUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMonitoringUITests.swift; sourceTree = "<group>"; };
 		82E91D3620002ABC00005705 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82E91D4220002D7600005705 /* ConnectionTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTestViewController.swift; sourceTree = "<group>"; };
+		867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F8BDCFDA6B73D31A23F5634 /* Pods-ARMonitoringUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringUITests/Pods-ARMonitoringUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A018690E0524F688EADD6C17 /* Pods-ARMonitoringTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests.release.xcconfig"; sourceTree = "<group>"; };
+		A6AE96F6944040492F9B42BA /* Pods-ARMonitoringUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringUITests/Pods-ARMonitoringUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DB7DF5825DE044963DE2A8B5 /* Pods-ARMonitoring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoring.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring.release.xcconfig"; sourceTree = "<group>"; };
+		E97C7D1DFB315EB0C5BB167F /* Pods_ARMonitoringUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoringUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BE1526714AFEDAD6A45A290 /* Pods_ARMonitoring.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				491EB1CB6CC39FF7D90A55B5 /* Pods_ARMonitoringTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +86,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F507E51665F2DC8178B77D7 /* Pods_ARMonitoringUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61366735142637CB0C74AAF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */,
+				7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */,
+				E97C7D1DFB315EB0C5BB167F /* Pods_ARMonitoringUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F424D8453F9A57D29DF7B7C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				27A5A8D54E89F60A827A9956 /* Pods-ARMonitoring.debug.xcconfig */,
+				DB7DF5825DE044963DE2A8B5 /* Pods-ARMonitoring.release.xcconfig */,
+				245F119FF2755A99F08448D9 /* Pods-ARMonitoringTests.debug.xcconfig */,
+				A018690E0524F688EADD6C17 /* Pods-ARMonitoringTests.release.xcconfig */,
+				A6AE96F6944040492F9B42BA /* Pods-ARMonitoringUITests.debug.xcconfig */,
+				8F8BDCFDA6B73D31A23F5634 /* Pods-ARMonitoringUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		82E91D0620002ABC00005705 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +123,8 @@
 				82E91D2820002ABC00005705 /* ARMonitoringTests */,
 				82E91D3320002ABC00005705 /* ARMonitoringUITests */,
 				82E91D1020002ABC00005705 /* Products */,
+				6F424D8453F9A57D29DF7B7C /* Pods */,
+				61366735142637CB0C74AAF8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +141,7 @@
 		82E91D1120002ABC00005705 /* ARMonitoring */ = {
 			isa = PBXGroup;
 			children = (
+				82E91D44200036A000005705 /* Model */,
 				82E91D1220002ABC00005705 /* AppDelegate.swift */,
 				82E91D1420002ABC00005705 /* art.scnassets */,
 				82E91D1620002ABC00005705 /* ViewController.swift */,
@@ -106,6 +149,7 @@
 				82E91D1B20002ABC00005705 /* Assets.xcassets */,
 				82E91D1D20002ABC00005705 /* LaunchScreen.storyboard */,
 				82E91D2020002ABC00005705 /* Info.plist */,
+				82E91D4220002D7600005705 /* ConnectionTestViewController.swift */,
 			);
 			path = ARMonitoring;
 			sourceTree = "<group>";
@@ -128,6 +172,13 @@
 			path = ARMonitoringUITests;
 			sourceTree = "<group>";
 		};
+		82E91D44200036A000005705 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +186,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 82E91D3920002ABC00005705 /* Build configuration list for PBXNativeTarget "ARMonitoring" */;
 			buildPhases = (
+				63E917412CBDDFA6413C5BD2 /* [CP] Check Pods Manifest.lock */,
 				82E91D0B20002ABC00005705 /* Sources */,
 				82E91D0C20002ABC00005705 /* Frameworks */,
 				82E91D0D20002ABC00005705 /* Resources */,
+				018C54CFEACD3E4F0D011AF1 /* [CP] Embed Pods Frameworks */,
+				0E2567ED4AE5B0E4FBC61C8C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +206,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 82E91D3C20002ABC00005705 /* Build configuration list for PBXNativeTarget "ARMonitoringTests" */;
 			buildPhases = (
+				364716DC78725EFB35DBA2B2 /* [CP] Check Pods Manifest.lock */,
 				82E91D2120002ABC00005705 /* Sources */,
 				82E91D2220002ABC00005705 /* Frameworks */,
 				82E91D2320002ABC00005705 /* Resources */,
+				B33F3EF421DBA8A5539BE548 /* [CP] Embed Pods Frameworks */,
+				5E7FB13433FBE67E2DFB3C41 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +227,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 82E91D3F20002ABC00005705 /* Build configuration list for PBXNativeTarget "ARMonitoringUITests" */;
 			buildPhases = (
+				2797522DF355789784FA1427 /* [CP] Check Pods Manifest.lock */,
 				82E91D2C20002ABC00005705 /* Sources */,
 				82E91D2D20002ABC00005705 /* Frameworks */,
 				82E91D2E20002ABC00005705 /* Resources */,
+				26C8E23B119048C7CB361051 /* [CP] Embed Pods Frameworks */,
+				B5806CFDE0DB7C55A9AAF757 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -258,12 +318,165 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		018C54CFEACD3E4F0D011AF1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
+				"${BUILT_PRODUCTS_DIR}/StompClientLib/StompClientLib.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StompClientLib.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0E2567ED4AE5B0E4FBC61C8C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		26C8E23B119048C7CB361051 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoringUITests/Pods-ARMonitoringUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2797522DF355789784FA1427 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARMonitoringUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		364716DC78725EFB35DBA2B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARMonitoringTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E7FB13433FBE67E2DFB3C41 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63E917412CBDDFA6413C5BD2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARMonitoring-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B33F3EF421DBA8A5539BE548 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5806CFDE0DB7C55A9AAF757 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoringUITests/Pods-ARMonitoringUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		82E91D0B20002ABC00005705 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				82E91D1720002ABC00005705 /* ViewController.swift in Sources */,
+				82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +641,7 @@
 		};
 		82E91D3A20002ABC00005705 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27A5A8D54E89F60A827A9956 /* Pods-ARMonitoring.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -443,6 +657,7 @@
 		};
 		82E91D3B20002ABC00005705 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB7DF5825DE044963DE2A8B5 /* Pods-ARMonitoring.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -458,6 +673,7 @@
 		};
 		82E91D3D20002ABC00005705 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 245F119FF2755A99F08448D9 /* Pods-ARMonitoringTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -475,6 +691,7 @@
 		};
 		82E91D3E20002ABC00005705 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A018690E0524F688EADD6C17 /* Pods-ARMonitoringTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -492,6 +709,7 @@
 		};
 		82E91D4020002ABC00005705 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6AE96F6944040492F9B42BA /* Pods-ARMonitoringUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -508,6 +726,7 @@
 		};
 		82E91D4120002ABC00005705 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F8BDCFDA6B73D31A23F5634 /* Pods-ARMonitoringUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
