@@ -19,6 +19,7 @@
 		82E91D2A20002ABC00005705 /* ARMonitoringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D2920002ABC00005705 /* ARMonitoringTests.swift */; };
 		82E91D3520002ABC00005705 /* ARMonitoringUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D3420002ABC00005705 /* ARMonitoringUITests.swift */; };
 		82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D4220002D7600005705 /* ConnectionTestViewController.swift */; };
+		82E91D4820004BE500005705 /* DataLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D4720004BE500005705 /* DataLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		82E91D3420002ABC00005705 /* ARMonitoringUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMonitoringUITests.swift; sourceTree = "<group>"; };
 		82E91D3620002ABC00005705 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82E91D4220002D7600005705 /* ConnectionTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTestViewController.swift; sourceTree = "<group>"; };
+		82E91D4720004BE500005705 /* DataLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLog.swift; sourceTree = "<group>"; };
 		867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F8BDCFDA6B73D31A23F5634 /* Pods-ARMonitoringUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringUITests/Pods-ARMonitoringUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A018690E0524F688EADD6C17 /* Pods-ARMonitoringTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		82E91D44200036A000005705 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				82E91D4720004BE500005705 /* DataLog.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -326,13 +329,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/StompClientLib/StompClientLib.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StompClientLib.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -475,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82E91D4820004BE500005705 /* DataLog.swift in Sources */,
 				82E91D1720002ABC00005705 /* ViewController.swift in Sources */,
 				82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,

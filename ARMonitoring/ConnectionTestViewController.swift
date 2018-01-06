@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import StompClientLib
+import ObjectMapper
 
 class ConnectionTestViewController: UIViewController, StompClientLibDelegate {
     
@@ -19,24 +20,18 @@ class ConnectionTestViewController: UIViewController, StompClientLibDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.displayInfo.text = ""
+        
         let url = NSURL(string: "http://10.3.50.6:80/dataLogWS/websocket")!
         socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url as URL), delegate: self)
     }
     
-    func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, withHeader header: [String : String]?, withDestination destination: String) {
+    func stompClientDidConnect(client: StompClientLib!) {
         print("------------------------")
-        print("stompClient w/ jsonBody as anyObject")
-        print("========================")
-        print(jsonBody as! String)
+        print("Websocket connected!")
         print("------------------------")
-    }
-    
-    func stompClientJSONBody(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-        print("------------------------")
-        print("stompClient w/ jsonBody as string")
-        print("========================")
-        print(jsonBody as Any)
-        print("------------------------")
+        
+        client.subscribe(destination: "/topic/dataLog")
     }
     
     func stompClientDidDisconnect(client: StompClientLib!) {
@@ -45,12 +40,24 @@ class ConnectionTestViewController: UIViewController, StompClientLibDelegate {
         print("------------------------")
     }
     
-    func stompClientDidConnect(client: StompClientLib!) {
+    func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, withHeader header: [String : String]?, withDestination destination: String) {
         print("------------------------")
-        print("Websocket connected!")
+        print("stompClient w/ jsonBody as anyObject")
+//        print("========================")
+//        if let test = Mapper<DataLog>().map(JSONObject: jsonBody) {
+//            print(test.toJSONString(prettyPrint: true) as Any)
+//        }
         print("------------------------")
-        
-        client.subscribe(destination: "topic/dataLog")
+    }
+    
+    func stompClientJSONBody(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
+        print("------------------------")
+        print("stompClientJSONBody w/ jsonBody as string")
+        print("========================")
+        if let dl: DataLog = DataLog(JSONString: jsonBody!) {
+            self.displayInfo.text.append(dl.toString() + "\n-----------------------------\n")
+        }
+        print("------------------------")
     }
     
     func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {

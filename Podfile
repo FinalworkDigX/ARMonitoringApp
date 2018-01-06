@@ -7,6 +7,8 @@ target 'ARMonitoring' do
 
   # Pods for ARMonitoring
   pod "StompClientLib"
+  pod 'SwiftyJSON'
+  pod 'ObjectMapper', '~> 3.1'
 
   target 'ARMonitoringTests' do
     inherit! :search_paths
