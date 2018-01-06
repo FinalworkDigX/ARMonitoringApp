@@ -28,6 +28,12 @@ class DataLog: Mappable {
     }
     
     func toString() -> String {
-        return String("id: \(id), item_id: \(item_id), information: \(information), timestamp: \(timestamp)")
+        var message = ""
+        message += "id:\n \(id!),\n"
+        message += "item_id:\n \(item_id!),\n"
+        message += "information:\n \(information!),\n"
+        message += "timestamp:\n \(timestamp!),\n"
+        
+        return message
     }
 }
