@@ -10,19 +10,58 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--AR View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARMonitoring" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="AR View Controller" id="BV1-FR-VrT" customClass="ARViewController" customModule="ARMonitoring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rih-ad-tUx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4r-kN-PQQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </arscnView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGi-6L-Ipt">
+                                <rect key="frame" x="0.0" y="539" width="375" height="128"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c9i-nL-7Lo">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="5K9-63-GTG"/>
+                                    <constraint firstItem="c9i-nL-7Lo" firstAttribute="top" secondItem="KGi-6L-Ipt" secondAttribute="top" id="9Si-4C-b8M"/>
+                                    <constraint firstAttribute="trailing" secondItem="c9i-nL-7Lo" secondAttribute="trailing" id="GXl-Da-wGN"/>
+                                    <constraint firstAttribute="bottom" secondItem="c9i-nL-7Lo" secondAttribute="bottom" id="HBx-MY-5xz"/>
+                                    <constraint firstItem="c9i-nL-7Lo" firstAttribute="leading" secondItem="KGi-6L-Ipt" secondAttribute="leading" id="ueo-uF-qzh"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="n4r-kN-PQQ" firstAttribute="leading" secondItem="qEN-2i-ZDe" secondAttribute="leading" id="0Ry-HQ-eyH"/>
+                            <constraint firstItem="n4r-kN-PQQ" firstAttribute="trailing" secondItem="qEN-2i-ZDe" secondAttribute="trailing" id="5Ai-Dw-b04"/>
+                            <constraint firstItem="KGi-6L-Ipt" firstAttribute="leading" secondItem="qEN-2i-ZDe" secondAttribute="leading" id="6xd-Un-DXV"/>
+                            <constraint firstItem="n4r-kN-PQQ" firstAttribute="bottom" secondItem="qEN-2i-ZDe" secondAttribute="bottom" id="AxH-tz-WLj"/>
+                            <constraint firstItem="n4r-kN-PQQ" firstAttribute="top" secondItem="rih-ad-tUx" secondAttribute="top" id="MrX-vV-dgI"/>
+                            <constraint firstItem="KGi-6L-Ipt" firstAttribute="trailing" secondItem="qEN-2i-ZDe" secondAttribute="trailing" id="qHx-3C-V5c"/>
+                            <constraint firstItem="KGi-6L-Ipt" firstAttribute="bottom" secondItem="qEN-2i-ZDe" secondAttribute="bottom" id="rWw-KW-WRI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qEN-2i-ZDe"/>
                     </view>
+                    <connections>
+                        <outlet property="sceneView" destination="n4r-kN-PQQ" id="q7r-Rq-0zk"/>
+                        <outlet property="tmpTextArea" destination="c9i-nL-7Lo" id="xR3-el-Rny"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="669.60000000000002" y="36.431784107946029"/>
         </scene>
         <!--Connection test-->
         <scene sceneID="37Y-t4-J5x">
