@@ -21,12 +21,9 @@ class ItemNode: SCNNode {
         
         let billboardconstraint = SCNBillboardConstraint()
         billboardconstraint.freeAxes = SCNBillboardAxis.Y
-        
         constraints = [billboardconstraint]
-        
-        self.createBackground()
-        self.createNameText()
-        self.createInfoText(info: "som info to display")
+
+        self.testSetup()
         /*
          Next up
          - receive data from emitter (json)
@@ -35,24 +32,44 @@ class ItemNode: SCNNode {
          */
     }
     
+    init(withItem item:Item)
+    {
+        super.init()
+        
+        // Set constraints
+        let billboardconstraint = SCNBillboardConstraint()
+        billboardconstraint.freeAxes = SCNBillboardAxis.Y
+        constraints = [billboardconstraint]
+        
+        self.name = item.id
+        
+        setup(item: item)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // Y acces anchor at bottom
-    private func helloWorld() {
-        // add text
-        let pomTextNode = SKLabelNode(text: "pom")
-        pomTextNode.name = "pom"
-        pomTextNode.fontSize = 20
-        pomTextNode.fontName = UIFont.systemFont(ofSize: 20).fontName
-        pomTextNode.position = CGPoint(x: PLANE_SIZE/2, y: PLANE_SIZE/3)
-        pomTextNode.zPosition = -5
+    private func testSetup()
+    {
+        self.createBackground()
+        self.createNameText(name: "nameText")
+        self.createInfoText(name: "infoText", info: "som info to display", index: 1)
+    }
+    
+    private func setup(item: Item)
+    {
+        self.createBackground()
+        self.createNameText(name: item.name)
         
+        for (index, info_row) in item.row_list.enumerated() {
+            self.createInfoText(name: info_row, info: "---", index: index)
+        }
     }
     
     private func createBackground()
     {
+        // Create SubNode
         let rect = CGRect(x: 0, y: 0, width: PLANE_SIZE, height: PLANE_SIZE)
         let rectShape = SKShapeNode(rect: rect)
         rectShape.name = "backgroundShape"
@@ -61,47 +78,52 @@ class ItemNode: SCNNode {
         rectShape.lineWidth = 0.1
         rectShape.zPosition = -10
         
-        let skScene = createScene(name: "backgroundScene", size: CGSize(width: PLANE_SIZE, height: PLANE_SIZE))
+        // Add SubNode to ItemNode
+        let skScene = createScene(name: "BackgroundScene", size: CGSize(width: PLANE_SIZE, height: PLANE_SIZE))
         skScene.addChild(rectShape)
         
         let scnPlane = toPlane(name: "background", skScene: skScene)
         toChildNode(name: "background", position: SCNVector3(0, 0, -0.5), plane: scnPlane)
     }
     
-    private func createNameText()
+    private func createNameText(name: String)
     {
         print(self.name!)
+        // Create SubNode
         let nameTextNode = SKLabelNode(text: self.name!)
-        nameTextNode.name = "nameText"
+        nameTextNode.name = name
         nameTextNode.fontSize = 10
         nameTextNode.fontName = UIFont.systemFont(ofSize: 10).fontName
         nameTextNode.fontColor = SKColor.red
         nameTextNode.position = CGPoint(x: PLANE_SIZE/2, y: (PLANE_SIZE/6)*5)
         nameTextNode.zPosition = -5
         
-        let skScene = createScene(name: "nameScene", size: CGSize(width: PLANE_SIZE, height: PLANE_SIZE))
+        // Add SubNode to ItemNode
+        let skScene = createScene(name: "TitleScene", size: CGSize(width: PLANE_SIZE, height: PLANE_SIZE))
         skScene.addChild(nameTextNode)
         
-        let scnPlane = toPlane(name: "name", skScene: skScene)
-        toChildNode(name: "name", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
+        let scnPlane = toPlane(name: "TitlePlane", skScene: skScene)
+        toChildNode(name: "TitleNode", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
     }
     
-    private func createInfoText(info: String)
+    private func createInfoText(name:String, info: String, index:Int)
     {
-        print(self.name!)
-        let nameTextNode = SKLabelNode(text: info)
-        nameTextNode.name = "infoText"
+        // Create SubNode
+        let nameTextNode = SKLabelNode(text: "\(name): \(info)")
+        nameTextNode.name = name
         nameTextNode.fontSize = 10
         nameTextNode.fontName = UIFont.systemFont(ofSize: 10).fontName
         nameTextNode.fontColor = SKColor.red
-        nameTextNode.position = CGPoint(x: PLANE_SIZE/2, y: (PLANE_SIZE/6)*4)
+        nameTextNode.position = CGPoint(x: 0, y: (PLANE_SIZE/6)*CGFloat(4-index))
+        nameTextNode.horizontalAlignmentMode = .left
         nameTextNode.zPosition = -5
         
-        let skScene = createScene(name: "infoScene", size: CGSize(width: PLANE_SIZE, height: PLANE_SIZE))
+        // Add SubNode to ItemNode
+        let skScene = createScene(name: "\(name)Scene", size: CGSize(width: PLANE_SIZE, height: PLANE_SIZE))
         skScene.addChild(nameTextNode)
         
-        let scnPlane = toPlane(name: "info", skScene: skScene)
-        toChildNode(name: "info", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
+        let scnPlane = toPlane(name: "\(name)Plane", skScene: skScene)
+        toChildNode(name: "\(name)Node", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
     }
     
     private func createScene(name: String, size: CGSize) -> SKScene
