@@ -27,12 +27,22 @@ class DataLog: Mappable {
         timestamp   <- map["timestamp"]
     }
     
+    func toLog() -> String {
+        var message = ""
+        message += "id:\t\t\t\t\(id!),\n"
+        message += "item_id:\t\t\(item_id!),\n"
+        message += "information:\t\(information!),\n"
+        message += "timestamp:\t\t\(timestamp!),\n"
+        
+        return message
+    }
+    
     func toString() -> String {
         var message = ""
-        message += "id:\n \(id!),\n"
-        message += "item_id:\n \(item_id!),\n"
-        message += "information:\n \(information!),\n"
-        message += "timestamp:\n \(timestamp!),\n"
+        message += "[id: \(id!), "
+        message += "item_id: \(item_id!), "
+        message += "information: \(information!), "
+        message += "timestamp: \(timestamp!)]"
         
         return message
     }

@@ -95,7 +95,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     // WebSockets delegate
     func didReceiveJSON(dataLog: DataLog) {
-        print(dataLog)
+        print(dataLog.toLog())
     }
     
     func test(text: String) {
