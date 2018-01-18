@@ -16,6 +16,7 @@
 		82E53522200FED5D0049C5B4 /* ARSCNViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53521200FED5D0049C5B4 /* ARSCNViewExtension.swift */; };
 		82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53523200FED8E0049C5B4 /* SCNodeExtension.swift */; };
 		82E53527200FEFE50049C5B4 /* StompClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53526200FEFE50049C5B4 /* StompClientService.swift */; };
+		82E53529201014940049C5B4 /* StompClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53528201014940049C5B4 /* StompClientDelegate.swift */; };
 		82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D1220002ABC00005705 /* AppDelegate.swift */; };
 		82E91D1520002ABC00005705 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 82E91D1420002ABC00005705 /* art.scnassets */; };
 		82E91D1A20002ABC00005705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82E91D1820002ABC00005705 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		82E53521200FED5D0049C5B4 /* ARSCNViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNViewExtension.swift; sourceTree = "<group>"; };
 		82E53523200FED8E0049C5B4 /* SCNodeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNodeExtension.swift; sourceTree = "<group>"; };
 		82E53526200FEFE50049C5B4 /* StompClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompClientService.swift; sourceTree = "<group>"; };
+		82E53528201014940049C5B4 /* StompClientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompClientDelegate.swift; sourceTree = "<group>"; };
 		82E91D0F20002ABC00005705 /* ARMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E91D1220002ABC00005705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82E91D1420002ABC00005705 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				82E53526200FEFE50049C5B4 /* StompClientService.swift */,
+				82E53528201014940049C5B4 /* StompClientDelegate.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				82E53520200FED2F0049C5B4 /* SCNVector3Extensions.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,
 				82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */,
+				82E53529201014940049C5B4 /* StompClientDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

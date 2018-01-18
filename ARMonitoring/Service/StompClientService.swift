@@ -9,15 +9,16 @@
 import Foundation
 import StompClientLib
 
+//TODO: 'didCloseWithCode 1001, reason: Optional("Stream end encountered")'
+
 class StompClientService: StompClientLibDelegate {
     
-    static let sharedInstance = StompClientService();
-    
     private var socketClient: StompClientLib = StompClientLib()
-    
-    private init() {
-        let url = NSURL(string: "http://10.3.50.6:80/managerWS/websocket")!
-        socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url as URL), delegate: self)
+    public var delegate: StompClientDelegate?
+
+    func openSocket(withUrl wsurl: URL) {
+        socketClient.openSocketWithURLRequest(request: NSURLRequest(url: wsurl), delegate: self)
+        delegate?.test(text: "OpenSOcket----")
     }
     
     func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, withHeader header: [String : String]?, withDestination destination: String) {
@@ -25,7 +26,11 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func stompClientJSONBody(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-        //
+        
+        if let dl = DataLog(JSONString: jsonBody!) {
+            delegate?.didReceiveJSON(dataLog: dl)
+        }
+        
     }
     
     func stompClientDidDisconnect(client: StompClientLib!) {
@@ -33,7 +38,7 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func stompClientDidConnect(client: StompClientLib!) {
-        //
+        client.subscribe(destination: "/topic/dataLog")
     }
     
     func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {
@@ -47,6 +52,4 @@ class StompClientService: StompClientLibDelegate {
     func serverDidSendPing() {
         //
     }
-    
-    
 }

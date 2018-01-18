@@ -10,12 +10,12 @@ import Foundation
 import ARKit
 import SceneKit
 
-class ARViewController: UIViewController, ARSCNViewDelegate {
-    
+class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var tmpTextArea: UITextView!
     
+    private var stompClient: StompClientService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +31,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+        //---------
+        startWebsocket()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +69,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
      }
      */
     
+    // ARSCN delegate
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
@@ -81,13 +85,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-    //
+    // WebSockets
     func startWebsocket() -> () {
+        self.stompClient = StompClientService()
+        self.stompClient?.delegate = self
         
-        // TODO: Ovveride Service functions to affect items in this view.
-        
-//        var stomp = StompClientService.sharedInstance {
-//
-//        }
+        self.stompClient?.openSocket(withUrl: URL(string: "http://10.3.50.6:80/managerWS/websocket")!)
+    }
+    
+    // WebSockets delegate
+    func didReceiveJSON(dataLog: DataLog) {
+        print(dataLog)
+    }
+    
+    func test(text: String) {
+        print(text)
     }
 }
