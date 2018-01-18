@@ -41,16 +41,44 @@
                                     <constraint firstItem="c9i-nL-7Lo" firstAttribute="leading" secondItem="KGi-6L-Ipt" secondAttribute="leading" id="ueo-uF-qzh"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pF6-5L-9K5">
+                                <rect key="frame" x="313" y="501" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="Bor-9l-5U0"/>
+                                    <constraint firstAttribute="height" constant="30" id="QKX-Xx-K82"/>
+                                </constraints>
+                                <state key="normal" title="Test"/>
+                                <connections>
+                                    <action selector="addItemButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="4so-Pk-Ff6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vT-jD-Fi9">
+                                <rect key="frame" x="16" y="501" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="E1D-ww-Rmu"/>
+                                    <constraint firstAttribute="width" constant="46" id="nVj-fM-Py1"/>
+                                </constraints>
+                                <state key="normal" title="Room"/>
+                                <connections>
+                                    <action selector="resetRoomButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ihD-cB-Dd1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="n4r-kN-PQQ" firstAttribute="leading" secondItem="qEN-2i-ZDe" secondAttribute="leading" id="0Ry-HQ-eyH"/>
                             <constraint firstItem="n4r-kN-PQQ" firstAttribute="trailing" secondItem="qEN-2i-ZDe" secondAttribute="trailing" id="5Ai-Dw-b04"/>
                             <constraint firstItem="KGi-6L-Ipt" firstAttribute="leading" secondItem="qEN-2i-ZDe" secondAttribute="leading" id="6xd-Un-DXV"/>
+                            <constraint firstItem="qEN-2i-ZDe" firstAttribute="trailing" secondItem="pF6-5L-9K5" secondAttribute="trailing" constant="16" id="7EO-Iy-1ES"/>
                             <constraint firstItem="n4r-kN-PQQ" firstAttribute="bottom" secondItem="qEN-2i-ZDe" secondAttribute="bottom" id="AxH-tz-WLj"/>
                             <constraint firstItem="n4r-kN-PQQ" firstAttribute="top" secondItem="rih-ad-tUx" secondAttribute="top" id="MrX-vV-dgI"/>
+                            <constraint firstItem="3vT-jD-Fi9" firstAttribute="leading" secondItem="qEN-2i-ZDe" secondAttribute="leading" constant="16" id="Vas-5N-mgo"/>
+                            <constraint firstItem="KGi-6L-Ipt" firstAttribute="top" secondItem="pF6-5L-9K5" secondAttribute="bottom" constant="8" id="edy-ID-4Ia"/>
                             <constraint firstItem="KGi-6L-Ipt" firstAttribute="trailing" secondItem="qEN-2i-ZDe" secondAttribute="trailing" id="qHx-3C-V5c"/>
                             <constraint firstItem="KGi-6L-Ipt" firstAttribute="bottom" secondItem="qEN-2i-ZDe" secondAttribute="bottom" id="rWw-KW-WRI"/>
+                            <constraint firstItem="KGi-6L-Ipt" firstAttribute="top" secondItem="3vT-jD-Fi9" secondAttribute="bottom" constant="8" id="zdB-VU-iXw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qEN-2i-ZDe"/>
                     </view>
