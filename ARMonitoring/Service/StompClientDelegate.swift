@@ -7,6 +7,6 @@
 //
 
 protocol StompClientDelegate {
-    func didReceiveJSON(dataLog: DataLog)
-    func test(text: String)
+    func stompDidReceiveJSON(dataLog: DataLog)
+    func stompTest(text: String)
 }
