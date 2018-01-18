@@ -15,4 +15,16 @@ extension ARSCNView {
     func getNode(name: String) -> SCNNode? {
         return self.scene.rootNode.childNode(withName: name, recursively: true)
     }
+    
+    func getCameraCoordinates() -> SCNVector3 {
+        let cameraTransform = self.session.currentFrame?.camera.transform
+        let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
+        
+        var cc = SCNVector3()
+        cc.x = cameraCoordinates.translation.x
+        cc.y = cameraCoordinates.translation.y
+        cc.z = cameraCoordinates.translation.z
+        
+        return cc
+    }
 }
