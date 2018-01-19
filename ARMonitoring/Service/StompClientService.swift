@@ -37,7 +37,7 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func stompClientJSONBody(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-        
+
         if let dl = DataLog(JSONString: jsonBody!) {
             delegate.stompDidReceiveJSON(dataLog: dl)
         }
