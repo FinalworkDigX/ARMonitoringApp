@@ -22,7 +22,7 @@ class ConnectionTestViewController: UIViewController, StompClientLibDelegate {
         
         self.displayInfo.text = ""
         
-        let url = NSURL(string: "http://10.3.50.6:80/dataLogWS/websocket")!
+        let url = NSURL(string: "http://10.3.50.6:80/managerWS/websocket")!
         socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url as URL), delegate: self)
     }
     

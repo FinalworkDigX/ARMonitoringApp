@@ -10,9 +10,15 @@
 		3BE1526714AFEDAD6A45A290 /* Pods_ARMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */; };
 		491EB1CB6CC39FF7D90A55B5 /* Pods_ARMonitoringTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */; };
 		4F507E51665F2DC8178B77D7 /* Pods_ARMonitoringUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97C7D1DFB315EB0C5BB167F /* Pods_ARMonitoringUITests.framework */; };
+		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
+		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
+		82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */; };
+		82E53522200FED5D0049C5B4 /* ARSCNViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53521200FED5D0049C5B4 /* ARSCNViewExtension.swift */; };
+		82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53523200FED8E0049C5B4 /* SCNodeExtension.swift */; };
+		82E53527200FEFE50049C5B4 /* StompClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53526200FEFE50049C5B4 /* StompClientService.swift */; };
+		82E53529201014940049C5B4 /* StompClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53528201014940049C5B4 /* StompClientDelegate.swift */; };
 		82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D1220002ABC00005705 /* AppDelegate.swift */; };
 		82E91D1520002ABC00005705 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 82E91D1420002ABC00005705 /* art.scnassets */; };
-		82E91D1720002ABC00005705 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D1620002ABC00005705 /* ViewController.swift */; };
 		82E91D1A20002ABC00005705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82E91D1820002ABC00005705 /* Main.storyboard */; };
 		82E91D1C20002ABC00005705 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82E91D1B20002ABC00005705 /* Assets.xcassets */; };
 		82E91D1F20002ABC00005705 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82E91D1D20002ABC00005705 /* LaunchScreen.storyboard */; };
@@ -20,6 +26,10 @@
 		82E91D3520002ABC00005705 /* ARMonitoringUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D3420002ABC00005705 /* ARMonitoringUITests.swift */; };
 		82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D4220002D7600005705 /* ConnectionTestViewController.swift */; };
 		82E91D4820004BE500005705 /* DataLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E91D4720004BE500005705 /* DataLog.swift */; };
+		82EBE7B5201107D5003DCB7E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7B4201107D5003DCB7E /* Item.swift */; };
+		82EBE7B720110DE9003DCB7E /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7B620110DE9003DCB7E /* Room.swift */; };
+		82EBE7B920111B50003DCB7E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7B820111B50003DCB7E /* StringExtension.swift */; };
+		82EBE7BC201159B1003DCB7E /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7BB201159B1003DCB7E /* Information.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,10 +53,16 @@
 		245F119FF2755A99F08448D9 /* Pods-ARMonitoringTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests.debug.xcconfig"; sourceTree = "<group>"; };
 		27A5A8D54E89F60A827A9956 /* Pods-ARMonitoring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoring.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring.debug.xcconfig"; sourceTree = "<group>"; };
 		7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoringTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
+		82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
+		82E53521200FED5D0049C5B4 /* ARSCNViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNViewExtension.swift; sourceTree = "<group>"; };
+		82E53523200FED8E0049C5B4 /* SCNodeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNodeExtension.swift; sourceTree = "<group>"; };
+		82E53526200FEFE50049C5B4 /* StompClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompClientService.swift; sourceTree = "<group>"; };
+		82E53528201014940049C5B4 /* StompClientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompClientDelegate.swift; sourceTree = "<group>"; };
 		82E91D0F20002ABC00005705 /* ARMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E91D1220002ABC00005705 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82E91D1420002ABC00005705 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		82E91D1620002ABC00005705 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		82E91D1920002ABC00005705 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		82E91D1B20002ABC00005705 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82E91D1E20002ABC00005705 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,6 +75,10 @@
 		82E91D3620002ABC00005705 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82E91D4220002D7600005705 /* ConnectionTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTestViewController.swift; sourceTree = "<group>"; };
 		82E91D4720004BE500005705 /* DataLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLog.swift; sourceTree = "<group>"; };
+		82EBE7B4201107D5003DCB7E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		82EBE7B620110DE9003DCB7E /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		82EBE7B820111B50003DCB7E /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		82EBE7BB201159B1003DCB7E /* Information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F8BDCFDA6B73D31A23F5634 /* Pods-ARMonitoringUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringUITests/Pods-ARMonitoringUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A018690E0524F688EADD6C17 /* Pods-ARMonitoringTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +138,34 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		82E53518200FE4160049C5B4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				82E53519200FE4520049C5B4 /* ARViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		82E5351B200FEB3B0049C5B4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */,
+				82E53521200FED5D0049C5B4 /* ARSCNViewExtension.swift */,
+				82E53523200FED8E0049C5B4 /* SCNodeExtension.swift */,
+				82EBE7B820111B50003DCB7E /* StringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		82E53525200FEFBB0049C5B4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				82E53526200FEFE50049C5B4 /* StompClientService.swift */,
+				82E53528201014940049C5B4 /* StompClientDelegate.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		82E91D0620002ABC00005705 = {
 			isa = PBXGroup;
 			children = (
@@ -143,10 +191,12 @@
 		82E91D1120002ABC00005705 /* ARMonitoring */ = {
 			isa = PBXGroup;
 			children = (
+				82E53525200FEFBB0049C5B4 /* Service */,
+				82E5351B200FEB3B0049C5B4 /* Extensions */,
+				82E53518200FE4160049C5B4 /* Controller */,
 				82E91D44200036A000005705 /* Model */,
 				82E91D1220002ABC00005705 /* AppDelegate.swift */,
 				82E91D1420002ABC00005705 /* art.scnassets */,
-				82E91D1620002ABC00005705 /* ViewController.swift */,
 				82E91D1820002ABC00005705 /* Main.storyboard */,
 				82E91D1B20002ABC00005705 /* Assets.xcassets */,
 				82E91D1D20002ABC00005705 /* LaunchScreen.storyboard */,
@@ -178,6 +228,10 @@
 			isa = PBXGroup;
 			children = (
 				82E91D4720004BE500005705 /* DataLog.swift */,
+				82E5351D200FEC040049C5B4 /* ItemNode.swift */,
+				82EBE7B4201107D5003DCB7E /* Item.swift */,
+				82EBE7B620110DE9003DCB7E /* Room.swift */,
+				82EBE7BB201159B1003DCB7E /* Information.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -483,9 +537,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				82E91D4820004BE500005705 /* DataLog.swift in Sources */,
-				82E91D1720002ABC00005705 /* ViewController.swift in Sources */,
+				82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */,
+				82EBE7B720110DE9003DCB7E /* Room.swift in Sources */,
+				82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */,
+				82E53527200FEFE50049C5B4 /* StompClientService.swift in Sources */,
+				82E53522200FED5D0049C5B4 /* ARSCNViewExtension.swift in Sources */,
+				82EBE7BC201159B1003DCB7E /* Information.swift in Sources */,
 				82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */,
+				82EBE7B5201107D5003DCB7E /* Item.swift in Sources */,
+				82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,
+				82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */,
+				82EBE7B920111B50003DCB7E /* StringExtension.swift in Sources */,
+				82E53529201014940049C5B4 /* StompClientDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
