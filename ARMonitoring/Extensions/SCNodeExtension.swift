@@ -20,5 +20,10 @@ extension SCNNode {
             return self.parent?.getParentNode(thatContians: name)
         }
     }
+    
+    func deleteChildNode(withName name:String) {
+        print(name)
+        self.childNode(withName: name, recursively: true)?.removeFromParentNode()
+    }
 }
 

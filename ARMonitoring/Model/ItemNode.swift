@@ -15,25 +15,14 @@ class ItemNode: SCNNode {
     final let PLANE_SIZE:CGFloat = CGFloat(100)
     final let SCALE:SCNVector3 = SCNVector3(0.08, 0.08, 0.08)
     
-    init(withName name: String) {
-        super.init()
-        self.name = name
-        
-        let billboardconstraint = SCNBillboardConstraint()
-        billboardconstraint.freeAxes = SCNBillboardAxis.Y
-        constraints = [billboardconstraint]
+    /*
+     Next up
+     - receive data from emitter (json)
+     - check how much rows, dynamically adapt text height / number of rows
+     - 2functions -> background & rows
+     */
 
-        self.testSetup()
-        /*
-         Next up
-         - receive data from emitter (json)
-         - check how much rows, dynamically adapt text height / number of rows
-         - 2functions -> background & rows
-         */
-    }
-    
-    init(withItem item:Item)
-    {
+    init(withItem item:Item) {
         super.init()
         
         // Set constraints
@@ -50,15 +39,7 @@ class ItemNode: SCNNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func testSetup()
-    {
-        self.createBackground()
-        self.createNameText(name: "nameText")
-        self.createInfoText(name: "infoText", info: "som info to display", index: 1)
-    }
-    
-    private func setup(item: Item)
-    {
+    private func setup(item: Item) {
         self.createBackground()
         self.createNameText(name: item.name)
         
@@ -67,8 +48,20 @@ class ItemNode: SCNNode {
         }
     }
     
-    private func createBackground()
-    {
+    public func updateData(dataLog: DataLog) {
+        
+        for child in self.childNodes {
+            print(child.name!)
+        }
+        
+        for information in dataLog.information {
+            self.deleteChildNode(withName: "\(information.name!)Node")
+            self.createInfoText(name: information.name, info: information.data, index: information.index)
+        }
+    }
+    
+    private func createBackground() {
+        
         // Create SubNode
         let rect = CGRect(x: 0, y: 0, width: PLANE_SIZE, height: PLANE_SIZE)
         let rectShape = SKShapeNode(rect: rect)
@@ -86,8 +79,8 @@ class ItemNode: SCNNode {
         toChildNode(name: "background", position: SCNVector3(0, 0, -0.5), plane: scnPlane)
     }
     
-    private func createNameText(name: String)
-    {
+    private func createNameText(name: String) {
+        
         print(self.name!)
         // Create SubNode
         let nameTextNode = SKLabelNode(text: self.name!)
@@ -106,8 +99,8 @@ class ItemNode: SCNNode {
         toChildNode(name: "TitleNode", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
     }
     
-    private func createInfoText(name:String, info: String, index:Int)
-    {
+    private func createInfoText(name:String, info: String, index:Int) {
+        
         // Create SubNode
         let nameTextNode = SKLabelNode(text: "\(name): \(info)")
         nameTextNode.name = name
@@ -126,8 +119,8 @@ class ItemNode: SCNNode {
         toChildNode(name: "\(name)Node", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
     }
     
-    private func createScene(name: String, size: CGSize) -> SKScene
-    {
+    private func createScene(name: String, size: CGSize) -> SKScene {
+        
         let skScene = SKScene(size: size)
         skScene.backgroundColor = UIColor.clear
         skScene.name = name
@@ -135,8 +128,8 @@ class ItemNode: SCNNode {
         return skScene
     }
     
-    private func toPlane(name: String, skScene: SKScene) ->SCNPlane
-    {
+    private func toPlane(name: String, skScene: SKScene) ->SCNPlane {
+        
         let plane = SCNPlane(width: PLANE_SIZE/10, height: -PLANE_SIZE/10)
         plane.name = "\(name)_plane"
         let material = SCNMaterial()
@@ -148,8 +141,8 @@ class ItemNode: SCNNode {
         return plane
     }
     
-    private func toChildNode(name: String, position: SCNVector3, plane: SCNPlane)
-    {
+    private func toChildNode(name: String, position: SCNVector3, plane: SCNPlane) {
+        
         let node = SCNNode(geometry: plane)
         node.name = name
         node.position = position

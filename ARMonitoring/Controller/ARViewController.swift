@@ -64,7 +64,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     // MARK: - Buttons
     
     @IBAction func addItemButton(_ sender: Any) {
-        let testItem = ItemNode(withName: "add_test_1")
+        let itemJSON = "{ \"id\": \"test_item_btnAdded\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"row_list\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}"
+        let myItem = Item(JSONString: itemJSON)!
+        let testItem = ItemNode(withItem: myItem)
         let cc = sceneView.getCameraCoordinates()
         
         testItem.position = SCNVector3(cc.x, cc.y, cc.z-1)
@@ -137,10 +139,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     func stompDidReceiveJSON(dataLog: DataLog) {
-        print(dataLog.toLog())
         
-        if let node = sceneView.getNode(name: dataLog.item_id) {
-            // Edit node
+        // print(dataLog.toLog())
+        print("in json: \(dataLog.item_id)")
+        if let node = sceneView.getNodeInRoom(name: dataLog.item_id) {
+            
+            node.updateData(dataLog: dataLog)
+            
+//            var message = ""
+//            message += "--------------------\n"
+//            message += "NodeName= \(node.name)\n\n"
+//            message += dataLog.toLog()
+//            message += "--------------------\n"
+//            
+//            
+//            
+//            print(message)
         }
     }
     
