@@ -13,12 +13,12 @@ class DataLog: Mappable {
     
     var id: String!
     var item_id: String!
-    var information: String!
-    // var information: [String : Any] = [:]
+    // var information: String!
+    var information: [Information] = []
     var timestamp: CLong!
     
-//    init() { }
-    required init?(map: Map) {}
+    required init?(map: Map) {
+    }
     
     func mapping(map: Map) {
         id          <- map["id"]
@@ -31,7 +31,7 @@ class DataLog: Mappable {
         var message = ""
         message += "id:\t\t\t\t\(id!),\n"
         message += "item_id:\t\t\(item_id!),\n"
-        message += "information:\t\(information!),\n"
+        message += "informationC:\t\(String(describing: information)),\n"
         message += "timestamp:\t\t\(timestamp!),\n"
         
         return message
@@ -41,7 +41,7 @@ class DataLog: Mappable {
         var message = ""
         message += "[id: \(id!), "
         message += "item_id: \(item_id!), "
-        message += "information: \(information!), "
+        message += "information count: \(String(describing: information)), "
         message += "timestamp: \(timestamp!)]"
         
         return message
