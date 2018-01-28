@@ -13,7 +13,7 @@ import SceneKit
 class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
-    @IBOutlet weak var tmpTextArea: UITextView!
+    @IBOutlet weak var connectionStatusImage: UIImageView!
     
     private var stompClient: StompClientService?
     
@@ -64,18 +64,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     // MARK: - Buttons
     
     @IBAction func addItemButton(_ sender: Any) {
-        let itemJSON = "{ \"id\": \"test_item_btnAdded\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"row_list\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}"
-        let myItem = Item(JSONString: itemJSON)!
-        let testItem = ItemNode(withItem: myItem)
-        let cc = sceneView.getCameraCoordinates()
+        // Temp disable.
         
-        testItem.position = SCNVector3(cc.x, cc.y, cc.z-1)
-        
-        // Add testItem to RoomNode
-        // RoomNode needs to be add programmatically by beacon position
-        // sceneView.getNode(name: "RoomNode")?.addChildNode(testItem)
-        
-        sceneView.scene.rootNode.addChildNode(testItem)
+//        let itemJSON = "{ \"id\": \"test_item_btnAdded\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"row_list\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}"
+//        let myItem = Item(JSONString: itemJSON)!
+//        let testItem = ItemNode(withItem: myItem)
+//        let cc = sceneView.getCameraCoordinates()
+//
+//        testItem.position = SCNVector3(cc.x, cc.y, cc.z-1)
+//
+//        // Add testItem to RoomNode
+//        // RoomNode needs to be add programmatically by beacon position
+//        // sceneView.getNode(name: "RoomNode")?.addChildNode(testItem)
+//
+//        sceneView.scene.rootNode.addChildNode(testItem)
     }
     
     // MARK: - ARSCNViewDelegate
@@ -141,24 +143,30 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     func stompDidReceiveJSON(dataLog: DataLog) {
         
         // print(dataLog.toLog())
-        print("in json: \(dataLog.item_id)")
         if let node = sceneView.getNodeInRoom(name: dataLog.item_id) {
-            
             node.updateData(dataLog: dataLog)
-            
-//            var message = ""
-//            message += "--------------------\n"
-//            message += "NodeName= \(node.name)\n\n"
-//            message += dataLog.toLog()
-//            message += "--------------------\n"
-//            
-//            
-//            
-//            print(message)
         }
     }
     
     func stompTest(text: String) {
         print(text)
+    }
+    
+    func connectionStatusUpdate(status: StompClientService.ConnectionStatus) {
+        var dotColor: UIColor = UIColor.gray
+        
+        switch status {
+        case .CONNECTING:
+            dotColor = UIColor.yellow
+            break;
+        case .CONNECTED:
+            dotColor = UIColor.green
+            break;
+        case .DISCONNECTED:
+            dotColor = UIColor.red
+            break;
+        }
+        
+        self.connectionStatusImage.setConnectionStatusDot(color: dotColor)
     }
 }

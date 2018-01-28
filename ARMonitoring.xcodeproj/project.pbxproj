@@ -30,6 +30,7 @@
 		82EBE7B720110DE9003DCB7E /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7B620110DE9003DCB7E /* Room.swift */; };
 		82EBE7B920111B50003DCB7E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7B820111B50003DCB7E /* StringExtension.swift */; };
 		82EBE7BC201159B1003DCB7E /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7BB201159B1003DCB7E /* Information.swift */; };
+		82EBE7BE201DFF8F003DCB7E /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7BD201DFF8F003DCB7E /* UIImageViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		82EBE7B620110DE9003DCB7E /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		82EBE7B820111B50003DCB7E /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		82EBE7BB201159B1003DCB7E /* Information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
+		82EBE7BD201DFF8F003DCB7E /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F8BDCFDA6B73D31A23F5634 /* Pods-ARMonitoringUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringUITests/Pods-ARMonitoringUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A018690E0524F688EADD6C17 /* Pods-ARMonitoringTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				82E53521200FED5D0049C5B4 /* ARSCNViewExtension.swift */,
 				82E53523200FED8E0049C5B4 /* SCNodeExtension.swift */,
 				82EBE7B820111B50003DCB7E /* StringExtension.swift */,
+				82EBE7BD201DFF8F003DCB7E /* UIImageViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				82EBE7B720110DE9003DCB7E /* Room.swift in Sources */,
 				82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */,
 				82E53527200FEFE50049C5B4 /* StompClientService.swift in Sources */,
+				82EBE7BE201DFF8F003DCB7E /* UIImageViewExtension.swift in Sources */,
 				82E53522200FED5D0049C5B4 /* ARSCNViewExtension.swift in Sources */,
 				82EBE7BC201159B1003DCB7E /* Information.swift in Sources */,
 				82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */,
@@ -716,6 +720,7 @@
 			baseConfigurationReference = 27A5A8D54E89F60A827A9956 /* Pods-ARMonitoring.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7L3GY5Q723;
 				INFOPLIST_FILE = ARMonitoring/Info.plist;
@@ -732,6 +737,7 @@
 			baseConfigurationReference = DB7DF5825DE044963DE2A8B5 /* Pods-ARMonitoring.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7L3GY5Q723;
 				INFOPLIST_FILE = ARMonitoring/Info.plist;

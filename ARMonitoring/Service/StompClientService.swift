@@ -13,6 +13,10 @@ import StompClientLib
 
 class StompClientService: StompClientLibDelegate {
     
+    public enum ConnectionStatus {
+        case CONNECTED, DISCONNECTED, CONNECTING
+    }
+    
     private var socketClient: StompClientLib = StompClientLib()
     private var delegate: StompClientDelegate
     private var socketUrlRequest: NSURLRequest
@@ -20,16 +24,27 @@ class StompClientService: StompClientLibDelegate {
     init(delegate: StompClientDelegate, socketUrl: URL) {
         self.delegate = delegate
         self.socketUrlRequest = NSURLRequest(url: socketUrl)
+        delegate.connectionStatusUpdate(status: .DISCONNECTED)
     }
-
-//    func openSocket(withUrl wsurl: URL) {
-//        socketClient.openSocketWithURLRequest(request: NSURLRequest(url: wsurl), delegate: self)
-//        delegate.test(text: "OpenSOcket----")
-//    }
 
     func openSocket() {
         socketClient.openSocketWithURLRequest(request: self.socketUrlRequest, delegate: self)
         delegate.stompTest(text: "OpenSOcket----")
+        delegate.connectionStatusUpdate(status: .CONNECTING)
+    }
+    
+    func stompClientDidConnect(client: StompClientLib!) {
+        client.subscribe(destination: "/topic/dataLog")
+        
+        delegate.connectionStatusUpdate(status: .CONNECTED)
+    }
+    
+    func stompClientDidDisconnect(client: StompClientLib!) {
+        delegate.stompTest(text: "STOMP discopnnected----")
+        
+        // Temp stomp disconnect fix
+        delegate.connectionStatusUpdate(status: .DISCONNECTED)
+        self.openSocket()
     }
     
     func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, withHeader header: [String : String]?, withDestination destination: String) {
@@ -44,23 +59,13 @@ class StompClientService: StompClientLibDelegate {
         
     }
     
-    func stompClientDidDisconnect(client: StompClientLib!) {
-        delegate.stompTest(text: "STOMP discopnnected----")
-        
-        // Temp stomp disconnect fix
-        self.openSocket()
-    }
-    
-    func stompClientDidConnect(client: StompClientLib!) {
-        client.subscribe(destination: "/topic/dataLog")
-    }
-    
     func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {
         //
     }
     
     func serverDidSendError(client: StompClientLib!, withErrorMessage description: String, detailedErrorMessage message: String?) {
         delegate.stompTest(text: "server did send error----")
+        delegate.connectionStatusUpdate(status: .DISCONNECTED)
     }
     
     func serverDidSendPing() {
