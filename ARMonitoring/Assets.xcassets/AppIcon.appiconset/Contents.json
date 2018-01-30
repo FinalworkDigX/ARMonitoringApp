@@ -37,7 +37,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Icon-App-60x60@2x.png",
+      "filename" : "ItunesArtwork@2x.png",
       "scale" : "2x"
     },
     {
@@ -87,9 +87,8 @@
       "scale" : "2x"
     },
     {
-      "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "Icon-App-83.5x83.5@2x.png",
+      "size" : "83.5x83.5",
       "scale" : "2x"
     },
     {
