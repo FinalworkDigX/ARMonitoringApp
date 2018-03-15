@@ -9,8 +9,8 @@
 import Foundation
 
 class LoginDto {
-    var email: String!
-    var password: String!
+    let email: String!
+    let password: String!
     
     init(email: String, password: String) {
         self.email = email

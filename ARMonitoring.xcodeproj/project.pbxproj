@@ -13,6 +13,7 @@
 		82816B9C205ADB9400371E3B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9B205ADB9400371E3B /* User.swift */; };
 		82816B9F205AF05E00371E3B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9E205AF05E00371E3B /* AuthenticationService.swift */; };
 		82816BA2205B167E00371E3B /* LoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA1205B167E00371E3B /* LoginDto.swift */; };
+		82816BA4205B2A6B00371E3B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA3205B2A6B00371E3B /* UserInfo.swift */; };
 		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
 		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
 		82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */; };
@@ -60,6 +61,7 @@
 		82816B9B205ADB9400371E3B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		82816B9E205AF05E00371E3B /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		82816BA1205B167E00371E3B /* LoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDto.swift; sourceTree = "<group>"; };
+		82816BA3205B2A6B00371E3B /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
 		82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				82EBE7B620110DE9003DCB7E /* Room.swift */,
 				82EBE7BB201159B1003DCB7E /* Information.swift */,
 				82816B9B205ADB9400371E3B /* User.swift */,
+				82816BA3205B2A6B00371E3B /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82816BA4205B2A6B00371E3B /* UserInfo.swift in Sources */,
 				82E91D4820004BE500005705 /* DataLog.swift in Sources */,
 				82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */,
 				82EBE7B720110DE9003DCB7E /* Room.swift in Sources */,

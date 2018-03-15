@@ -184,6 +184,23 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         authService.authenticate(url: myUrl, loginDto: loginDto, success: { user in
             print("in success AUTH")
         } , failed: { error in
+            switch (error.code) {
+            case -10:
+                // Wrong credentials
+                print(error.userInfo)
+                break;
+            case -15:
+                // Mapping error
+                print(error.userInfo)
+                break;
+            case -20:
+                // Connection error
+                print(error.userInfo)
+                break;
+            default:
+                print("unexpected error..")
+                break;
+            }
             print("in error AUTH")
         })
     }

@@ -16,7 +16,7 @@ class AuthenticationService {
         "Accept": "application/json"
     ]
     
-    func authenticate(url: String, loginDto: LoginDto, success: @escaping (User) -> (), failed: (NSError)->()) {
+    func authenticate(url: String, loginDto: LoginDto, success: @escaping (User) -> (), failed: @escaping (NSError)->()) {
         
         let testParameters: Parameters = [
             "email": loginDto.email,
@@ -34,14 +34,29 @@ class AuthenticationService {
                 
                 if let json = response.result.value {
                     if let user: User = Mapper<User>().map(JSONObject: json) {
-                        print(user.toString())
-                        success(user)
+                        if user.accessToken != nil || user.idToken != nil {
+                           success(user)
+                        }
+                        else {
+                            failed(NSError(
+                                domain: "EHB.ARMonitoring",
+                                code: -10,
+                                userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.wrong.credentials"]))
+                        }
+                    }
+                    else {
+                        failed(NSError(
+                            domain: "EHB.ARMonitoring",
+                            code: -15,
+                            userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.mapping.error"]))
                     }
                 }
-                
-                // print(response)
-                
-                // print(userResponse)
+                else {
+                    failed(NSError(
+                        domain: "EHB.ARMonitoring",
+                        code: -20,
+                        userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.connection.error"]))
+                }
         }
     }
 }
