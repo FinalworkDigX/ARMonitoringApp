@@ -10,6 +10,8 @@
 		3BE1526714AFEDAD6A45A290 /* Pods_ARMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */; };
 		491EB1CB6CC39FF7D90A55B5 /* Pods_ARMonitoringTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */; };
 		4F507E51665F2DC8178B77D7 /* Pods_ARMonitoringUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97C7D1DFB315EB0C5BB167F /* Pods_ARMonitoringUITests.framework */; };
+		82816B9C205ADB9400371E3B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9B205ADB9400371E3B /* User.swift */; };
+		82816B9F205AF05E00371E3B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9E205AF05E00371E3B /* AuthenticationService.swift */; };
 		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
 		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
 		82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */; };
@@ -54,6 +56,8 @@
 		245F119FF2755A99F08448D9 /* Pods-ARMonitoringTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests.debug.xcconfig"; sourceTree = "<group>"; };
 		27A5A8D54E89F60A827A9956 /* Pods-ARMonitoring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoring.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring.debug.xcconfig"; sourceTree = "<group>"; };
 		7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoringTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		82816B9B205ADB9400371E3B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		82816B9E205AF05E00371E3B /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
 		82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			children = (
 				82E53526200FEFE50049C5B4 /* StompClientService.swift */,
 				82E53528201014940049C5B4 /* StompClientDelegate.swift */,
+				82816B9E205AF05E00371E3B /* AuthenticationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				82EBE7B4201107D5003DCB7E /* Item.swift */,
 				82EBE7B620110DE9003DCB7E /* Room.swift */,
 				82EBE7BB201159B1003DCB7E /* Information.swift */,
+				82816B9B205ADB9400371E3B /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -386,6 +392,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/StompClientLib/StompClientLib.framework",
@@ -393,6 +401,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWTDecode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StompClientLib.framework",
@@ -543,6 +553,7 @@
 				82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */,
 				82EBE7B720110DE9003DCB7E /* Room.swift in Sources */,
 				82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */,
+				82816B9C205ADB9400371E3B /* User.swift in Sources */,
 				82E53527200FEFE50049C5B4 /* StompClientService.swift in Sources */,
 				82EBE7BE201DFF8F003DCB7E /* UIImageViewExtension.swift in Sources */,
 				82E53522200FED5D0049C5B4 /* ARSCNViewExtension.swift in Sources */,
@@ -551,6 +562,7 @@
 				82EBE7B5201107D5003DCB7E /* Item.swift in Sources */,
 				82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,
+				82816B9F205AF05E00371E3B /* AuthenticationService.swift in Sources */,
 				82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */,
 				82EBE7B920111B50003DCB7E /* StringExtension.swift in Sources */,
 				82E53529201014940049C5B4 /* StompClientDelegate.swift in Sources */,

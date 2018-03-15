@@ -37,6 +37,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         
         //---------
         startWebsocket()
+        
+        // Test alamofire / authentication
+        authenticate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,7 +137,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     // MARK: - WebSockets & StompClientDelegate
     func startWebsocket() -> () {
-        let url = URL(string: "http://10.3.50.6:80/managerWS/websocket")!
+        let url = URL(string: "https://fw.ludovicmarchand.be/managerWS/websocket")!
+        // let url = URL(string: "http://db.ludovicmarchand.be/managerWS/websocket")!
         
         self.stompClient = StompClientService(delegate: self, socketUrl: url)
         self.stompClient?.openSocket()
@@ -168,5 +172,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         }
         
         self.connectionStatusImage.setConnectionStatusDot(color: dotColor)
+    }
+    
+    //
+    func authenticate() {
+        let authService: AuthenticationService = AuthenticationService()
+        
+        let myUrl = "https://fw.ludovicmarchand.be/v1/auth/login"
+        
+        authService.authenticate(url: myUrl, success: { user in
+            print("in success AUTH")
+        } , failed: { error in
+            print("in error AUTH")
+        })
     }
 }
