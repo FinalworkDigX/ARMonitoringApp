@@ -179,8 +179,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         let authService: AuthenticationService = AuthenticationService()
         
         let myUrl = "https://fw.ludovicmarchand.be/v1/auth/login"
+        let loginDto = LoginDto(email: "*****", password: "*****")
         
-        authService.authenticate(url: myUrl, success: { user in
+        authService.authenticate(url: myUrl, loginDto: loginDto, success: { user in
             print("in success AUTH")
         } , failed: { error in
             print("in error AUTH")

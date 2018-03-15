@@ -8,23 +8,41 @@
 
 import Foundation
 import Alamofire
+import ObjectMapper
 
 class AuthenticationService {
     
-    func authenticate(url: String, success: (User) -> (), failed: (NSError)->()) {
+    let headers: HTTPHeaders = [
+        "Accept": "application/json"
+    ]
+    
+    func authenticate(url: String, loginDto: LoginDto, success: @escaping (User) -> (), failed: (NSError)->()) {
         
         let testParameters: Parameters = [
-            "email": "*******",
-            "password": "*******"
+            "email": loginDto.email,
+            "password": loginDto.password
         ]
-        Alamofire.request(url, method: .post, parameters: testParameters, encoding: JSONEncoding.default).responseJSON { response in
-            
-            if let json = response.result.value {
-                print("JSON : \(json)")
-            }
-            // print(response)
-            
-            // print(userResponse)
+        
+        Alamofire.request(
+            url,
+            method: .post,
+            parameters: testParameters,
+            encoding: JSONEncoding.default,
+            headers: headers
+            )
+            .responseJSON { response in
+                
+                if let json = response.result.value {
+                    if let user: User = Mapper<User>().map(JSONObject: json) {
+                        print(user.toString())
+                        success(user)
+                    }
+                }
+                
+                // print(response)
+                
+                // print(userResponse)
         }
     }
 }
+

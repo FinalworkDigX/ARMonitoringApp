@@ -10,8 +10,10 @@ import Foundation
 import ObjectMapper
 
 class User: Mappable {
-    var access_token: String!
-    var id_token: String!
+    var email: String?
+    var password: String?
+    var access_token: String?
+    var id_token: String?
     
     required init?(map: Map) {
     }
@@ -23,8 +25,8 @@ class User: Mappable {
     
     func toString() -> String {
         var message: String = ""
-        message += "[name: \(access_token), "
-        message += "data: \(id_token)"
+        message += "[name: \(String(describing: access_token)), "
+        message += "data: \(String(describing: id_token))"
         
         return message
     }

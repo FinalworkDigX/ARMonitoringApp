@@ -12,6 +12,7 @@
 		4F507E51665F2DC8178B77D7 /* Pods_ARMonitoringUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97C7D1DFB315EB0C5BB167F /* Pods_ARMonitoringUITests.framework */; };
 		82816B9C205ADB9400371E3B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9B205ADB9400371E3B /* User.swift */; };
 		82816B9F205AF05E00371E3B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9E205AF05E00371E3B /* AuthenticationService.swift */; };
+		82816BA2205B167E00371E3B /* LoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA1205B167E00371E3B /* LoginDto.swift */; };
 		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
 		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
 		82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */; };
@@ -58,6 +59,7 @@
 		7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoringTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82816B9B205ADB9400371E3B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		82816B9E205AF05E00371E3B /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		82816BA1205B167E00371E3B /* LoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDto.swift; sourceTree = "<group>"; };
 		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
 		82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		82816BA0205B166600371E3B /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				82816BA1205B167E00371E3B /* LoginDto.swift */,
+			);
+			path = Dto;
+			sourceTree = "<group>";
+		};
 		82E53518200FE4160049C5B4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 		82E91D1120002ABC00005705 /* ARMonitoring */ = {
 			isa = PBXGroup;
 			children = (
+				82816BA0205B166600371E3B /* Dto */,
 				82E53525200FEFBB0049C5B4 /* Service */,
 				82E5351B200FEB3B0049C5B4 /* Extensions */,
 				82E53518200FE4160049C5B4 /* Controller */,
@@ -566,6 +577,7 @@
 				82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */,
 				82EBE7B920111B50003DCB7E /* StringExtension.swift in Sources */,
 				82E53529201014940049C5B4 /* StompClientDelegate.swift in Sources */,
+				82816BA2205B167E00371E3B /* LoginDto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
