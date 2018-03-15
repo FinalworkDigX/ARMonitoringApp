@@ -9,6 +9,7 @@
 import Foundation
 import ARKit
 import SceneKit
+import SwiftKeychainWrapper
 
 class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate {
 
@@ -61,7 +62,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
     }
     
     // MARK: - Buttons
@@ -138,7 +138,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     // MARK: - WebSockets & StompClientDelegate
     func startWebsocket() -> () {
         let url = URL(string: "https://fw.ludovicmarchand.be/managerWS/websocket")!
-        // let url = URL(string: "http://db.ludovicmarchand.be/managerWS/websocket")!
         
         self.stompClient = StompClientService(delegate: self, socketUrl: url)
         self.stompClient?.openSocket()
@@ -152,6 +151,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         }
     }
     
+    // Debugging
     func stompTest(text: String) {
         print(text)
     }
@@ -174,7 +174,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         self.connectionStatusImage.setConnectionStatusDot(color: dotColor)
     }
     
-    //
+    // Authentication
     func authenticate() {
         let authService: AuthenticationService = AuthenticationService()
         
