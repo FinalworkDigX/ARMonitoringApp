@@ -17,7 +17,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     @IBOutlet weak var connectionStatusImage: UIImageView!
     
     private var stompClient: StompClientService?
-    private var user: User?
     
     // TODO: make delegate for room detection (Beacons)
     
@@ -40,8 +39,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         //---------
         startWebsocket()
         
-        // Test alamofire / authentication
-        if user == nil {
+        // Debug authentication, code has to be removed later on.
+        if !SessionService.sharedInstance.userSet {
             authenticate()
         }
     }
@@ -177,11 +176,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         self.connectionStatusImage.setConnectionStatusDot(color: dotColor)
     }
     
+    // DEBUGGING: CODE HAS TO BE REMOVED LATER ON
     // Authentication
-    func setUser(user: User) {
-        self.user = user
-    }
-    
     func authenticate() {
         let authService: AuthenticationService = AuthenticationService()
         

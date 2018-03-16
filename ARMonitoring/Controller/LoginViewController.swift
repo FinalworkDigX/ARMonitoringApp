@@ -14,8 +14,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var errorMessageLbl: UILabel!
     
-    private var user: User?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +57,7 @@ class LoginViewController: UIViewController {
         
         authService.authenticate(url: myUrl, loginDto: loginDto, success: { user in
             // Authentication Succeeded
-            self.user = user
+            SessionService.sharedInstance.setUserAccount(user: user)
             print("sucess")
             // Call segue?
             self.performSegue(withIdentifier: "arViewSegue", sender: self)
@@ -96,7 +94,6 @@ class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "arViewSegue" {
             let destinationVC = segue.destination as! ARViewController
-            destinationVC.setUser(user: user!)
         }
     }
 

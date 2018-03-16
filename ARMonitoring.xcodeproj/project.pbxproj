@@ -15,6 +15,7 @@
 		82816BA2205B167E00371E3B /* LoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA1205B167E00371E3B /* LoginDto.swift */; };
 		82816BA4205B2A6B00371E3B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA3205B2A6B00371E3B /* UserInfo.swift */; };
 		82816BA6205B41B800371E3B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA5205B41B800371E3B /* LoginViewController.swift */; };
+		82816BAA205BEF7D00371E3B /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA9205BEF7D00371E3B /* SessionService.swift */; };
 		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
 		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
 		82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */; };
@@ -64,6 +65,7 @@
 		82816BA1205B167E00371E3B /* LoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDto.swift; sourceTree = "<group>"; };
 		82816BA3205B2A6B00371E3B /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		82816BA5205B41B800371E3B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		82816BA9205BEF7D00371E3B /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
 		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
 		82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				82E53526200FEFE50049C5B4 /* StompClientService.swift */,
 				82E53528201014940049C5B4 /* StompClientDelegate.swift */,
 				82816B9E205AF05E00371E3B /* AuthenticationService.swift */,
+				82816BA9205BEF7D00371E3B /* SessionService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				82E53527200FEFE50049C5B4 /* StompClientService.swift in Sources */,
 				82EBE7BE201DFF8F003DCB7E /* UIImageViewExtension.swift in Sources */,
 				82816BA6205B41B800371E3B /* LoginViewController.swift in Sources */,
+				82816BAA205BEF7D00371E3B /* SessionService.swift in Sources */,
 				82E53522200FED5D0049C5B4 /* ARSCNViewExtension.swift in Sources */,
 				82EBE7BC201159B1003DCB7E /* Information.swift in Sources */,
 				82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */,
