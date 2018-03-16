@@ -19,5 +19,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ARMonitoring/Controller/LoginViewController.swift"
+            timestampString = "542855801.9435019"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "login(loginDto:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ARMonitoring.User) -&gt; () in ARMonitoring.LoginViewController.(login in _553003EBAB49B6C10A39192E58E6FD0D)(loginDto: ARMonitoring.LoginDto) -&gt; ()"
+                  moduleName = "ARMonitoring"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ludo/Documents/DigX/FinalWork/AR_tests/ARMonitoring/ARMonitoring/Controller/LoginViewController.swift"
+                  timestampString = "542852658.969221"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__ObjC.NSError) -&gt; () in ARMonitoring.LoginViewController.(login in _553003EBAB49B6C10A39192E58E6FD0D)(loginDto: ARMonitoring.LoginDto) -&gt; ()"
+                  moduleName = "ARMonitoring"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ludo/Documents/DigX/FinalWork/AR_tests/ARMonitoring/ARMonitoring/Controller/LoginViewController.swift"
+                  timestampString = "542852658.971585"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -17,6 +17,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     @IBOutlet weak var connectionStatusImage: UIImageView!
     
     private var stompClient: StompClientService?
+    private var user: User?
     
     // TODO: make delegate for room detection (Beacons)
     
@@ -40,7 +41,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         startWebsocket()
         
         // Test alamofire / authentication
-        authenticate()
+        if user == nil {
+            authenticate()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,6 +178,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     // Authentication
+    func setUser(user: User) {
+        self.user = user
+    }
+    
     func authenticate() {
         let authService: AuthenticationService = AuthenticationService()
         
