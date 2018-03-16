@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2013-2014 Kim Pedersen
+ * Modified by Ludovic Marchand on 13/02/2018.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +23,14 @@
 
 import Foundation
 import SceneKit
+import Trilateration3D
 
 extension SCNVector3
 {
+    func toVector3() -> Vector3 {
+        return Vector3(x: self.x, y: self.y, z: self.z)
+    }
+    
     /**
      * Negates the vector described by SCNVector3 and returns
      * the result as a new SCNVector3.
