@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "arViewSegue" {
-            let destinationVC = segue.destination as! ARViewController
+            // let destinationVC = segue.destination as! ARViewController
         }
     }
 
