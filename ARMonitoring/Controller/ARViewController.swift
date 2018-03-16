@@ -23,26 +23,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
         sceneView.delegate = self
         
+        // Init scene
+        let scene = SCNScene()
+        sceneView.scene = scene
+        
+        // Debugging
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        // Create a new scene
-        // let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        let scene = SCNScene()
-        
-        // Set the scene to the view
-        sceneView.scene = scene
-        
         //---------
         startWebsocket()
-        
-        // Debug authentication, code has to be removed later on.
-        if !SessionService.sharedInstance.userSet {
-            authenticate()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,22 +59,25 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     // MARK: - Buttons
+    @IBAction func toBeaconList(_ sender: Any) {
+    }
     
-    @IBAction func addItemButton(_ sender: Any) {
+    
+    func addItemToScene() {
         // Temp disable.
         
-//        let itemJSON = "{ \"id\": \"test_item_btnAdded\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"row_list\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}"
-//        let myItem = Item(JSONString: itemJSON)!
-//        let testItem = ItemNode(withItem: myItem)
-//        let cc = sceneView.getCameraCoordinates()
-//
-//        testItem.position = SCNVector3(cc.x, cc.y, cc.z-1)
-//
-//        // Add testItem to RoomNode
-//        // RoomNode needs to be add programmatically by beacon position
-//        // sceneView.getNode(name: "RoomNode")?.addChildNode(testItem)
-//
-//        sceneView.scene.rootNode.addChildNode(testItem)
+        //        let itemJSON = "{ \"id\": \"test_item_btnAdded\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"row_list\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}"
+        //        let myItem = Item(JSONString: itemJSON)!
+        //        let testItem = ItemNode(withItem: myItem)
+        //        let cc = sceneView.getCameraCoordinates()
+        //
+        //        testItem.position = SCNVector3(cc.x, cc.y, cc.z-1)
+        //
+        //        // Add testItem to RoomNode
+        //        // RoomNode needs to be add programmatically by beacon position
+        //        // sceneView.getNode(name: "RoomNode")?.addChildNode(testItem)
+        //
+        //        sceneView.scene.rootNode.addChildNode(testItem)
     }
     
     // MARK: - ARSCNViewDelegate
@@ -174,37 +169,5 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         }
         
         self.connectionStatusImage.setConnectionStatusDot(color: dotColor)
-    }
-    
-    // DEBUGGING: CODE HAS TO BE REMOVED LATER ON
-    // Authentication
-    func authenticate() {
-        let authService: AuthenticationService = AuthenticationService()
-        
-        let myUrl = "https://fw.ludovicmarchand.be/v1/auth/login"
-        let loginDto = LoginDto(email: "*****", password: "*****")
-        
-        authService.authenticate(url: myUrl, loginDto: loginDto, success: { user in
-            print("in success AUTH")
-        } , failed: { error in
-            switch (error.code) {
-            case -10:
-                // Wrong credentials
-                print(error.userInfo)
-                break;
-            case -15:
-                // Mapping error
-                print(error.userInfo)
-                break;
-            case -20:
-                // Connection error
-                print(error.userInfo)
-                break;
-            default:
-                print("unexpected error..")
-                break;
-            }
-            print("in error AUTH")
-        })
     }
 }

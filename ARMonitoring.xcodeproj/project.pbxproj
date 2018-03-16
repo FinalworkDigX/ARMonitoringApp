@@ -16,6 +16,8 @@
 		82816BA4205B2A6B00371E3B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA3205B2A6B00371E3B /* UserInfo.swift */; };
 		82816BA6205B41B800371E3B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA5205B41B800371E3B /* LoginViewController.swift */; };
 		82816BAA205BEF7D00371E3B /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA9205BEF7D00371E3B /* SessionService.swift */; };
+		82816BAC205BF72700371E3B /* BeaconsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BAB205BF72700371E3B /* BeaconsTableViewController.swift */; };
+		82816BAE205BF88A00371E3B /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BAD205BF88A00371E3B /* Beacon.swift */; };
 		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
 		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
 		82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */; };
@@ -66,6 +68,8 @@
 		82816BA3205B2A6B00371E3B /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		82816BA5205B41B800371E3B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		82816BA9205BEF7D00371E3B /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
+		82816BAB205BF72700371E3B /* BeaconsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconsTableViewController.swift; sourceTree = "<group>"; };
+		82816BAD205BF88A00371E3B /* Beacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
 		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
 		82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			children = (
 				82E53519200FE4520049C5B4 /* ARViewController.swift */,
 				82816BA5205B41B800371E3B /* LoginViewController.swift */,
+				82816BAB205BF72700371E3B /* BeaconsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				82EBE7BB201159B1003DCB7E /* Information.swift */,
 				82816B9B205ADB9400371E3B /* User.swift */,
 				82816BA3205B2A6B00371E3B /* UserInfo.swift */,
+				82816BAD205BF88A00371E3B /* Beacon.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 				82E91D4820004BE500005705 /* DataLog.swift in Sources */,
 				82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */,
 				82EBE7B720110DE9003DCB7E /* Room.swift in Sources */,
+				82816BAC205BF72700371E3B /* BeaconsTableViewController.swift in Sources */,
 				82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */,
 				82816B9C205ADB9400371E3B /* User.swift in Sources */,
 				82E53527200FEFE50049C5B4 /* StompClientService.swift in Sources */,
@@ -591,6 +598,7 @@
 				82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */,
 				82EBE7B920111B50003DCB7E /* StringExtension.swift in Sources */,
 				82E53529201014940049C5B4 /* StompClientDelegate.swift in Sources */,
+				82816BAE205BF88A00371E3B /* Beacon.swift in Sources */,
 				82816BA2205B167E00371E3B /* LoginDto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
