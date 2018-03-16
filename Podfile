@@ -5,6 +5,9 @@ target 'ARMonitoring' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+  # ignore all warnings from all pods
+  inhibit_all_warnings!
+
   # Pods for ARMonitoring
   pod "StompClientLib"
   pod 'SwiftyJSON'
@@ -12,6 +15,7 @@ target 'ARMonitoring' do
   pod 'JWTDecode', '~> 2.1'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftKeychainWrapper'
+  pod 'Trilateration3D'
 
   target 'ARMonitoringTests' do
     inherit! :search_paths
