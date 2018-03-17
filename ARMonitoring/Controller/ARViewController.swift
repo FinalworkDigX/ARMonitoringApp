@@ -142,6 +142,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         
         self.stompClient = StompClientService(delegate: self, socketUrl: url)
         self.stompClient?.openSocket()
+        
+        self.stompClient?.sendMessage()
     }
     
     func stompDidReceiveJSON(dataLog: DataLog) {

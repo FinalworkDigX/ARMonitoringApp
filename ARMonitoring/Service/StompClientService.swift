@@ -29,7 +29,7 @@ class StompClientService: StompClientLibDelegate {
 
     func openSocket() {
         socketClient.openSocketWithURLRequest(request: self.socketUrlRequest, delegate: self)
-        delegate.stompTest(text: "OpenSOcket----")
+        delegate.stompTest(text: "-- OpenSocket --")
         delegate.connectionStatusUpdate(status: .CONNECTING)
     }
     
@@ -40,7 +40,7 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func stompClientDidDisconnect(client: StompClientLib!) {
-        delegate.stompTest(text: "STOMP discopnnected----")
+        delegate.stompTest(text: "-- STOMP disconnected --")
         
         // Temp stomp disconnect fix
         delegate.connectionStatusUpdate(status: .DISCONNECTED)
@@ -52,10 +52,18 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func stompClientJSONBody(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-
-        if let dl = DataLog(JSONString: jsonBody!) {
-            delegate.stompDidReceiveJSON(dataLog: dl)
+        
+        switch destination {
+        case DataLog.destination:
+            if let dl = DataLog(JSONString: jsonBody!) {
+                delegate.stompDidReceiveJSON(dataLog: dl)
+            }
+            break;
+        default:
+            print("delegate error?")
+            break;
         }
+        
         
     }
     
@@ -64,11 +72,30 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func serverDidSendError(client: StompClientLib!, withErrorMessage description: String, detailedErrorMessage message: String?) {
-        delegate.stompTest(text: "server did send error----")
+        delegate.stompTest(text: "-- Server error --")
         delegate.connectionStatusUpdate(status: .DISCONNECTED)
     }
     
     func serverDidSendPing() {
         //
+    }
+    
+    func sendMessage() {
+        
+        if let channel = SessionService.sharedInstance.getUserInfo()?.channel {
+            
+            let beaconCalibDto = BeaconCalibrationDto(
+                id: "1feb6e90-cb3a-44c6-9619-5ff3b6d6b340",
+                calibrationFactor: 4.4
+            )
+            
+            let beaconJson = beaconCalibDto.toJSON()
+            
+            socketClient.sendJSONForDict(
+                dict: beaconJson as AnyObject,
+                toDestination: "/beacon/calibrate/" + channel
+            )
+
+        }
     }
 }

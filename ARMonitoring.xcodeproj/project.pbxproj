@@ -20,6 +20,7 @@
 		82816BAE205BF88A00371E3B /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BAD205BF88A00371E3B /* Beacon.swift */; };
 		82816BB0205C073100371E3B /* BeaconLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BAF205C073100371E3B /* BeaconLocationService.swift */; };
 		82816BB2205C087300371E3B /* Vector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BB1205C087300371E3B /* Vector3Extension.swift */; };
+		82816BB4205D088A00371E3B /* BeaconCalibrationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BB3205D088A00371E3B /* BeaconCalibrationDto.swift */; };
 		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
 		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
 		82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */; };
@@ -74,6 +75,7 @@
 		82816BAD205BF88A00371E3B /* Beacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
 		82816BAF205C073100371E3B /* BeaconLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconLocationService.swift; sourceTree = "<group>"; };
 		82816BB1205C087300371E3B /* Vector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector3Extension.swift; sourceTree = "<group>"; };
+		82816BB3205D088A00371E3B /* BeaconCalibrationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconCalibrationDto.swift; sourceTree = "<group>"; };
 		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
 		82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				82816BA1205B167E00371E3B /* LoginDto.swift */,
+				82816BB3205D088A00371E3B /* BeaconCalibrationDto.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				82E53522200FED5D0049C5B4 /* ARSCNViewExtension.swift in Sources */,
 				82EBE7BC201159B1003DCB7E /* Information.swift in Sources */,
 				82E91D4320002D7600005705 /* ConnectionTestViewController.swift in Sources */,
+				82816BB4205D088A00371E3B /* BeaconCalibrationDto.swift in Sources */,
 				82EBE7B5201107D5003DCB7E /* Item.swift in Sources */,
 				82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,

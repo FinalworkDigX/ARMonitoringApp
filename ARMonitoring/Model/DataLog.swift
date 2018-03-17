@@ -13,9 +13,10 @@ class DataLog: Mappable {
     
     var id: String!
     var item_id: String!
-    // var information: String!
     var information: [Information] = []
     var timestamp: CLong!
+    
+    static let destination: String = "/topic/database"
     
     required init?(map: Map) {
     }
