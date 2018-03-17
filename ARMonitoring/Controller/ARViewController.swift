@@ -39,6 +39,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Hide navigation bar
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
@@ -49,6 +51,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // Show navigation bar on other views
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         
         // Pause the view's session
         sceneView.session.pause()
