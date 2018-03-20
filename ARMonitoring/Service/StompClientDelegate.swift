@@ -9,6 +9,7 @@
 protocol StompClientDelegate {
     
     func connectionStatusUpdate(status: StompClientService.ConnectionStatus)
-    func stompDidReceiveJSON(dataLog: DataLog)
-    func stompTest(text: String)
+    func stompText(text: String)
+    func stompDataLogGet(dataLog: DataLog)
+    func stompBeaconGet(beacon: Beacon)
 }

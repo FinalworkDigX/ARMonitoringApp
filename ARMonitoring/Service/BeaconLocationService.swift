@@ -15,14 +15,16 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager!
     var region: CLBeaconRegion!
+    var stompClient: StompClientService!
     var activeBeacons: [Beacon]!
     
     var sceneView: ARSCNView!
     
-    init(withUUID uuid:String, andSceneView sceneView: ARSCNView) {
+    init(uuid:String, sceneView: ARSCNView, stompClient: StompClientService) {
         super.init()
         
         self.sceneView = sceneView
+        self.stompClient = stompClient
         self.activeBeacons = [Beacon]()
         
         locationManager = CLLocationManager()
@@ -73,6 +75,9 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                 var aBeacon = Beacon()
                 if let activeBeaconIndex = beaconActive(beacon: beacon) {
                     aBeacon = activeBeacons[activeBeaconIndex]
+                }
+                else {
+                    self.stompClient.sendMessage()
                 }
                 // TODO: calculate range using calibrationfactor and rssi
                 // Add current position in activeBeacons array

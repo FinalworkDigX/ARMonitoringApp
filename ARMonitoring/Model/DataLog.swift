@@ -12,18 +12,18 @@ import ObjectMapper
 class DataLog: Mappable {
     
     var id: String!
-    var item_id: String!
+    var itemId: String!
     var information: [Information] = []
     var timestamp: CLong!
     
-    static let destination: String = "/topic/database"
+    static let destination: String = "/topic/dataLog"
     
     required init?(map: Map) {
     }
     
     func mapping(map: Map) {
         id          <- map["id"]
-        item_id     <- map["item_id"]
+        itemId      <- map["itemId"]
         information <- map["information"]
         timestamp   <- map["timestamp"]
     }
@@ -31,7 +31,7 @@ class DataLog: Mappable {
     func toLog() -> String {
         var message = ""
         message += "id:\t\t\t\t\(id!),\n"
-        message += "item_id:\t\t\(item_id!),\n"
+        message += "itemId:\t\t\(itemId!),\n"
         message += "informationC:\t\(String(describing: information)),\n"
         message += "timestamp:\t\t\(timestamp!),\n"
         
@@ -41,7 +41,7 @@ class DataLog: Mappable {
     func toString() -> String {
         var message = ""
         message += "[id: \(id!), "
-        message += "item_id: \(item_id!), "
+        message += "itemId: \(itemId!), "
         message += "information count: \(String(describing: information)), "
         message += "timestamp: \(timestamp!)]"
         

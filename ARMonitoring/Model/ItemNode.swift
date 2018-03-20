@@ -43,7 +43,7 @@ class ItemNode: SCNNode {
         self.createBackground()
         self.createNameText(name: item.name)
         
-        for (index, info_row) in item.row_list.enumerated() {
+        for (index, info_row) in item.rowList.enumerated() {
             self.createInfoText(name: info_row, info: "---", index: index)
         }
     }

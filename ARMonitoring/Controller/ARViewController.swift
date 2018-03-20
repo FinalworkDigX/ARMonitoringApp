@@ -17,6 +17,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     @IBOutlet weak var connectionStatusImage: UIImageView!
     
     private var stompClient: StompClientService?
+    private var beaconClient: BeaconLocationService?
     
     // TODO: make delegate for room detection (Beacons)
     
@@ -34,7 +35,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         sceneView.showsStatistics = true
         
         //---------
-        startWebsocket()
+        startWebsocketService()
+        startBeaconLocationService()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,9 +129,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         roomNode.name = "RoomNode"
         
         // TODO: Itterate over 'Room' model to add items at correct coordinates inside the Room
-        let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"item_list\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"row_list\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]}"
+        let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]}"
         let room: Room = Room(JSONString: roomJSON)!
-        for item: Item in room.item_list {
+        for item: Item in room.itemList {
             roomNode.addChildNode(ItemNode(withItem: item))
         }
         
@@ -137,7 +139,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     // MARK: - WebSockets & StompClientDelegate
-    func startWebsocket() -> () {
+    func startWebsocketService() {
         let url = URL(string: "https://fw.ludovicmarchand.be/managerWS/websocket")!
         
         self.stompClient = StompClientService(delegate: self, socketUrl: url)
@@ -146,16 +148,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         self.stompClient?.sendMessage()
     }
     
-    func stompDidReceiveJSON(dataLog: DataLog) {
+    func stompDataLogGet(dataLog: DataLog) {
         
-        // print(dataLog.toLog())
-        if let node = sceneView.getNodeInRoom(name: dataLog.item_id) {
+        print(dataLog.toLog())
+        if let node = sceneView.getNodeInRoom(name: dataLog.itemId) {
             node.updateData(dataLog: dataLog)
         }
     }
     
+    func stompBeaconGet(beacon: Beacon) { }
+    
     // Debugging
-    func stompTest(text: String) {
+    func stompText(text: String) {
         print(text)
     }
     
@@ -175,5 +179,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         }
         
         self.connectionStatusImage.setConnectionStatusDot(color: dotColor)
+    }
+    
+    //
+    func startBeaconLocationService() {
+        let uuid_ = "4AFECBF0-E8A4-0135-7D93-7E27D0FEF627"
+        if let sceneView_ = self.sceneView, let stompClient_ = self.stompClient {
+            self.beaconClient = BeaconLocationService(uuid: uuid_, sceneView: sceneView_, stompClient: stompClient_)
+        }
+        
     }
 }

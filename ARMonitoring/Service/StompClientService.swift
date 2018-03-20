@@ -29,7 +29,7 @@ class StompClientService: StompClientLibDelegate {
 
     func openSocket() {
         socketClient.openSocketWithURLRequest(request: self.socketUrlRequest, delegate: self)
-        delegate.stompTest(text: "-- OpenSocket --")
+        delegate.stompText(text: "-- OpenSocket --")
         delegate.connectionStatusUpdate(status: .CONNECTING)
     }
     
@@ -40,7 +40,7 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func stompClientDidDisconnect(client: StompClientLib!) {
-        delegate.stompTest(text: "-- STOMP disconnected --")
+        delegate.stompText(text: "-- STOMP disconnected --")
         
         // Temp stomp disconnect fix
         delegate.connectionStatusUpdate(status: .DISCONNECTED)
@@ -52,15 +52,15 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func stompClientJSONBody(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-        
+
         switch destination {
         case DataLog.destination:
             if let dl = DataLog(JSONString: jsonBody!) {
-                delegate.stompDidReceiveJSON(dataLog: dl)
+                delegate.stompDataLogGet(dataLog: dl)
             }
             break;
         default:
-            print("delegate error?")
+            print("Destination not dound: \(destination);")
             break;
         }
         
@@ -72,7 +72,7 @@ class StompClientService: StompClientLibDelegate {
     }
     
     func serverDidSendError(client: StompClientLib!, withErrorMessage description: String, detailedErrorMessage message: String?) {
-        delegate.stompTest(text: "-- Server error --")
+        delegate.stompText(text: "-- Server error --")
         delegate.connectionStatusUpdate(status: .DISCONNECTED)
     }
     

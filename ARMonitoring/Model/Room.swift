@@ -13,7 +13,7 @@ class Room: Mappable {
     var id: String!
     var name: String!
     var description: String!
-    var item_list: [Item] = []
+    var itemList: [Item] = []
     
     required init?(map: Map) {}
     
@@ -21,7 +21,7 @@ class Room: Mappable {
         id          <- map["id"]
         name        <- map["name"]
         description <- map["description"]
-        item_list   <- map["item_list"]
+        itemList   <- map["itemList"]
         
         name.captitalizeFirstLetter()
     }
@@ -31,7 +31,7 @@ class Room: Mappable {
         message += "[id: \(id), "
         message += "name: \(name), "
         message += "description: \(description), "
-        message += "item_list: \(item_list)]"
+        message += "itemList: \(itemList)]"
         
         return message
     }
