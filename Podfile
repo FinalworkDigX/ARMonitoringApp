@@ -16,6 +16,7 @@ target 'ARMonitoring' do
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftKeychainWrapper'
   pod 'Trilateration3D'
+  pod "SwiftyDB"
 
   target 'ARMonitoringTests' do
     inherit! :search_paths
