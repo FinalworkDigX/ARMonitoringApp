@@ -7,27 +7,41 @@
 //
 
 import Foundation
-import CoreLocation
+import ObjectMapper
 import Trilateration3D
 import Darwin
 
-class Beacon: CLBeacon {
+class Beacon: Mappable {
     
-    var pastUserPositions: [Position]?
-    var txPower: Int?
+    var id: String!
+    var name: String?
+    var description: String?
+    var location: Any?
+    var roomId: String!
+    var major: Int!
+    var minor: Int!
+    var calibrationFactor: Double!
     
-    override init() {
-        super.init()
-        commonInit()
-    }
+    var pastUserPositions: [Position]!
+    var txPower: Int!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    private func commonInit() {
+    init() {
         self.pastUserPositions = [Position]()
+    }
+    
+    required init?(map: Map) {
+        self.pastUserPositions = [Position]()
+    }
+    
+    func mapping(map: Map) {
+        id                  <- map["id"]
+        name                <- map["name"]
+        description         <- map["description"]
+        location            <- map["location"]
+        roomId              <- map["roomId"]
+        major               <- map["major"]
+        minor               <- map["minor"]
+        calibrationFactor   <- map["calibrationFactor"]
     }
     
     // https://gist.github.com/JoostKiens/d834d8acd3a6c78324c9

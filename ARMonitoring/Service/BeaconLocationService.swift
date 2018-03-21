@@ -104,8 +104,9 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
     
     private func beaconActive(beacon: CLBeacon) -> Int? {
         for (aIndex, aBeacon) in activeBeacons.enumerated() {
-            if beacon.major == aBeacon.major,
-                beacon.minor == aBeacon.minor {
+            
+            if beacon.major == NSNumber(integerLiteral: aBeacon.major),
+                beacon.minor == NSNumber(integerLiteral: aBeacon.minor) {
                 return aIndex
             }
         }
