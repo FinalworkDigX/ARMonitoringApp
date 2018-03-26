@@ -145,14 +145,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         
         self.stompClient = StompClientService(delegate: self, socketUrl: url)
         self.stompClient?.openSocket()
-        
- 
-//        let beaconCalibDto = BeaconCalibrationDto(
-//            id: "1feb6e90-cb3a-44c6-9619-5ff3b6d6b340",
-//            calibrationFactor: 4.4
-//        )
-//        let json = beaconCalibDto.toJSON()
-//        self.stompClient?.sendMessage(destination: "/beacon/calibrate/", json: json, usingPrivateChannel: true)
     }
     
     func stompDataLogGet(dataLog: DataLog) {
@@ -165,6 +157,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     func stompBeaconsGet(beacons: [Beacon]) {
         print(beacons)
+        let beaconService: BeaconService = BeaconService()
+        beaconService.massInsertOrUpdate(beacons)
     }
     
     // Debugging

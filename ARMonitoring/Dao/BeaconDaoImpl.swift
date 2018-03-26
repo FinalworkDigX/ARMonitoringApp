@@ -6,8 +6,10 @@
 //  Copyright © 2018 Ludovic Marchand. All rights reserved.
 //
 
+// https://github.com/stephencelis/SQLite.swift
 import Foundation
 import SQLite
+import Trilateration3D
 
 class BeaconDaoImpl: BeaconDao {
 
@@ -24,76 +26,87 @@ class BeaconDaoImpl: BeaconDao {
         
         do {
             for row in try db.prepare(beaconDto.table) {
-                let b = Beacon()
-                b.id = try row.get(beaconDto.id)
-                b.major = try Int(row.get(beaconDto.major))
-                b.minor = try Int(row.get(beaconDto.minor))
-                b.calibrationFactor = try row.get(beaconDto.calibrationFactor)
-                
-                returnBeacons.append(b)
+                returnBeacons.append(try self.rowToModel(row))
             }
         } catch {
-            print("BeaconGetAll error")
+            print("BeaconGetAll error: \(error)")
         }
         
         return returnBeacons
     }
     
     func getById(id: String) -> Beacon? {
-        
-        
         do {
             if let row = try db.pluck(beaconDto.table.filter(beaconDto.id == id)) {
-                let b = Beacon()
-                b.id = try row.get(beaconDto.id)
-                b.major = try Int(row.get(beaconDto.major))
-                b.minor = try Int(row.get(beaconDto.minor))
-                b.calibrationFactor = try row.get(beaconDto.calibrationFactor)
-                return b
+                return try self.rowToModel(row)
             }
         } catch {
-            print("BeaconGetAll error")
+            print("BeaconGetById error: \(error)")
         }
         
         return nil
     }
     
     func getByMajorMinor(major: Int, minor: Int) -> Beacon? {
-        let b = Beacon()
-        
         do {
             if let row = try db.pluck(
                     beaconDto.table
                         .filter(beaconDto.major == Int64(major))
                         .filter(beaconDto.minor == Int64(minor))
             ) {
-                b.id = try row.get(beaconDto.id)
-                b.major = try Int(row.get(beaconDto.major))
-                b.minor = try Int(row.get(beaconDto.minor))
-                b.calibrationFactor = try row.get(beaconDto.calibrationFactor)
+                return try self.rowToModel(row)
             }
             
         } catch {
-            print("BeaconGetAll error")
+            print("BeaconGetMajorMinor error: \(error)")
         }
         
-        return b
+        return nil
     }
     
     func create(beacon: Beacon) -> Bool {
         do {
-            let query = beaconDto.table.insert(
+            try db.run(beaconDto.table.insert(
                 beaconDto.id <- beacon.id,
                 beaconDto.major <- Int64(beacon.major),
                 beaconDto.minor <- Int64(beacon.minor),
-                beaconDto.calibrationFactor <- beacon.calibrationFactor
-            )
-            try db.run(query)
+                beaconDto.calibrationFactor <- beacon.calibrationFactor,
+                beaconDto.lastUpdated <- beacon.lastUpdated
+            ))
+
+            return true
+        } catch {
+            print("BeaconCreate error: \(error)")
+            return false
+        }
+    }
+    
+    func update(id: String, beacon: Beacon) -> Bool {
+        do {
+            let query = beaconDto.table.filter(beaconDto.id == id)
+            
+            try db.run(query.update(
+                beaconDto.major <- Int64(beacon.major),
+                beaconDto.minor <- Int64(beacon.minor),
+                beaconDto.calibrationFactor <- beacon.calibrationFactor,
+                beaconDto.lastUpdated <- beacon.lastUpdated
+            ))
             
             return true
         } catch {
-            print("BeaconGetAll error")
+            print("BeaconUpdate error: \(error)")
             return false
         }
+    }
+    
+    private func rowToModel(_ row: Row) throws -> Beacon {
+        let b = Beacon()
+        b.id = try row.get(beaconDto.id)
+        b.major = try Int(row.get(beaconDto.major))
+        b.minor = try Int(row.get(beaconDto.minor))
+        b.calibrationFactor = try row.get(beaconDto.calibrationFactor)
+        b.lastUpdated = try row.get(beaconDto.lastUpdated)
+        
+        return b
     }
 }

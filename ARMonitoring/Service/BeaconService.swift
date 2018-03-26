@@ -28,16 +28,24 @@ class BeaconService {
         return beaconDao.getByMajorMinor(major: major, minor: minor)
     }
     
-    func create(beacon: Beacon) -> Bool {
+    func create(_ beacon: Beacon) -> Bool {
         return beaconDao.create(beacon: beacon)
     }
     
-    func massInsertOrUpdate(beacons: [Beacon]) -> Int {
+    func update(id: String, beacon: Beacon) -> Bool {
+        return beaconDao.update(id: id, beacon: beacon)
+    }
+    
+    func massInsertOrUpdate(_ beacons: [Beacon]) -> () {
         for beacon in beacons {
-            if let localBeacon = getById(id: beacon.id) {
-                localBeacon.id = beacon.id
+            if let _ = getById(id: beacon.id) {
+                print("update: \(beacon.id)")
+                let _ = update(id: beacon.id, beacon: beacon)
+            }
+            else {
+                print("create: \(beacon.id)")
+                let _ = create(beacon)
             }
         }
-        return 0
     }
 }

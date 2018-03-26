@@ -93,23 +93,6 @@ class LoginViewController: UIViewController {
         if segue.identifier == "arViewSegue" {
             // let destinationVC = segue.destination as! ARViewController
             let _ = DBInitializer()
-            print("ee")
-            let beaconDao = BeaconDaoImpl()
-            let b = Beacon()
-            b.id = "test"
-            b.major = 10
-            b.minor = 11
-            b.calibrationFactor = 2.2
-//            if beaconDao.create(beacon: b) {
-//                print("beacon added")
-//            }
-//            else {
-//                print("beacon not added")
-//            }
-            
-            let allBeacons = beaconDao.getAll()
-            print(allBeacons)
-            
         }
     }
 

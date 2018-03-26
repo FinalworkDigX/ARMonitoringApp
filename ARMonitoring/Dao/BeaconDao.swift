@@ -13,4 +13,5 @@ protocol BeaconDao {
     func getById(id: String) -> Beacon?
     func getByMajorMinor(major: Int, minor: Int) -> Beacon?
     func create(beacon: Beacon) -> Bool
+    func update(id: String, beacon: Beacon) -> Bool
 }

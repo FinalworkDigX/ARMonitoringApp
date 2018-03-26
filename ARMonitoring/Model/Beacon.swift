@@ -16,19 +16,21 @@ class Beacon: Mappable {
     var id: String!
     var name: String?
     var description: String?
-    var location: Any?
     var roomId: String!
     var major: Int!
     var minor: Int!
     var calibrationFactor: Double!
+    var lastUpdated: Double!
     
     static let destination: String = "/topic/beacon"
     
+    var pastUserRanges: [Double]!
     var pastUserPositions: [Position]!
     var txPower: Int!
     
     init() {
         self.pastUserPositions = [Position]()
+        self.pastUserRanges = [Double]() 
     }
     
     required init?(map: Map) {
@@ -39,12 +41,14 @@ class Beacon: Mappable {
         id                  <- map["id"]
         name                <- map["name"]
         description         <- map["description"]
-        location            <- map["location"]
         roomId              <- map["roomId"]
         major               <- map["major"]
         minor               <- map["minor"]
         calibrationFactor   <- map["calibrationFactor"]
+        lastUpdated         <- map["lastUpdated"]
     }
+    
+    
     
     // https://gist.github.com/JoostKiens/d834d8acd3a6c78324c9
     func caclulateAccuracy(txPower: Int, rssi: Int) -> Float {

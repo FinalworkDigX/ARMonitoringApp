@@ -15,4 +15,5 @@ class BeaconSqliteDto {
     let major = Expression<Int64>("major")
     let minor = Expression<Int64>("minor")
     let calibrationFactor = Expression<Double>("calibrationFactor")
+    let lastUpdated = Expression<Double>("lastUpdated")
 }
