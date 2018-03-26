@@ -10,7 +10,7 @@ import Foundation
 import SQLite
 
 class BeaconDaoImpl: BeaconDao {
-    
+
     private let db: Connection
     private let beaconDto: BeaconSqliteDto
     
@@ -39,25 +39,26 @@ class BeaconDaoImpl: BeaconDao {
         return returnBeacons
     }
     
-    func getById(id: String) -> Beacon {
-        let b = Beacon()
+    func getById(id: String) -> Beacon? {
+        
         
         do {
             if let row = try db.pluck(beaconDto.table.filter(beaconDto.id == id)) {
+                let b = Beacon()
                 b.id = try row.get(beaconDto.id)
                 b.major = try Int(row.get(beaconDto.major))
                 b.minor = try Int(row.get(beaconDto.minor))
                 b.calibrationFactor = try row.get(beaconDto.calibrationFactor)
-                
+                return b
             }
         } catch {
             print("BeaconGetAll error")
         }
         
-        return b
+        return nil
     }
     
-    func getByMajorMinor(major: Int, minor: Int) -> Beacon {
+    func getByMajorMinor(major: Int, minor: Int) -> Beacon? {
         let b = Beacon()
         
         do {

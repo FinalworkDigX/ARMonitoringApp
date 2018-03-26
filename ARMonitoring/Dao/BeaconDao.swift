@@ -10,7 +10,7 @@ import Foundation
 
 protocol BeaconDao {
     func getAll() -> [Beacon]
-    func getById(id: String) -> Beacon
-    func getByMajorMinor(major: Int, minor: Int) -> Beacon
+    func getById(id: String) -> Beacon?
+    func getByMajorMinor(major: Int, minor: Int) -> Beacon?
     func create(beacon: Beacon) -> Bool
 }
