@@ -10,11 +10,15 @@ import Foundation
 import ARKit
 
 class ServiceController: StompClientDelegate {
-    let stompClient: StompClientService!
-    let beaconLocation: BeaconLocationService!
-    let beaconService: BeaconService!
+    var stompClient: StompClientService!
+    var beaconLocation: BeaconLocationService!
+    var beaconService: BeaconService!
+    
+    var sceneView: ARSCNView!
     
     init(sceneView: ARSCNView) {
+        self.sceneView = sceneView
+        
         let url = URL(string: "https://fw.ludovicmarchand.be/managerWS/websocket")!
         stompClient = StompClientService(delegate: self, socketUrl: url)
         
@@ -36,11 +40,13 @@ class ServiceController: StompClientDelegate {
     }
     
     func stompDataLogGet(dataLog: DataLog) {
-        
+        if let node = sceneView.getNodeInRoom(name: dataLog.itemId) {
+            node.updateData(dataLog: dataLog)
+        }
     }
     
     func stompBeaconsGet(beacons: [Beacon]) {
-        
+        beaconService.massInsertOrUpdate(beacons)
     }
     
 }
