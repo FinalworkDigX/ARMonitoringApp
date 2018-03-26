@@ -8,6 +8,7 @@
 
 import Foundation
 import StompClientLib
+import ObjectMapper
 
 //TODO: 'didCloseWithCode 1001, reason: Optional("Stream end encountered")'
 
@@ -35,6 +36,7 @@ class StompClientService: StompClientLibDelegate {
     
     func stompClientDidConnect(client: StompClientLib!) {
         client.subscribe(destination: "/topic/dataLog")
+        client.subscribe(destination: "/topic/beacon")
         
         delegate.connectionStatusUpdate(status: .CONNECTED)
     }
@@ -59,6 +61,11 @@ class StompClientService: StompClientLibDelegate {
                 delegate.stompDataLogGet(dataLog: dl)
             }
             break;
+        case Beacon.destination:
+            if let beacons: Array<Beacon> = Mapper<Beacon>().mapArray(JSONString: jsonBody!) {
+                delegate.stompBeaconsGet(beacons: beacons)
+            }
+            break;
         default:
             print("Destination not dound: \(destination);")
             break;
@@ -80,22 +87,22 @@ class StompClientService: StompClientLibDelegate {
         //
     }
     
-    func sendMessage() {
-        
-        if let channel = SessionService.sharedInstance.getUserInfo()?.channel {
-            
-            let beaconCalibDto = BeaconCalibrationDto(
-                id: "1feb6e90-cb3a-44c6-9619-5ff3b6d6b340",
-                calibrationFactor: 4.4
-            )
-            
-            let beaconJson = beaconCalibDto.toJSON()
-            
-            socketClient.sendJSONForDict(
-                dict: beaconJson as AnyObject,
-                toDestination: "/beacon/calibrate/" + channel
-            )
-
+    func sendMessage(destination: String, json: [String : Any] = [String : Any](), usingPrivateChannel: Bool = false) {
+        var destination_ = destination
+        if usingPrivateChannel {
+            if let channel = SessionService.sharedInstance.getUserInfo()?.channel {
+                destination_ += channel
+            }
+            else {
+                // THROW ERROR
+                print("private channel error")
+                return
+            }
         }
+        
+        socketClient.sendJSONForDict(
+            dict: json as AnyObject,
+            toDestination:  destination_
+        )
     }
 }

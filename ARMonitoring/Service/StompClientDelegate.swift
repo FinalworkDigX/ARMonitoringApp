@@ -11,5 +11,5 @@ protocol StompClientDelegate {
     func connectionStatusUpdate(status: StompClientService.ConnectionStatus)
     func stompText(text: String)
     func stompDataLogGet(dataLog: DataLog)
-    func stompBeaconGet(beacon: Beacon)
+    func stompBeaconsGet(beacons: [Beacon])
 }

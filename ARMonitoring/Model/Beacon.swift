@@ -22,6 +22,8 @@ class Beacon: Mappable {
     var minor: Int!
     var calibrationFactor: Double!
     
+    static let destination: String = "/topic/beacon"
+    
     var pastUserPositions: [Position]!
     var txPower: Int!
     

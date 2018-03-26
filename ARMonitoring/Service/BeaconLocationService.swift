@@ -77,7 +77,7 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                     aBeacon = activeBeacons[activeBeaconIndex]
                 }
                 else {
-                    self.stompClient.sendMessage()
+                    //self.stompClient.sendMessage()
                 }
                 // TODO: calculate range using calibrationfactor and rssi
                 // Add current position in activeBeacons array
