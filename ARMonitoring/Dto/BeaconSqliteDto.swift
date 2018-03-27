@@ -12,6 +12,7 @@ import SQLite
 class BeaconSqliteDto {
     let table = Table("beacon")
     let id = Expression<String>("id")
+    let roomId = Expression<String>("roomId")
     let major = Expression<Int64>("major")
     let minor = Expression<Int64>("minor")
     let calibrationFactor = Expression<Int64>("calibrationFactor")

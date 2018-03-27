@@ -29,6 +29,7 @@ class DBInitializer {
         
         try db.run(beacon.table.create(ifNotExists: true) { t in
             t.column(beacon.id, primaryKey: true)
+            t.column(beacon.roomId)
             t.column(beacon.major)
             t.column(beacon.minor, unique: true)
             t.column(beacon.calibrationFactor)
