@@ -113,8 +113,14 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                             p3: userPastPos[posCount-1],
                             returnMiddle: true) {
                         
-                            print(tril)
+                            let roomForAR: RoomForARDto = RoomForARDto()
+                            roomForAR.roomLocation = tril.first
+                            stompClient.sendMessage(
+                                destination: ["/room", "/\(aBeacon.roomId!)"],
+                                json: roomForAR.toJSON(),
+                                usingPrivateChannel: true)
                         }
+                        aBeacon.pastUserPositions.removeFirst()
                     }
                 }
                 

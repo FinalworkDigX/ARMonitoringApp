@@ -68,6 +68,7 @@ class BeaconDaoImpl: BeaconDao {
         do {
             try db.run(beaconDto.table.insert(
                 beaconDto.id <- beacon.id,
+                beaconDto.roomId <- beacon.roomId,
                 beaconDto.major <- Int64(beacon.major),
                 beaconDto.minor <- Int64(beacon.minor),
                 beaconDto.calibrationFactor <- Int64(beacon.calibrationFactor),
@@ -86,6 +87,7 @@ class BeaconDaoImpl: BeaconDao {
             let query = beaconDto.table.filter(beaconDto.id == id)
             
             try db.run(query.update(
+                beaconDto.roomId <- beacon.roomId,
                 beaconDto.major <- Int64(beacon.major),
                 beaconDto.minor <- Int64(beacon.minor),
                 beaconDto.calibrationFactor <- Int64(beacon.calibrationFactor),
@@ -102,6 +104,7 @@ class BeaconDaoImpl: BeaconDao {
     private func rowToModel(_ row: Row) throws -> Beacon {
         let b = Beacon()
         b.id = try row.get(beaconDto.id)
+        b.roomId = try row.get(beaconDto.roomId)
         b.major = try Int(row.get(beaconDto.major))
         b.minor = try Int(row.get(beaconDto.minor))
         b.calibrationFactor = try Int(row.get(beaconDto.calibrationFactor))

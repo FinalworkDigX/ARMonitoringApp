@@ -10,13 +10,12 @@ import Foundation
 import ObjectMapper
 
 class DataLog: Mappable {
+    static let destination: String = "/topic/dataLog"
     
     var id: String!
     var itemId: String!
     var information: [Information] = []
     var timestamp: CLong!
-    
-    static let destination: String = "/topic/dataLog"
     
     required init?(map: Map) {
     }

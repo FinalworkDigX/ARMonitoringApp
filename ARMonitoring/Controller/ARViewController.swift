@@ -9,10 +9,10 @@
 import Foundation
 import ARKit
 import SceneKit
-import SwiftKeychainWrapper
+// import SwiftKeychainWrapper
+import Trilateration3D
 
 class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate {
-
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var connectionStatusImage: UIImageView!
     
@@ -36,7 +36,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         
         //---------
         startWebsocketService()
-        startBeaconLocationService()
+        // startBeaconLocationService()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,7 +124,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     //tmp function to add testRoom
     @IBAction func resetRoomButton(_ sender: Any) {
         // self.stompClient?.sendMessage(destination: "/app/beacon")
-        generateRoom()
+        //generateRoom()
+        
+        let roomForAR: RoomForARDto = RoomForARDto()
+        roomForAR.roomLocation = Vector3(x: 1.0, y: 1.1, z: 1.2)
+        stompClient?.sendMessage(
+            destination: ["/app/room", "/f9a5bae4-c089-4dab-8b2b-c89b9f33a610"],
+            json: roomForAR.toJSON(),
+            usingPrivateChannel: true)
     }
     
     func generateRoom() {
@@ -156,6 +163,19 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         self.stompClient?.openSocket()
     }
     
+    func stompRoomGet(roomForAR: RoomForARDto) {
+        let roomNode: SCNNode = SCNNode()
+        roomNode.position = roomForAR.roomLocation.toSCNVector3()
+        roomNode.name = "RoomNode"
+        
+        let room: Room = roomForAR.room
+        for item: Item in room.itemList {
+            roomNode.addChildNode(ItemNode(withItem: item))
+        }
+        
+        sceneView.scene.rootNode.addChildNode(roomNode)
+    }
+
     func stompDataLogGet(dataLog: DataLog) {
         
         print(dataLog.toLog())
@@ -212,7 +232,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     func firstInit() {
         if !UserDefaults.standard.bool(forKey: "launchedBefore") {
-            stompClient?.sendMessage(destination: "/app/beacon")
+            stompClient?.sendMessage(destination: ["/app/beacon"])
         }
     }
 }

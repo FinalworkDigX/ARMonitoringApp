@@ -21,11 +21,23 @@ class StompClientService: StompClientLibDelegate {
     private var socketClient: StompClientLib = StompClientLib()
     private var delegate: StompClientDelegate
     private var socketUrlRequest: NSURLRequest
+    private let channel: String
+    
+    private let rfarDestination: String
     
     init(delegate: StompClientDelegate, socketUrl: URL) {
         self.delegate = delegate
         self.socketUrlRequest = NSURLRequest(url: socketUrl)
         delegate.connectionStatusUpdate(status: .DISCONNECTED)
+        
+        if let channel = SessionService.sharedInstance.getUserInfo()?.channel {
+            self.channel = channel
+            self.rfarDestination = "\(RoomForARDto.destination)\(channel)"
+        }
+        else {
+            self.channel = "----"
+            self.rfarDestination = "----"
+        }
     }
 
     func openSocket() {
@@ -37,6 +49,7 @@ class StompClientService: StompClientLibDelegate {
     func stompClientDidConnect(client: StompClientLib!) {
         client.subscribe(destination: "/topic/dataLog")
         client.subscribe(destination: "/topic/beacon")
+        client.subscribe(destination: "/topic/room/\(channel)")
         
         delegate.connectionStatusUpdate(status: .CONNECTED)
     }
@@ -66,6 +79,12 @@ class StompClientService: StompClientLibDelegate {
                 delegate.stompBeaconsGet(beacons: beacons)
             }
             break;
+        case rfarDestination:
+            if let rfar = RoomForARDto(JSONString: jsonBody!) {
+                delegate.stompRoomGet(roomForAR: rfar)
+            }
+            print("in roomAR case")
+            break;
         default:
             print("Destination not dound: \(destination);")
             break;
@@ -87,16 +106,12 @@ class StompClientService: StompClientLibDelegate {
         //
     }
     
-    func sendMessage(destination: String, json: [String : Any] = [String : Any](), usingPrivateChannel: Bool = false) {
-        var destination_ = destination
+    func sendMessage(destination: [String], json: [String : Any] = [String : Any](), usingPrivateChannel: Bool = false) {
+        var destination_ = destination[0]
         if usingPrivateChannel {
-            if let channel = SessionService.sharedInstance.getUserInfo()?.channel {
-                destination_ += channel
-            }
-            else {
-                // THROW ERROR
-                print("private channel error")
-                return
+            destination_ += "/\(channel)"
+            if destination.count > 1 {
+                destination_ += destination[1]
             }
         }
         

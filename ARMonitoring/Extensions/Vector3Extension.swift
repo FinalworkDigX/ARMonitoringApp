@@ -12,8 +12,18 @@ import ARKit
 
 extension Vector3 {
     
+    init(fromJson: [String : Any]) {
+        self.x = fromJson["x"] as! Float
+        self.y = fromJson["y"] as! Float
+        self.z = fromJson["z"] as! Float
+    }
+    
     func toSCNVector3() -> SCNVector3 {
         return SCNVector3(self.x, self.y, self.z)
+    }
+    
+    func toJsonArray() -> [String : Any] {
+        return ["x": self.x, "y": self.y, "z": self.z]
     }
 }
 

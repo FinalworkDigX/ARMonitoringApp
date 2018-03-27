@@ -12,4 +12,5 @@ protocol StompClientDelegate {
     func stompText(text: String)
     func stompDataLogGet(dataLog: DataLog)
     func stompBeaconsGet(beacons: [Beacon])
+    func stompRoomGet(roomForAR: RoomForARDto)
 }

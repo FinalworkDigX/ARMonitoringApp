@@ -15,15 +15,18 @@ class Room: Mappable {
     var description: String!
     var itemList: [Item] = []
     
+    init(){ }
+    
     required init?(map: Map) {}
     
     func mapping(map: Map) {
         id          <- map["id"]
         name        <- map["name"]
         description <- map["description"]
-        itemList    <- map["itemList"]
         
-        name.captitalizeFirstLetter()
+        if name != nil {
+            name.captitalizeFirstLetter()
+        }
     }
     
     func toString() -> String {
