@@ -60,25 +60,12 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
         let knownBeacons = beacons.filter{ $0.proximity != .unknown }
         let forgettableBeacons = beacons.filter{ $0.proximity == .unknown }
         
-        
-        for beacon in beacons {
-            print(String(format: "%.2f", beacon.accuracy) + " - \(beacon.minor)")
-        }
-        
-        print("in location manager")
         print()
         print(knownBeacons.count)
         
         if knownBeacons.count > 0 {
             for beacon in knownBeacons {
-                // DO
-                // Get camera location from Scene
-                // Get distance from Beacon
-                // WHILE (3verschillende punten)
-                // Get beacon if alreadyKnown
-                
-                
-                // get beacon if already in activeBeacons array
+                // Get Beacon from activeBeacons OR localDB beacons
                 var aBeacon = Beacon()
                 if let activeBeaconIndex = beaconActive(beacon: beacon) {
                     aBeacon = activeBeacons[activeBeaconIndex]
@@ -92,34 +79,49 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                     }
                     else {
                         print("ERROR: beacon not in localDB")
+                        break;
                     }
                 }
+                
+                print("cf: \(aBeacon.calibrationFactor), rssi: \(beacon.rssi)")
+                
+                // Get Range & Position of user to beacon
                 // If using Kalmann filter, need to get multiple anges before adding to userPosition
-                // TODO: calculate range using calibrationfactor and rssi
-                // Add current position in activeBeacons array
                 let range_ = Beacon.caclulateAccuracy(
                     calibrationFactor: aBeacon.calibrationFactor, rssi: beacon.rssi)
+                print("range: \(range_)")
                 
-                let beaconPos = Position(location: sceneView.getCameraCoordinates().toVector3(), range: range_)
+                // Position
+                let cc = sceneView.getCameraCoordinates().toVector3()
+                // Check position is not 0 0 0
+                if cc.x == 0.0 && cc.y == 0.0 && cc.z == 0.0 {
+                    print("Coordiante error (0, 0, 0)")
+                    break;
+                }
+                let beaconPos = Position(location: cc, range: range_)
+                print("position: \(beaconPos)")
                 aBeacon.pastUserPositions?.append(beaconPos)
                 
-                // TODO: trialterate over apstuserPositions
+                // Trilaterate if enough positions known
                 // If aBeacon.pastUserPositions.count >= 3 trilaterate and add room to Scene
                 if let userPastPos = aBeacon.pastUserPositions {
                     if userPastPos.count >= 3 {
                         let posCount = userPastPos.count
-                        print(trilaterate(
+                        if let tril = trilaterate(
                             p1: userPastPos[posCount-3],
                             p2: userPastPos[posCount-2],
                             p3: userPastPos[posCount-1],
-                            returnMiddle: true))
+                            returnMiddle: true) {
+                        
+                            print(tril)
+                        }
                     }
                 }
                 
-                
                 print(aBeacon)
-                // Active Beacons
+                // Add Beacon to activeBeacons
                 activeBeacons.append(aBeacon)
+                print("==========================")
                 
             }
         }

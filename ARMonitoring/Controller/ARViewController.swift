@@ -123,8 +123,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     // MARK: - RoomShizzle
     //tmp function to add testRoom
     @IBAction func resetRoomButton(_ sender: Any) {
-        self.stompClient?.sendMessage(destination: "/app/beacon")
-        // generateRoom()
+        // self.stompClient?.sendMessage(destination: "/app/beacon")
+        generateRoom()
     }
     
     func generateRoom() {
@@ -138,7 +138,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         roomNode.name = "RoomNode"
         
         // TODO: Itterate over 'Room' model to add items at correct coordinates inside the Room
-        let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]}"
+        let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"room_id\": \"room_test_id\"}]}"
+        // , \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]
         let room: Room = Room(JSONString: roomJSON)!
         for item: Item in room.itemList {
             roomNode.addChildNode(ItemNode(withItem: item))

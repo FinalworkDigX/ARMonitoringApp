@@ -14,7 +14,7 @@ class Item: Mappable {
     var id: String!
     var name: String!
     var location: SCNVector3 = SCNVector3()
-    var rowList: [String] = []
+    //var rowList: [String] = []
     var roomId: String!
     
     required init?(map: Map) {}
@@ -25,7 +25,7 @@ class Item: Mappable {
         location.x  <- map["location.x"]
         location.y  <- map["location.y"]
         location.z  <- map["location.z"]
-        rowList    <- map["rowList"]
+        //rowList    <- map["rowList"]
         roomId     <- map["roomId"]
         
         name.captitalizeFirstLetter()
@@ -36,7 +36,7 @@ class Item: Mappable {
         message += "[id: \(id), "
         message += "name: \(name), "
         message += "location: [x: \(location.x), y:\(location.y), z:\(location.z)], "
-        message += "rowList: \(rowList), "
+        //message += "rowList: \(rowList), "
         message += "roomId: \(roomId)]"
         
         return message

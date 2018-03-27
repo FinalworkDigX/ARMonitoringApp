@@ -43,9 +43,9 @@ class ItemNode: SCNNode {
         self.createBackground()
         self.createNameText(name: item.name)
         
-        for (index, info_row) in item.rowList.enumerated() {
-            self.createInfoText(name: info_row, info: "---", index: index)
-        }
+//        for (index, info_row) in item.rowList.enumerated() {
+//            self.createInfoText(name: info_row, info: "---", index: index)
+//        }
     }
     
     public func updateData(dataLog: DataLog) {
