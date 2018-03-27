@@ -1,5 +1,5 @@
 //
-//  AuthenticationService.swift
+//  AuthenticationRestService.swift
 //  ARMonitoring
 //
 //  Created by Ludovic Marchand on 15/03/2018.
@@ -10,13 +10,15 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-class AuthenticationService {
+class AuthenticationRestService {
     
     let headers: HTTPHeaders = [
         "Accept": "application/json"
     ]
     
-    func authenticate(url: String, loginDto: LoginDto, success: @escaping (User) -> (), failed: @escaping (NSError)->()) {
+    let baseUrl: String = "https://fw.ludovicmarchand.be/v1/"
+    
+    func authenticate(loginDto: LoginDto, success: @escaping (User) -> (), failed: @escaping (NSError)->()) {
         
         let testParameters: Parameters = [
             "email": loginDto.email,
@@ -24,7 +26,7 @@ class AuthenticationService {
         ]
         
         Alamofire.request(
-            url,
+            "\(self.baseUrl)/auth/login",
             method: .post,
             parameters: testParameters,
             encoding: JSONEncoding.default,

@@ -10,6 +10,8 @@ import UIKit
 
 class BeaconsTableViewController: UITableViewController {
 
+    var beaconLocationClient: BeaconLocationService?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -51,11 +51,9 @@ class LoginViewController: UIViewController {
     }
     
     private func login(loginDto: LoginDto) {
-        let authService: AuthenticationService = AuthenticationService()
+        let authService: AuthenticationRestService = AuthenticationRestService()
         
-        let myUrl = "https://fw.ludovicmarchand.be/v1/auth/login"
-        
-        authService.authenticate(url: myUrl, loginDto: loginDto, success: { user in
+        authService.authenticate(loginDto: loginDto, success: { user in
             // Authentication Succeeded
             SessionService.sharedInstance.setUserAccount(user: user)
             print("sucess")
@@ -94,6 +92,7 @@ class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "arViewSegue" {
             // let destinationVC = segue.destination as! ARViewController
+            let _ = DBInitializer()
         }
     }
 

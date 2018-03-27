@@ -21,7 +21,7 @@ class Room: Mappable {
         id          <- map["id"]
         name        <- map["name"]
         description <- map["description"]
-        itemList   <- map["itemList"]
+        itemList    <- map["itemList"]
         
         name.captitalizeFirstLetter()
     }

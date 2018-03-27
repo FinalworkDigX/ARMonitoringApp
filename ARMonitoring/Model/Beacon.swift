@@ -7,36 +7,56 @@
 //
 
 import Foundation
-import CoreLocation
+import ObjectMapper
 import Trilateration3D
 import Darwin
 
-class Beacon: CLBeacon {
+class Beacon: Mappable {
     
-    var pastUserPositions: [Position]?
-    var txPower: Int?
+    var id: String!
+    var name: String?
+    var description: String?
+    var roomId: String!
+    var major: Int!
+    var minor: Int!
+    var calibrationFactor: Int!
+    var lastUpdated: Double!
     
-    override init() {
-        super.init()
-        commonInit()
+    static let destination: String = "/topic/beacon"
+    
+    var pastUserRanges: [Double]!
+    var pastUserPositions: [Position]!
+    var txPower: Int!
+    
+    init() {
+        self.pastUserPositions = [Position]()
+        self.pastUserRanges = [Double]() 
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    private func commonInit() {
+    required init?(map: Map) {
         self.pastUserPositions = [Position]()
     }
     
+    func mapping(map: Map) {
+        id                  <- map["id"]
+        name                <- map["name"]
+        description         <- map["description"]
+        roomId              <- map["roomId"]
+        major               <- map["major"]
+        minor               <- map["minor"]
+        calibrationFactor   <- map["calibrationFactor"]
+        lastUpdated         <- map["lastUpdated"]
+    }
+    
+    
+    
     // https://gist.github.com/JoostKiens/d834d8acd3a6c78324c9
-    func caclulateAccuracy(txPower: Int, rssi: Int) -> Float {
+    static func caclulateAccuracy(calibrationFactor: Int, rssi: Int) -> Float {
         if rssi == 0 {
             return -1
         }
         
-        let ratio: Float = Float(rssi * 1 / txPower)
+        let ratio: Float = Float(rssi * 1 / calibrationFactor)
         if ratio < 1.0 {
             return pow(ratio, 10)
         }

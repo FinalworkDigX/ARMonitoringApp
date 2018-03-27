@@ -17,7 +17,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     @IBOutlet weak var connectionStatusImage: UIImageView!
     
     private var stompClient: StompClientService?
-    private var beaconClient: BeaconLocationService?
+    private var beaconLocationClient: BeaconLocationService?
     
     // TODO: make delegate for room detection (Beacons)
     
@@ -62,6 +62,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "beaconListSegue" {
+            let destinationVC = segue.destination as! BeaconsTableViewController
+            destinationVC.beaconLocationClient = self.beaconLocationClient
+        }
     }
     
     // MARK: - Buttons
@@ -115,6 +123,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     // MARK: - RoomShizzle
     //tmp function to add testRoom
     @IBAction func resetRoomButton(_ sender: Any) {
+        // self.stompClient?.sendMessage(destination: "/app/beacon")
         generateRoom()
     }
     
@@ -129,7 +138,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         roomNode.name = "RoomNode"
         
         // TODO: Itterate over 'Room' model to add items at correct coordinates inside the Room
-        let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]}"
+        let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"room_id\": \"room_test_id\"}]}"
+        // , \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]
         let room: Room = Room(JSONString: roomJSON)!
         for item: Item in room.itemList {
             roomNode.addChildNode(ItemNode(withItem: item))
@@ -144,8 +154,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         
         self.stompClient = StompClientService(delegate: self, socketUrl: url)
         self.stompClient?.openSocket()
-        
-        self.stompClient?.sendMessage()
     }
     
     func stompDataLogGet(dataLog: DataLog) {
@@ -156,7 +164,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         }
     }
     
-    func stompBeaconGet(beacon: Beacon) { }
+    func stompBeaconsGet(beacons: [Beacon]) {
+        print("Beacons: \(beacons.count)")
+        let beaconService: BeaconService = BeaconService()
+        beaconService.massInsertOrUpdate(beacons)
+    }
     
     // Debugging
     func stompText(text: String) {
@@ -172,6 +184,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
             break;
         case .CONNECTED:
             dotColor = UIColor.green
+            firstInit()
             break;
         case .DISCONNECTED:
             dotColor = UIColor.red
@@ -185,8 +198,21 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     func startBeaconLocationService() {
         let uuid_ = "4AFECBF0-E8A4-0135-7D93-7E27D0FEF627"
         if let sceneView_ = self.sceneView, let stompClient_ = self.stompClient {
-            self.beaconClient = BeaconLocationService(uuid: uuid_, sceneView: sceneView_, stompClient: stompClient_)
+            self.beaconLocationClient = BeaconLocationService(
+                uuid: uuid_,
+                sceneView: sceneView_,
+                stompClient: stompClient_)
+            
+            self.beaconLocationClient?.startObserving(failed: { error in 
+                print(error)
+            })
         }
         
+    }
+    
+    func firstInit() {
+        if !UserDefaults.standard.bool(forKey: "launchedBefore") {
+            stompClient?.sendMessage(destination: "/app/beacon")
+        }
     }
 }
