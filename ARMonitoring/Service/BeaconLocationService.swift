@@ -16,6 +16,7 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager!
     var region: CLBeaconRegion!
     var stompClient: StompClientService!
+    var beaconService: BeaconService!
     var activeBeacons: [Beacon]!
     
     var sceneView: ARSCNView!
@@ -26,28 +27,33 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
         self.sceneView = sceneView
         self.stompClient = stompClient
         self.activeBeacons = [Beacon]()
+        self.beaconService = BeaconService()
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        
+        locationManager.requestAlwaysAuthorization()
         // Authorize if not already done
-        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
-            locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.authorizationStatus() != .authorizedAlways {
+            locationManager.requestAlwaysAuthorization()
         }
         
         // Set beacon regiond (uuid) + start monitoring
-        region = CLBeaconRegion(proximityUUID: UUID(uuidString: uuid)!, identifier: "iBeacons")
+        self.region = CLBeaconRegion(proximityUUID: UUID(uuidString: uuid)!, identifier: "iBeacons")
     }
     
     func startObserving(failed: (NSError) -> ()) {
+        print("===============")
         print("start observing")
-        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
+        print("===============")
+        if CLLocationManager.authorizationStatus() != .authorizedAlways {
             failed(NSError(
                 domain: "EHB.ARMonitoring.BeaconLocationService",
                 code: -50,
                 userInfo: [NSLocalizedFailureReasonErrorKey: "error.locationmanager.authorizationstatus.not.authorized"]))
         }
-        locationManager.startRangingBeacons(in: region)
+        
+        locationManager.startMonitoring(for: self.region)
+        locationManager.startRangingBeacons(in: self.region)
     }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
@@ -71,24 +77,49 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                 // WHILE (3verschillende punten)
                 // Get beacon if alreadyKnown
                 
+                
                 // get beacon if already in activeBeacons array
                 var aBeacon = Beacon()
                 if let activeBeaconIndex = beaconActive(beacon: beacon) {
                     aBeacon = activeBeacons[activeBeaconIndex]
                 }
                 else {
-                    //self.stompClient.sendMessage()
+                    if let localBeacon = beaconService.getByMajorMinor(
+                        major: Int(truncating: beacon.major),
+                        minor: Int(truncating: beacon.minor)
+                    ) {
+                        aBeacon = localBeacon
+                    }
+                    else {
+                        print("ERROR: beacon not in localDB")
+                    }
                 }
+                // If using Kalmann filter, need to get multiple anges before adding to userPosition
                 // TODO: calculate range using calibrationfactor and rssi
                 // Add current position in activeBeacons array
-                let beaconPos = Position(location: sceneView.getCameraCoordinates().toVector3(), range: 1)
+                let range_ = Beacon.caclulateAccuracy(
+                    calibrationFactor: aBeacon.calibrationFactor, rssi: beacon.rssi)
+                
+                let beaconPos = Position(location: sceneView.getCameraCoordinates().toVector3(), range: range_)
                 aBeacon.pastUserPositions?.append(beaconPos)
                 
                 // TODO: trialterate over apstuserPositions
                 // If aBeacon.pastUserPositions.count >= 3 trilaterate and add room to Scene
+                if let userPastPos = aBeacon.pastUserPositions {
+                    if userPastPos.count >= 3 {
+                        let posCount = userPastPos.count
+                        print(trilaterate(
+                            p1: userPastPos[posCount-3],
+                            p2: userPastPos[posCount-2],
+                            p3: userPastPos[posCount-1],
+                            returnMiddle: true))
+                    }
+                }
+                
                 
                 print(aBeacon)
                 // Active Beacons
+                activeBeacons.append(aBeacon)
                 
             }
         }
@@ -103,10 +134,11 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
     }
     
     private func beaconActive(beacon: CLBeacon) -> Int? {
+        
         for (aIndex, aBeacon) in activeBeacons.enumerated() {
             
-            if beacon.major == NSNumber(integerLiteral: aBeacon.major),
-                beacon.minor == NSNumber(integerLiteral: aBeacon.minor) {
+            if Int(truncating: beacon.major) == aBeacon.major,
+                Int(truncating: beacon.minor) == aBeacon.minor {
                 return aIndex
             }
         }

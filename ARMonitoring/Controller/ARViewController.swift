@@ -17,7 +17,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     @IBOutlet weak var connectionStatusImage: UIImageView!
     
     private var stompClient: StompClientService?
-    private var beaconClient: BeaconLocationService?
+    private var beaconLocationClient: BeaconLocationService?
     
     // TODO: make delegate for room detection (Beacons)
     
@@ -62,6 +62,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "beaconListSegue" {
+            let destinationVC = segue.destination as! BeaconsTableViewController
+            destinationVC.beaconLocationClient = self.beaconLocationClient
+        }
     }
     
     // MARK: - Buttons
@@ -156,7 +164,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     func stompBeaconsGet(beacons: [Beacon]) {
-        print(beacons)
+        print("Beacons: \(beacons.count)")
         let beaconService: BeaconService = BeaconService()
         beaconService.massInsertOrUpdate(beacons)
     }
@@ -189,7 +197,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     func startBeaconLocationService() {
         let uuid_ = "4AFECBF0-E8A4-0135-7D93-7E27D0FEF627"
         if let sceneView_ = self.sceneView, let stompClient_ = self.stompClient {
-            self.beaconClient = BeaconLocationService(uuid: uuid_, sceneView: sceneView_, stompClient: stompClient_)
+            self.beaconLocationClient = BeaconLocationService(
+                uuid: uuid_,
+                sceneView: sceneView_,
+                stompClient: stompClient_)
+            
+            self.beaconLocationClient?.startObserving(failed: { error in 
+                print(error)
+            })
         }
         
     }

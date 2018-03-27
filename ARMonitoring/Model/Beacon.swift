@@ -19,7 +19,7 @@ class Beacon: Mappable {
     var roomId: String!
     var major: Int!
     var minor: Int!
-    var calibrationFactor: Double!
+    var calibrationFactor: Int!
     var lastUpdated: Double!
     
     static let destination: String = "/topic/beacon"
@@ -51,12 +51,12 @@ class Beacon: Mappable {
     
     
     // https://gist.github.com/JoostKiens/d834d8acd3a6c78324c9
-    func caclulateAccuracy(txPower: Int, rssi: Int) -> Float {
+    static func caclulateAccuracy(calibrationFactor: Int, rssi: Int) -> Float {
         if rssi == 0 {
             return -1
         }
         
-        let ratio: Float = Float(rssi * 1 / txPower)
+        let ratio: Float = Float(rssi * 1 / calibrationFactor)
         if ratio < 1.0 {
             return pow(ratio, 10)
         }

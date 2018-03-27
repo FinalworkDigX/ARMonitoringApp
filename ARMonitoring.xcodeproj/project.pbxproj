@@ -26,9 +26,7 @@
 		82816BBD2061CAFC00371E3B /* BeaconDaoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BBC2061CAFC00371E3B /* BeaconDaoImpl.swift */; };
 		82816BBF2061CC3500371E3B /* ConnectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BBE2061CC3500371E3B /* ConnectionFactory.swift */; };
 		82816BC12061D0D600371E3B /* BeaconSqliteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BC02061D0D600371E3B /* BeaconSqliteDto.swift */; };
-		82816BC42061DDC900371E3B /* DBSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BC32061DDC900371E3B /* DBSyncService.swift */; };
 		829422DA2069665A003936D7 /* BeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829422D92069665A003936D7 /* BeaconService.swift */; };
-		82E2B2112069A74400E0784F /* ServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2B2102069A74400E0784F /* ServiceController.swift */; };
 		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
 		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
 		82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */; };
@@ -88,9 +86,7 @@
 		82816BBC2061CAFC00371E3B /* BeaconDaoImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconDaoImpl.swift; sourceTree = "<group>"; };
 		82816BBE2061CC3500371E3B /* ConnectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionFactory.swift; sourceTree = "<group>"; };
 		82816BC02061D0D600371E3B /* BeaconSqliteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconSqliteDto.swift; sourceTree = "<group>"; };
-		82816BC32061DDC900371E3B /* DBSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBSyncService.swift; sourceTree = "<group>"; };
 		829422D92069665A003936D7 /* BeaconService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconService.swift; sourceTree = "<group>"; };
-		82E2B2102069A74400E0784F /* ServiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceController.swift; sourceTree = "<group>"; };
 		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
 		82E5351F200FED2F0049C5B4 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
@@ -218,7 +214,6 @@
 				82E53519200FE4520049C5B4 /* ARViewController.swift */,
 				82816BA5205B41B800371E3B /* LoginViewController.swift */,
 				82816BAB205BF72700371E3B /* BeaconsTableViewController.swift */,
-				82E2B2102069A74400E0784F /* ServiceController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -244,7 +239,6 @@
 				82E53528201014940049C5B4 /* StompClientDelegate.swift */,
 				82816BA9205BEF7D00371E3B /* SessionService.swift */,
 				82816BAF205C073100371E3B /* BeaconLocationService.swift */,
-				82816BC32061DDC900371E3B /* DBSyncService.swift */,
 				829422D92069665A003936D7 /* BeaconService.swift */,
 			);
 			path = Service;
@@ -645,7 +639,6 @@
 				82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */,
 				82EBE7B720110DE9003DCB7E /* Room.swift in Sources */,
 				829422DA2069665A003936D7 /* BeaconService.swift in Sources */,
-				82816BC42061DDC900371E3B /* DBSyncService.swift in Sources */,
 				82816BAC205BF72700371E3B /* BeaconsTableViewController.swift in Sources */,
 				82816BB2205C087300371E3B /* Vector3Extension.swift in Sources */,
 				82816BC12061D0D600371E3B /* BeaconSqliteDto.swift in Sources */,
@@ -661,7 +654,6 @@
 				82EBE7BC201159B1003DCB7E /* Information.swift in Sources */,
 				82816BB4205D088A00371E3B /* BeaconCalibrationDto.swift in Sources */,
 				82EBE7B5201107D5003DCB7E /* Item.swift in Sources */,
-				82E2B2112069A74400E0784F /* ServiceController.swift in Sources */,
 				82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,
 				82816B9F205AF05E00371E3B /* AuthenticationRestService.swift in Sources */,

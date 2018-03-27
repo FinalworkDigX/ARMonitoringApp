@@ -70,7 +70,7 @@ class BeaconDaoImpl: BeaconDao {
                 beaconDto.id <- beacon.id,
                 beaconDto.major <- Int64(beacon.major),
                 beaconDto.minor <- Int64(beacon.minor),
-                beaconDto.calibrationFactor <- beacon.calibrationFactor,
+                beaconDto.calibrationFactor <- Int64(beacon.calibrationFactor),
                 beaconDto.lastUpdated <- beacon.lastUpdated
             ))
 
@@ -88,7 +88,7 @@ class BeaconDaoImpl: BeaconDao {
             try db.run(query.update(
                 beaconDto.major <- Int64(beacon.major),
                 beaconDto.minor <- Int64(beacon.minor),
-                beaconDto.calibrationFactor <- beacon.calibrationFactor,
+                beaconDto.calibrationFactor <- Int64(beacon.calibrationFactor),
                 beaconDto.lastUpdated <- beacon.lastUpdated
             ))
             
@@ -104,7 +104,7 @@ class BeaconDaoImpl: BeaconDao {
         b.id = try row.get(beaconDto.id)
         b.major = try Int(row.get(beaconDto.major))
         b.minor = try Int(row.get(beaconDto.minor))
-        b.calibrationFactor = try row.get(beaconDto.calibrationFactor)
+        b.calibrationFactor = try Int(row.get(beaconDto.calibrationFactor))
         b.lastUpdated = try row.get(beaconDto.lastUpdated)
         
         return b

@@ -39,11 +39,11 @@ class BeaconService {
     func massInsertOrUpdate(_ beacons: [Beacon]) -> () {
         for beacon in beacons {
             if let _ = getById(id: beacon.id) {
-                print("update: \(beacon.id)")
+                // print("update: \(beacon.id)")
                 let _ = update(id: beacon.id, beacon: beacon)
             }
             else {
-                print("create: \(beacon.id)")
+                // print("create: \(beacon.id)")
                 let _ = create(beacon)
             }
         }
