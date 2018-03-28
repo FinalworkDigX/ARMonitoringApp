@@ -17,4 +17,11 @@ extension String {
     mutating func captitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
+    
+    func getNonEmpty() -> String? {
+        if self != "" {
+            return self
+        }
+        return nil
+    }
 }

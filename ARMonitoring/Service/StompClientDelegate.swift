@@ -7,6 +7,10 @@
 //
 
 protocol StompClientDelegate {
-    func stompDidReceiveJSON(dataLog: DataLog)
-    func stompTest(text: String)
+    
+    func connectionStatusUpdate(status: StompClientService.ConnectionStatus)
+    func stompText(text: String)
+    func stompDataLogGet(dataLog: DataLog)
+    func stompBeaconsGet(beacons: [Beacon])
+    func stompRoomGet(roomForAR: RoomForARDto)
 }

@@ -8,7 +8,8 @@ branches:
 
 podfile: Podfile
 before_install:
-  - pod install
+  - sudo gem install cocoapods
+  - pod install --repo-update
 
 script:
   - xcodebuild test -workspace ARMonitoring.xcworkspace -scheme ARMonitoring -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
