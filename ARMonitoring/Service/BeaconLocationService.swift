@@ -97,6 +97,7 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                 let cc = sceneView.getCameraCoordinates().toVector3()
                 // Check position is not 0 0 0
                 if cc.x == 0.0 && cc.y == 0.0 && cc.z == 0.0 {
+                    print("cc: \(cc)")
                     print("Coordiante error (0, 0, 0)")
                     break;
                 }
@@ -107,6 +108,8 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                 // Trilaterate if enough positions known
                 // If aBeacon.pastUserPositions.count >= 3 trilaterate and add room to Scene
                 if let userPastPos = aBeacon.pastUserPositions, testBool {
+                    // TODO: Change code to only do once, button to retry/calibrate
+                    // (userPos.count == 3)
                     if userPastPos.count >= 3 {
                         let posCount = userPastPos.count
                         if let tril = trilaterate(
