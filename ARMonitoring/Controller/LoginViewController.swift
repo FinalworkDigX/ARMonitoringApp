@@ -93,6 +93,11 @@ class LoginViewController: UIViewController {
         if segue.identifier == "arViewSegue" {
             // let destinationVC = segue.destination as! ARViewController
             let _ = DBInitializer()
+//            let beaconService: BeaconService = BeaconService()
+//            let bs = beaconService.getAll()
+//            for b: Beacon in bs {
+//                print("roomdID: \(b.roomId)")
+//            }
         }
     }
 

@@ -21,14 +21,6 @@ extension ARSCNView {
             .childNode(withName: name, recursively: true) as? ItemNode
     }
     
-    func updateRoomNode() -> () {
-        let roomNode:SCNNode = SCNNode()
-        roomNode.name = "RoomNode"
-        
-        
-        self.scene.rootNode.addChildNode(roomNode)
-    }
-    
     func getCameraCoordinates() -> SCNVector3 {
         let cameraTransform = self.session.currentFrame?.camera.transform
         let cameraCoordinates = MDLTransform(matrix: cameraTransform!)

@@ -21,6 +21,8 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
     
     var sceneView: ARSCNView!
     
+    var testBool: Bool = true
+    
     init(uuid:String, sceneView: ARSCNView, stompClient: StompClientService) {
         super.init()
         
@@ -89,7 +91,7 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                 // If using Kalmann filter, need to get multiple anges before adding to userPosition
                 let range_ = Beacon.caclulateAccuracy(
                     calibrationFactor: aBeacon.calibrationFactor, rssi: beacon.rssi)
-                print("range: \(range_)")
+                // print("range: \(range_)")
                 
                 // Position
                 let cc = sceneView.getCameraCoordinates().toVector3()
@@ -99,12 +101,12 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                     break;
                 }
                 let beaconPos = Position(location: cc, range: range_)
-                print("position: \(beaconPos)")
+                // print("position: \(beaconPos)")
                 aBeacon.pastUserPositions?.append(beaconPos)
                 
                 // Trilaterate if enough positions known
                 // If aBeacon.pastUserPositions.count >= 3 trilaterate and add room to Scene
-                if let userPastPos = aBeacon.pastUserPositions {
+                if let userPastPos = aBeacon.pastUserPositions, testBool {
                     if userPastPos.count >= 3 {
                         let posCount = userPastPos.count
                         if let tril = trilaterate(
@@ -113,14 +115,19 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                             p3: userPastPos[posCount-1],
                             returnMiddle: true) {
                         
+                            print("================")
+                            print("TRIL: \(tril)")
+                            print("================")
+                            
                             let roomForAR: RoomForARDto = RoomForARDto()
                             roomForAR.roomLocation = tril.first
                             stompClient.sendMessage(
-                                destination: ["/room", "/\(aBeacon.roomId!)"],
+                                destination: ["/app/room", "/\(aBeacon.roomId!)"],
                                 json: roomForAR.toJSON(),
                                 usingPrivateChannel: true)
                         }
                         aBeacon.pastUserPositions.removeFirst()
+                        testBool = false
                     }
                 }
                 

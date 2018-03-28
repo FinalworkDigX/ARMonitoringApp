@@ -23,6 +23,7 @@ class Room: Mappable {
         id          <- map["id"]
         name        <- map["name"]
         description <- map["description"]
+        itemList    <- map["itemList"]
         
         if name != nil {
             name.captitalizeFirstLetter()

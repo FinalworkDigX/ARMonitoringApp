@@ -36,7 +36,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         
         //---------
         startWebsocketService()
-        // startBeaconLocationService()
+        startBeaconLocationService()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,17 +123,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     // MARK: - RoomShizzle
     //tmp function to add testRoom
     @IBAction func resetRoomButton(_ sender: Any) {
-        // self.stompClient?.sendMessage(destination: "/app/beacon")
-        //generateRoom()
+//        generateRoom()
         
         let roomForAR: RoomForARDto = RoomForARDto()
-        roomForAR.roomLocation = Vector3(x: 1.0, y: 1.1, z: 1.2)
+        roomForAR.roomLocation = Vector3(x: 0.195782185, y: 0.0673767626, z: 0.0634026974)
+        
+        // ===============================
+        // AUTOMATE DESTINATION ROOM ID
+        // ===============================
+        
         stompClient?.sendMessage(
-            destination: ["/app/room", "/f9a5bae4-c089-4dab-8b2b-c89b9f33a610"],
+            destination: ["/app/room", "/3fbf0f08-ae52-4529-8da7-731773a83a72"],
             json: roomForAR.toJSON(),
             usingPrivateChannel: true)
     }
     
+    // Test Func. To BE DELETED
     func generateRoom() {
         if let node = sceneView.getNode(name: "RoomNode") {
             node.removeFromParentNode()
@@ -164,15 +169,20 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     func stompRoomGet(roomForAR: RoomForARDto) {
+        if let node = sceneView.getNode(name: "RoomNode") {
+            node.removeFromParentNode()
+        }
+        
         let roomNode: SCNNode = SCNNode()
         roomNode.position = roomForAR.roomLocation.toSCNVector3()
         roomNode.name = "RoomNode"
-        
+
         let room: Room = roomForAR.room
         for item: Item in room.itemList {
+            print(item.location)
             roomNode.addChildNode(ItemNode(withItem: item))
         }
-        
+
         sceneView.scene.rootNode.addChildNode(roomNode)
     }
 
