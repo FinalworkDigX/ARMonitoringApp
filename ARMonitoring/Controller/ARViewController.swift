@@ -19,8 +19,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     private var stompClient: StompClientService?
     private var beaconLocationClient: BeaconLocationService?
     
-    // TODO: make delegate for room detection (Beacons)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +32,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        //---------
+        // Start services
         startWebsocketService()
         startBeaconLocationService()
     }
@@ -76,24 +74,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     @IBAction func toBeaconList(_ sender: Any) {
     }
     
-    
-    func addItemToScene() {
-        // Temp disable.
-        
-        //        let itemJSON = "{ \"id\": \"test_item_btnAdded\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"row_list\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}"
-        //        let myItem = Item(JSONString: itemJSON)!
-        //        let testItem = ItemNode(withItem: myItem)
-        //        let cc = sceneView.getCameraCoordinates()
-        //
-        //        testItem.position = SCNVector3(cc.x, cc.y, cc.z-1)
-        //
-        //        // Add testItem to RoomNode
-        //        // RoomNode needs to be add programmatically by beacon position
-        //        // sceneView.getNode(name: "RoomNode")?.addChildNode(testItem)
-        //
-        //        sceneView.scene.rootNode.addChildNode(testItem)
-    }
-    
     // MARK: - ARSCNViewDelegate
     
     /*
@@ -121,16 +101,40 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     // MARK: - RoomShizzle
-    //tmp function to add testRoom
     @IBAction func resetRoomButton(_ sender: Any) {
-//        generateRoom()
+        if let beaconLocClient = self.beaconLocationClient {
+            beaconLocClient.activeBeacons = [Beacon]()
+        }
+    }
+    
+    // Test Func. To BE DELETED
+    func generateRoom() {
+//        if let node = sceneView.getNode(name: "RoomNode") {
+//            node.removeFromParentNode()
+//        }
+//        // TODO: Set room at coordinates with beacons
+//        //tmp fix
+//        if let position = sceneView.getCameraCoordinates() {
+//            let roomNode: SCNNode = SCNNode()
+//            roomNode.position = position
+//            roomNode.name = "RoomNode"
+//
+//            // TODO: Itterate over 'Room' model to add items at correct coordinates inside the Room
+//            let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"room_id\": \"room_test_id\"}]}"
+//            // , \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]
+//            let room: Room = Room(JSONString: roomJSON)!
+//            for item: Item in room.itemList {
+//                roomNode.addChildNode(ItemNode(withItem: item))
+//            }
+//
+//            sceneView.scene.rootNode.addChildNode(roomNode)
+//        }
         
+        // =========================
+        // Generate usign WebSockets
+        // =========================
         let roomForAR: RoomForARDto = RoomForARDto()
         roomForAR.roomLocation = Vector3(x: 0.195782185, y: 0.0673767626, z: 0.0634026974)
-        
-        // ===============================
-        // AUTOMATE DESTINATION ROOM ID
-        // ===============================
         
         stompClient?.sendMessage(
             destination: ["/app/room", "/3fbf0f08-ae52-4529-8da7-731773a83a72"],
@@ -138,33 +142,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
             usingPrivateChannel: true)
     }
     
-    // Test Func. To BE DELETED
-    func generateRoom() {
-        if let node = sceneView.getNode(name: "RoomNode") {
-            node.removeFromParentNode()
-        }
-        // TODO: Set room at coordinates with beacons
-        //tmp fix
-        let roomNode: SCNNode = SCNNode()
-        roomNode.position = sceneView.getCameraCoordinates()
-        roomNode.name = "RoomNode"
-        
-        // TODO: Itterate over 'Room' model to add items at correct coordinates inside the Room
-        let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"room_id\": \"room_test_id\"}]}"
-        // , \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]
-        let room: Room = Room(JSONString: roomJSON)!
-        for item: Item in room.itemList {
-            roomNode.addChildNode(ItemNode(withItem: item))
-        }
-        
-        sceneView.scene.rootNode.addChildNode(roomNode)
-    }
-    
     // MARK: - WebSockets & StompClientDelegate
     func startWebsocketService() {
-        let url = URL(string: "https://fw.ludovicmarchand.be/managerWS/websocket")!
-        
-        self.stompClient = StompClientService(delegate: self, socketUrl: url)
+        self.stompClient = StompClientService(delegate: self, socketUrl: SessionService.API_URL)
         self.stompClient?.openSocket()
     }
     
@@ -182,7 +162,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
             print(item.location)
             roomNode.addChildNode(ItemNode(withItem: item))
         }
-
         sceneView.scene.rootNode.addChildNode(roomNode)
     }
 
@@ -226,10 +205,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     //
     func startBeaconLocationService() {
-        let uuid_ = "4AFECBF0-E8A4-0135-7D93-7E27D0FEF627"
         if let sceneView_ = self.sceneView, let stompClient_ = self.stompClient {
             self.beaconLocationClient = BeaconLocationService(
-                uuid: uuid_,
+                uuid: SessionService.BEACON_UUID,
                 sceneView: sceneView_,
                 stompClient: stompClient_)
             

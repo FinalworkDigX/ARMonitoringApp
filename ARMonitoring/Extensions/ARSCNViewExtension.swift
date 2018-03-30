@@ -21,15 +21,23 @@ extension ARSCNView {
             .childNode(withName: name, recursively: true) as? ItemNode
     }
     
-    func getCameraCoordinates() -> SCNVector3 {
-        let cameraTransform = self.session.currentFrame?.camera.transform
-        let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
-        
-        var cc = SCNVector3()
-        cc.x = cameraCoordinates.translation.x
-        cc.y = cameraCoordinates.translation.y
-        cc.z = cameraCoordinates.translation.z
-        
-        return cc
+    func getCameraCoordinates() -> SCNVector3? {
+        if let cameraTransform = self.session.currentFrame?.camera.transform {
+            let cameraCoordinates = MDLTransform(matrix: cameraTransform).translation
+            
+            // If Cameralocation not yet ready / origin returns
+            // Return nil
+            if cameraCoordinates.x != 0.0,
+                cameraCoordinates.y != 0.0,
+                cameraCoordinates.z != 0.0 {
+                
+                var cc = SCNVector3()
+                cc.x = cameraCoordinates.x
+                cc.y = cameraCoordinates.y
+                cc.z = cameraCoordinates.z
+                return cc
+            }
+        }
+        return nil
     }
 }
