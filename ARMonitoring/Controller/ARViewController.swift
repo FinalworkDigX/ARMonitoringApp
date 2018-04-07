@@ -144,7 +144,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     // MARK: - WebSockets & StompClientDelegate
     func startWebsocketService() {
-        self.stompClient = StompClientService(delegate: self, socketUrl: SessionService.API_URL)
+        self.stompClient = StompClientService(delegate: self, socketUrl: SessionService.WS_URL)
         self.stompClient?.openSocket()
     }
     

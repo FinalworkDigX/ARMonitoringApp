@@ -16,8 +16,6 @@ class AuthenticationRestService {
         "Accept": "application/json"
     ]
     
-    let baseUrl: String = "https://fw.ludovicmarchand.be/v1/"
-    
     func authenticate(loginDto: LoginDto, success: @escaping (User) -> (), failed: @escaping (NSError)->()) {
         
         let testParameters: Parameters = [
@@ -26,7 +24,7 @@ class AuthenticationRestService {
         ]
         
         Alamofire.request(
-            "\(self.baseUrl)/auth/login",
+            "\(SessionService.API_URL)/auth/login",
             method: .post,
             parameters: testParameters,
             encoding: JSONEncoding.default,
