@@ -13,6 +13,7 @@ import ARKit
 extension Vector3 {
     
     init(fromJson: [String : Any]) {
+        self.init()
         self.x = fromJson["x"] as! Float
         self.y = fromJson["y"] as! Float
         self.z = fromJson["z"] as! Float
