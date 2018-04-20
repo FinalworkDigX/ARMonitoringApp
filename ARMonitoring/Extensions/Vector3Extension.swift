@@ -14,9 +14,13 @@ extension Vector3 {
     
     init(fromJson: [String : Any]) {
         self.init()
-        self.x = fromJson["x"] as! Float
-        self.y = fromJson["y"] as! Float
-        self.z = fromJson["z"] as! Float
+        // ... got no time for this..
+        let mx = fromJson["x"] as! NSNumber
+        let my = fromJson["y"] as! NSNumber
+        let mz = fromJson["z"] as! NSNumber
+        self.x = Float(truncating: mx)
+        self.y = Float(truncating: my)
+        self.z = Float(truncating: mz)
     }
     
     func toSCNVector3() -> SCNVector3 {

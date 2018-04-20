@@ -24,7 +24,7 @@ class AuthenticationRestService {
         ]
         
         Alamofire.request(
-            "\(SessionService.API_URL)/auth/login",
+            "\(SessionService.API_URL)/auth/user/login",
             method: .post,
             parameters: testParameters,
             encoding: JSONEncoding.default,
