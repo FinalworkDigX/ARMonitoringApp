@@ -15,6 +15,10 @@ class ItemNode: SCNNode {
     final let PLANE_SIZE:CGFloat = CGFloat(100)
     final let SCALE:SCNVector3 = SCNVector3(0.08, 0.08, 0.08)
     
+    final let FILL_COLOR: SKColor = SKColor.yellow
+    final let BORDER_COLOR: SKColor = SKColor.red
+    final let TEXT_COLOR: SKColor = SKColor.black
+    
     /*
      Next up
      - receive data from emitter (json)
@@ -30,7 +34,7 @@ class ItemNode: SCNNode {
         billboardconstraint.freeAxes = SCNBillboardAxis.Y
         constraints = [billboardconstraint]
         
-        self.name = item.id
+        self.name = item.itemId
         
         setup(item: item)
     }
@@ -66,8 +70,8 @@ class ItemNode: SCNNode {
         let rect = CGRect(x: 0, y: 0, width: PLANE_SIZE, height: PLANE_SIZE)
         let rectShape = SKShapeNode(rect: rect)
         rectShape.name = "backgroundShape"
-        rectShape.fillColor = SKColor.yellow
-        rectShape.strokeColor = SKColor.red
+        rectShape.fillColor = FILL_COLOR
+        rectShape.strokeColor = BORDER_COLOR
         rectShape.lineWidth = 0.1
         rectShape.zPosition = -10
         
@@ -87,7 +91,7 @@ class ItemNode: SCNNode {
         nameTextNode.name = name
         nameTextNode.fontSize = 10
         nameTextNode.fontName = UIFont.systemFont(ofSize: 10).fontName
-        nameTextNode.fontColor = SKColor.red
+        nameTextNode.fontColor = TEXT_COLOR
         nameTextNode.position = CGPoint(x: PLANE_SIZE/2, y: (PLANE_SIZE/6)*5)
         nameTextNode.zPosition = -5
         
