@@ -12,12 +12,19 @@ import SceneKit
 
 // Staight copy from FirstARTest
 class ItemNode: SCNNode {
+    //final let PLANE_SIZE:CGFloat = CGFloat(100)
+    //final let SCALE:SCNVector3 = SCNVector3(0.08, 0.08, 0.08)
+    final let SCALE:SCNVector3 = SCNVector3(0.05, 0.05, 0.05)
     final let PLANE_SIZE:CGFloat = CGFloat(100)
-    final let SCALE:SCNVector3 = SCNVector3(0.08, 0.08, 0.08)
     
-    final let FILL_COLOR: SKColor = SKColor.yellow
-    final let BORDER_COLOR: SKColor = SKColor.red
-    final let TEXT_COLOR: SKColor = SKColor.black
+    final let FILL_COLOR: SKColor = SKColor.black.withAlphaComponent(0.80)
+    final let BORDER_COLOR: SKColor = SKColor.black
+    final let FONT_COLOR: SKColor = SKColor.white
+    
+    final let FONT_SIZE_1: CGFloat = 10;
+    final let FONT_SIZE_2: CGFloat = 10;
+    
+    final let FONT_NAME: String = "Courier"
     
     /*
      Next up
@@ -85,15 +92,16 @@ class ItemNode: SCNNode {
     
     private func createNameText(name: String) {
         
-        print(self.name!)
         // Create SubNode
-        let nameTextNode = SKLabelNode(text: self.name!)
+        let nameTextNode = SKLabelNode(text: name)
         nameTextNode.name = name
-        nameTextNode.fontSize = 10
-        nameTextNode.fontName = UIFont.systemFont(ofSize: 10).fontName
-        nameTextNode.fontColor = TEXT_COLOR
+        nameTextNode.fontSize = FONT_SIZE_1
+        nameTextNode.fontName = FONT_NAME
+        nameTextNode.fontColor = FONT_COLOR
         nameTextNode.position = CGPoint(x: PLANE_SIZE/2, y: (PLANE_SIZE/6)*5)
         nameTextNode.zPosition = -5
+        
+        // nameTextNode.setScale(CGFloat(0.5))
         
         // Add SubNode to ItemNode
         let skScene = createScene(name: "TitleScene", size: CGSize(width: PLANE_SIZE, height: PLANE_SIZE))
@@ -108,9 +116,10 @@ class ItemNode: SCNNode {
         // Create SubNode
         let nameTextNode = SKLabelNode(text: "\(name): \(info)")
         nameTextNode.name = name
-        nameTextNode.fontSize = 10
-        nameTextNode.fontName = UIFont.systemFont(ofSize: 10).fontName
-        nameTextNode.fontColor = SKColor.red
+        nameTextNode.fontSize = FONT_SIZE_2
+        // nameTextNode.fontName = UIFont.systemFont(ofSize: 10).fontName
+        nameTextNode.fontName = FONT_NAME
+        nameTextNode.fontColor = FONT_COLOR
         nameTextNode.position = CGPoint(x: 0, y: (PLANE_SIZE/6)*CGFloat(4-index))
         nameTextNode.horizontalAlignmentMode = .left
         nameTextNode.zPosition = -5

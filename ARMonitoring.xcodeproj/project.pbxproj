@@ -10,6 +10,7 @@
 		3BE1526714AFEDAD6A45A290 /* Pods_ARMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867AF9555CF4A9B43E717B61 /* Pods_ARMonitoring.framework */; };
 		491EB1CB6CC39FF7D90A55B5 /* Pods_ARMonitoringTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */; };
 		4F507E51665F2DC8178B77D7 /* Pods_ARMonitoringUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97C7D1DFB315EB0C5BB167F /* Pods_ARMonitoringUITests.framework */; };
+		822C63AA2090FDF200FDA91A /* SCNGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822C63A92090FDF200FDA91A /* SCNGeometry.swift */; };
 		82816B9C205ADB9400371E3B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9B205ADB9400371E3B /* User.swift */; };
 		82816B9F205AF05E00371E3B /* AuthenticationRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9E205AF05E00371E3B /* AuthenticationRestService.swift */; };
 		82816BA2205B167E00371E3B /* LoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA1205B167E00371E3B /* LoginDto.swift */; };
@@ -27,6 +28,9 @@
 		82816BBF2061CC3500371E3B /* ConnectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BBE2061CC3500371E3B /* ConnectionFactory.swift */; };
 		82816BC12061D0D600371E3B /* BeaconSqliteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BC02061D0D600371E3B /* BeaconSqliteDto.swift */; };
 		829422DA2069665A003936D7 /* BeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829422D92069665A003936D7 /* BeaconService.swift */; };
+		82A917CE20912BDC002B17CB /* TrilatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A917CD20912BDC002B17CB /* TrilatTests.swift */; };
+		82A917D020913986002B17CB /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A917CF20913986002B17CB /* CGPointExtension.swift */; };
+		82A917D220913B5B002B17CB /* Position2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A917D120913B5B002B17CB /* Position2.swift */; };
 		82B97EB1206AD171004E91D7 /* RoomForARDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B97EB0206AD171004E91D7 /* RoomForARDto.swift */; };
 		82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E53519200FE4520049C5B4 /* ARViewController.swift */; };
 		82E5351E200FEC040049C5B4 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5351D200FEC040049C5B4 /* ItemNode.swift */; };
@@ -71,6 +75,7 @@
 		245F119FF2755A99F08448D9 /* Pods-ARMonitoringTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoringTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoringTests/Pods-ARMonitoringTests.debug.xcconfig"; sourceTree = "<group>"; };
 		27A5A8D54E89F60A827A9956 /* Pods-ARMonitoring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMonitoring.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMonitoring/Pods-ARMonitoring.debug.xcconfig"; sourceTree = "<group>"; };
 		7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoringTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		822C63A92090FDF200FDA91A /* SCNGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNGeometry.swift; sourceTree = "<group>"; };
 		82816B9B205ADB9400371E3B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		82816B9E205AF05E00371E3B /* AuthenticationRestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRestService.swift; sourceTree = "<group>"; };
 		82816BA1205B167E00371E3B /* LoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDto.swift; sourceTree = "<group>"; };
@@ -88,6 +93,9 @@
 		82816BBE2061CC3500371E3B /* ConnectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionFactory.swift; sourceTree = "<group>"; };
 		82816BC02061D0D600371E3B /* BeaconSqliteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconSqliteDto.swift; sourceTree = "<group>"; };
 		829422D92069665A003936D7 /* BeaconService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconService.swift; sourceTree = "<group>"; };
+		82A917CD20912BDC002B17CB /* TrilatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrilatTests.swift; sourceTree = "<group>"; };
+		82A917CF20913986002B17CB /* CGPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
+		82A917D120913B5B002B17CB /* Position2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position2.swift; sourceTree = "<group>"; };
 		82B97EB0206AD171004E91D7 /* RoomForARDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomForARDto.swift; sourceTree = "<group>"; };
 		82E53519200FE4520049C5B4 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		82E5351D200FEC040049C5B4 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
@@ -230,6 +238,9 @@
 				82EBE7B820111B50003DCB7E /* StringExtension.swift */,
 				82EBE7BD201DFF8F003DCB7E /* UIImageViewExtension.swift */,
 				82816BB1205C087300371E3B /* Vector3Extension.swift */,
+				822C63A92090FDF200FDA91A /* SCNGeometry.swift */,
+				82A917CD20912BDC002B17CB /* TrilatTests.swift */,
+				82A917CF20913986002B17CB /* CGPointExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,6 +329,7 @@
 				82816B9B205ADB9400371E3B /* User.swift */,
 				82816BA3205B2A6B00371E3B /* UserInfo.swift */,
 				82816BAD205BF88A00371E3B /* Beacon.swift */,
+				82A917D120913B5B002B17CB /* Position2.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -635,9 +647,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				82816BB0205C073100371E3B /* BeaconLocationService.swift in Sources */,
+				82A917D220913B5B002B17CB /* Position2.swift in Sources */,
 				82816BA4205B2A6B00371E3B /* UserInfo.swift in Sources */,
 				82816BB92061C65600371E3B /* DBInitializer.swift in Sources */,
 				82816BBF2061CC3500371E3B /* ConnectionFactory.swift in Sources */,
+				822C63AA2090FDF200FDA91A /* SCNGeometry.swift in Sources */,
 				82E91D4820004BE500005705 /* DataLog.swift in Sources */,
 				82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */,
 				82EBE7B720110DE9003DCB7E /* Room.swift in Sources */,
@@ -656,9 +670,11 @@
 				82816BAA205BEF7D00371E3B /* SessionService.swift in Sources */,
 				82E53522200FED5D0049C5B4 /* ARSCNViewExtension.swift in Sources */,
 				82EBE7BC201159B1003DCB7E /* Information.swift in Sources */,
+				82A917CE20912BDC002B17CB /* TrilatTests.swift in Sources */,
 				82816BB4205D088A00371E3B /* BeaconCalibrationDto.swift in Sources */,
 				82EBE7B5201107D5003DCB7E /* Item.swift in Sources */,
 				82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */,
+				82A917D020913986002B17CB /* CGPointExtension.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,
 				82816B9F205AF05E00371E3B /* AuthenticationRestService.swift in Sources */,
 				82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */,

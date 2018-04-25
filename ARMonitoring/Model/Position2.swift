@@ -7,3 +7,10 @@
 //
 
 import Foundation
+import UIKit
+
+class Position2 {
+    var loc: CGPoint = CGPoint()
+    var range: CGFloat = CGFloat()
+    var name: String = String()
+}

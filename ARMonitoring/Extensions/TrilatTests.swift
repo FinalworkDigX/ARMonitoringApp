@@ -7,24 +7,20 @@
 //
 
 import Foundation
+import Trilateration3D
 import UIKit
 import Darwin
 
-class Trilat2 {
-    struct Position {
-        var loc: CGPoint = CGPoint()
-        var range: CGFloat = CGFloat()
-        var name: String = String()
-    }
+class TrilatTests {
     
-    func trilaturate(p1: Position, p2: Position, p3: Position) -> CGPoint {
+    static func trilaturate(p1: Position2, p2: Position2, p3: Position2) -> CGPoint {
         // Helping functions
         //  - Trilateration
         func sqr(_ base : CGFloat) -> CGFloat {
             return base * base
         }
         
-        func dot(a: Position, b: Position) -> CGFloat {
+        func dot(a: Position2, b: Position2) -> CGFloat {
             return sqr(a.loc.x) - sqr(b.loc.x) + sqr(a.loc.y) - sqr(b.loc.y) + sqr(b.range) - sqr(a.range)
         }
         

@@ -156,13 +156,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         let roomNode: SCNNode = SCNNode()
         roomNode.position = roomForAR.roomLocation.toSCNVector3()
         roomNode.name = "RoomNode"
+        
 
         let room: Room = roomForAR.room
         for item: Item in room.itemList {
-            print(item.location)
             roomNode.addChildNode(ItemNode(withItem: item))
         }
         sceneView.scene.rootNode.addChildNode(roomNode)
+        
+        //DEBUG
+        
+        
+        let sphereGeo = SCNSphere(radius: 0.01)
+        sphereGeo.firstMaterial?.diffuse.contents = UIColor.cyan
+        let sphereNode = SCNNode(geometry: sphereGeo)
+        sphereNode.position = roomForAR.roomLocation.toSCNVector3()
+        sceneView.scene.rootNode.addChildNode(sphereNode)
     }
 
     func stompDataLogGet(dataLog: DataLog) {
