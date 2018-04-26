@@ -13,31 +13,49 @@ import Darwin
 
 class TrilatTests {
     
-    static func trilaturate(p1: Position2, p2: Position2, p3: Position2) -> CGPoint {
-        // Helping functions
-        //  - Trilateration
-        func sqr(_ base : CGFloat) -> CGFloat {
+    public static func trilat2(p1: Position, p2: Position, p3: Position, p4: Position) -> Vector3 {
+        func sqr(_ base: Float) -> Float {
             return base * base
         }
         
-        func dot(a: Position2, b: Position2) -> CGFloat {
-            return sqr(a.loc.x) - sqr(b.loc.x) + sqr(a.loc.y) - sqr(b.loc.y) + sqr(b.range) - sqr(a.range)
+        func norm(_ vector: Vector3) -> Float {
+            return sqrtf(sqr(vector.x) + sqr(vector.y) + sqr(vector.z))
         }
         
-        func dat(a: CGPoint, b: CGPoint, c: CGPoint) -> CGFloat {
-            return (a.y - b.y) * (b.x - c.x)
+        func dot(a: Vector3, b: Vector3) -> Float {
+            return a.x * b.x + a.y * b.y + a.z * b.z
         }
         
-        let s = dot(a: p3, b: p2) / 2
-        let t = dot(a: p1, b: p2) / 2
+        let pv1 = p1.loc
+        let pv2 = p2.loc
+        let pv3 = p3.loc
+        let pv4 = p4.loc
         
-        let px = p2.loc.x - p1.loc.x
+        let pr1 = p1.range
+        let pr2 = p2.range
+        let pr3 = p3.range
+        let pr4 = p4.range
         
-        let my = (t * (p2.loc.x - p3.loc.x)) - (s * px)
-            / (dat(a: p1.loc, b: p2.loc, c: p3.loc) - dat(a: p3.loc, b: p2.loc, c: p1.loc))
+        let e_x =   pv1.substract(pv2).devide(norm(pv2.substract(pv1)))
+        let i =     dot(a: e_x, b: pv3.substract(pv1))
+        let e_y =   pv3.substract(pv1).substract(e_x.multiply(i)).devide(norm(pv3.substract(pv1).substract(e_x.multiply(i))))
+        let e_z =   e_x.cross(e_y)
+        let d =     norm(pv2.substract(pv1))
+        let j =     dot(a: e_y, b: (pv3.substract(pv1)))
+        let x =     (sqr(pr1)-sqr(pr2)+sqr(d)) / (d*2)
+        let y =     ((sqr(pr1)-sqr(pr3)+sqr(i)+sqr(j))/(2*j)) - ((i/j)*x)
+        let z1 =    sqrtf(sqr(pr1)-sqr(x)-sqr(y))
+        let z2 =    sqrtf(sqr(pr2)-sqr(x)-sqr(y)) * -1
+        let ans1 =  pv1.add(e_x.multiply(x)).add(e_y.multiply(y)).add(e_z.multiply(z1))
+        let ans2 =  pv1.add(e_x.multiply(x)).add(e_y.multiply(y)).add(e_z.multiply(z2))
+        let dist1 = norm(pv4.substract(ans1))
+        let dist2 = norm(pv4.substract(ans2))
         
-        let mx = (my * (p1.loc.y - p2.loc.y) - t) / px
-        
-        return CGPoint(x: mx, y: my)
+        if abs(pr4-dist1) < abs(pr4-dist2) {
+            return ans1
+        }
+        else {
+            return ans2
+        }
     }
 }

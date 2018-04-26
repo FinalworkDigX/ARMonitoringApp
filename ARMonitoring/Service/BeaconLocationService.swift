@@ -66,13 +66,18 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
         
         if knownBeacons.count > 0 {
             for beacon in knownBeacons {
-                print("------------")
-                print(beacon.accuracy)
-                print(beacon.proximity.rawValue)
-                print(beacon.rssi)
-                print("------------")
-                print(pow(Decimal((beacon.rssi-(-64))/(10 * 2)), 10))
-                print("==")
+                
+                
+                
+//                print("------------")
+//                print(beacon.accuracy)
+//                print(beacon.proximity.hashValue)
+//                print(beacon.rssi)
+//                print("------------")
+//                print(pow(Decimal((beacon.rssi-(-70))/(10 * 2)), 10))
+//                print("==")
+                
+                
                 // Get Beacon from activeBeacons OR localDB beacons
                 var aBeacon = Beacon()
                 if let activeBeaconIndex = beaconActive(beacon: beacon) {
@@ -96,74 +101,89 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                 // Get Range & Position of user to beacon
                 // If using Kalmann filter, need to get multiple anges before adding to userPosition
 //                let range_ = Beacon.caclulateAccuracy(
-//                    calibrationFactor: 70,
+//                    calibrationFactor: aBeacon.calibrationFactor,
 //                    rssi: beacon.rssi)
-                let range_ = Float(100)//Float(beacon.accuracy) * 0.58
-                print("range: \(range_)")
-//                print("acc: \(beacon.accuracy)")
+                //print("range_calc: \(range_2)")
+                //let range_ = Float(100)//Float(beacon.accuracy) * 0.58
 
-                
-                // Position
-                if let scenePosition = sceneView.getCameraCoordinates()?.toVector3() {
-                    // Check position is not 0 0 0
-                    let beaconPos = Position(location: scenePosition, range: range_)
-                    aBeacon.pastUserPositions?.append(beaconPos)
+                // Get cameraCoordinates for average calcualtion
+                if let cameraCoordinates = sceneView.getCameraCoordinates()?.toVector3() {
+                    // Add to arrays for later average calculation
+                    aBeacon.coordinatesAverage.append(cameraCoordinates)
+                    aBeacon.distanceAverage.append(beacon.accuracy)
+                    print("count: \(aBeacon.distanceAverage.count)")
                     
-                    // Trilaterate if enough positions known
-                    // If aBeacon.pastUserPositions.count >= 3 trilaterate and add room to Scene
-                    if let userPastPos = aBeacon.pastUserPositions {
-                        if userPastPos.count <= 3 {
-                            //debug
-                            debug(pos: scenePosition, tril: true)
+                    // If enough entries, calculate average
+                    if (aBeacon.distanceAverage.count > 2) {
+                        
+                        //Calculate averages
+                        let rangeA: Float = Float(aBeacon.getAndStoreAverageDistance())
+                        let cameraCoordinateA = aBeacon.getAndStoreAverageCoordinates()
+                       
+                        // Create Position
+                        let beaconPos = Position(
+                            location: cameraCoordinateA,
+                            range: rangeA)
+                        
+                        print("Range: \(beaconPos.range)")
+                        aBeacon.pastUserPositions?.append(beaconPos)
+                        
+                        // Trilaterate if enough positions known
+                        // If aBeacon.pastUserPositions.count >= 3 trilaterate and add room to Scene
+                        if let userPastPos = aBeacon.pastUserPositions {
+                            if userPastPos.count <= 4 {
+                                //debug
+                                debug(pos: cameraCoordinateA, tril: true)
+                            }
+                            if userPastPos.count == 4 {
+                                let posCount = userPastPos.count
+                                
+                                let tril_ = TrilatTests.trilat2(
+                                    p1: userPastPos[posCount-4],
+                                    p2: userPastPos[posCount-3],
+                                    p3: userPastPos[posCount-2],
+                                    p4: userPastPos[posCount-1])
+                                
+                                debug(pos: tril_, tril: false)
+                                
+                                
+                                let roomForAR: RoomForARDto = RoomForARDto()
+                                roomForAR.roomLocation = tril_
+                                stompClient.sendMessage(
+                                    destination: ["/app/room", "/\(aBeacon.roomId!)"],
+                                    json: roomForAR.toJSON(),
+                                    usingPrivateChannel: true)
+                                
+//                                if let tril = trilaterate(
+//                                    p1: userPastPos[posCount-3],
+//                                    p2: userPastPos[posCount-2],
+//                                    p3: userPastPos[posCount-1],
+//                                    returnMiddle: true) {
+//
+//                                    print("================")
+//                                    print("TRIL: \(tril)")
+//                                    print("================")
+//                                    debug(pos: tril[0], tril: false)
+//
+//
+//                                    let roomForAR: RoomForARDto = RoomForARDto()
+//                                    roomForAR.roomLocation = tril.first
+//                                    stompClient.sendMessage(
+//                                        destination: ["/app/room", "/\(aBeacon.roomId!)"],
+//                                        json: roomForAR.toJSON(),
+//                                        usingPrivateChannel: true)
+//                                }
+                                // aBeacon.pastUserPositions.removeFirst()
+                            }
                         }
-                        if userPastPos.count == 3 {
-                            let posCount = userPastPos.count
-                            
-                            let tril_ = TrilatTests.trilaturate(
-                                p1: userPastPos[posCount-3].toPosition2(),
-                                p2: userPastPos[posCount-2].toPosition2(),
-                                p3: userPastPos[posCount-1].toPosition2())
-
-                            let tril = tril_.toVector3()
-                            
-                            debug(pos: tril, tril: false)
-                            
-                            let roomForAR: RoomForARDto = RoomForARDto()
-                            roomForAR.roomLocation = tril
-                            stompClient.sendMessage(
-                                destination: ["/app/room", "/\(aBeacon.roomId!)"],
-                                json: roomForAR.toJSON(),
-                                usingPrivateChannel: true)
-                            
-//                            if let tril = trilaterate(
-//                                p1: userPastPos[posCount-3],
-//                                p2: userPastPos[posCount-2],
-//                                p3: userPastPos[posCount-1],
-//                                returnMiddle: true) {
-//
-//                                print("================")
-//                                print("TRIL: \(tril)")
-//                                print("================")
-//                                debug(pos: tril[0], tril: false)
-//
-//
-//                                let roomForAR: RoomForARDto = RoomForARDto()
-//                                roomForAR.roomLocation = tril.first
-//                                stompClient.sendMessage(
-//                                    destination: ["/app/room", "/\(aBeacon.roomId!)"],
-//                                    json: roomForAR.toJSON(),
-//                                    usingPrivateChannel: true)
-//                            }
-                            // aBeacon.pastUserPositions.removeFirst()
-                        }
+                        // print("==========================")
                     }
-                    
                     // Add Beacon to activeBeacons
                     activeBeacons.append(aBeacon)
-                    // print("==========================")
-                }
+                
+                } // End of averages
                 else {
-                    // print("Coordiante error (0, 0, 0)")
+                    print("Coordiantes too close to origin (0, 0, 0)")
                 }
             }
         }

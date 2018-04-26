@@ -26,11 +26,13 @@ class Beacon: Mappable {
     
     var pastUserRanges: [Double]!
     var pastUserPositions: [Position]!
+    var distanceAverage = [Double]()
+    var coordinatesAverage = [Vector3]()
     var txPower: Int!
     
     init() {
         self.pastUserPositions = [Position]()
-        self.pastUserRanges = [Double]() 
+        self.pastUserRanges = [Double]()
     }
     
     required init?(map: Map) {
@@ -48,7 +50,26 @@ class Beacon: Mappable {
         lastUpdated         <- map["lastUpdated"]
     }
     
+    public func getAndStoreAverageDistance() -> Double {
+        var average:Double = 0;
+        for distance in self.distanceAverage {
+            average += distance
+        }
+        average /= Double(self.distanceAverage.count)
+        self.distanceAverage.removeAll()
+        self.pastUserRanges.append(average)
+        return average
+    }
     
+    public func getAndStoreAverageCoordinates() -> Vector3 {
+        var average:Vector3 = Vector3(x: 0, y: 0, z: 0);
+        for distance in self.coordinatesAverage {
+            average = average.add(distance)
+        }
+        average = average.devide(self.coordinatesAverage.count)
+        self.coordinatesAverage.removeAll()
+        return average
+    }
     
     // https://gist.github.com/JoostKiens/d834d8acd3a6c78324c9
     static func caclulateAccuracy(calibrationFactor: Int, rssi: Int) -> Float {
