@@ -102,44 +102,34 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     // MARK: - RoomShizzle
     @IBAction func resetRoomButton(_ sender: Any) {
-        if let beaconLocClient = self.beaconLocationClient {
-            beaconLocClient.activeBeacons = [Beacon]()
+//        print("beacon: \(String(describing: sceneView.getCameraCoordinates()))")
+//        if let beaconLocClient = self.beaconLocationClient {
+//            beaconLocClient.activeBeacons = [Beacon]()
+//        }
+        
+        if let beaconLocClient = self.beaconLocationClient,
+            let position = sceneView.getCameraCoordinates() {
+            beaconLocClient.manualToggle = true;
+            beaconLocClient.callWebSocketSetRoom(position.toVector3())
         }
+        
     }
     
     // Test Func. To BE DELETED
     func generateRoom() {
-//        if let node = sceneView.getNode(name: "RoomNode") {
-//            node.removeFromParentNode()
-//        }
-//        // TODO: Set room at coordinates with beacons
-//        //tmp fix
-//        if let position = sceneView.getCameraCoordinates() {
-//            let roomNode: SCNNode = SCNNode()
-//            roomNode.position = position
-//            roomNode.name = "RoomNode"
-//
-//            // TODO: Itterate over 'Room' model to add items at correct coordinates inside the Room
-//            let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"room_id\": \"room_test_id\"}]}"
-//            // , \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]
-//            let room: Room = Room(JSONString: roomJSON)!
-//            for item: Item in room.itemList {
-//                roomNode.addChildNode(ItemNode(withItem: item))
-//            }
-//
-//            sceneView.scene.rootNode.addChildNode(roomNode)
-//        }
+        
+        print("\(String(describing: sceneView.getCameraCoordinates()))")
         
         // =========================
         // Generate usign WebSockets
         // =========================
-        let roomForAR: RoomForARDto = RoomForARDto()
-        roomForAR.roomLocation = Vector3(x: 0.195782185, y: 0.0673767626, z: 0.0634026974)
-        
-        stompClient?.sendMessage(
-            destination: ["/app/room", "/3fbf0f08-ae52-4529-8da7-731773a83a72"],
-            json: roomForAR.toJSON(),
-            usingPrivateChannel: true)
+//        let roomForAR: RoomForARDto = RoomForARDto()
+//        roomForAR.roomLocation = Vector3(x: 0.195782185, y: 0.0673767626, z: 0.0634026974)
+//
+//        stompClient?.sendMessage(
+//            destination: ["/app/room", "/3fbf0f08-ae52-4529-8da7-731773a83a72"],
+//            json: roomForAR.toJSON(),
+//            usingPrivateChannel: true)
     }
     
     // MARK: - WebSockets & StompClientDelegate

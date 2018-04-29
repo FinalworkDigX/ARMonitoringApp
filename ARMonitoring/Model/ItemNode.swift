@@ -26,6 +26,8 @@ class ItemNode: SCNNode {
     
     final let FONT_NAME: String = "Courier"
     
+    let item: Item;
+    
     /*
      Next up
      - receive data from emitter (json)
@@ -34,6 +36,7 @@ class ItemNode: SCNNode {
      */
 
     init(withItem item:Item) {
+        self.item = item;
         super.init()
         
         // Set constraints
@@ -87,7 +90,9 @@ class ItemNode: SCNNode {
         skScene.addChild(rectShape)
         
         let scnPlane = toPlane(name: "background", skScene: skScene)
-        toChildNode(name: "background", position: SCNVector3(0, 0, -0.5), plane: scnPlane)
+        var bgPosition: SCNVector3 = self.item.location
+        bgPosition.z += -0.02
+        toChildNode(name: "background", position: bgPosition, plane: scnPlane)
     }
     
     private func createNameText(name: String) {
@@ -108,7 +113,8 @@ class ItemNode: SCNNode {
         skScene.addChild(nameTextNode)
         
         let scnPlane = toPlane(name: "TitlePlane", skScene: skScene)
-        toChildNode(name: "TitleNode", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
+//        toChildNode(name: "TitleNode", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
+        toChildNode(name: "TitleNode", position: self.item.location, plane: scnPlane)
     }
     
     private func createInfoText(name:String, info: String, index:Int) {
@@ -129,7 +135,8 @@ class ItemNode: SCNNode {
         skScene.addChild(nameTextNode)
         
         let scnPlane = toPlane(name: "\(name)Plane", skScene: skScene)
-        toChildNode(name: "\(name)Node", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
+//        toChildNode(name: "\(name)Node", position: SCNVector3(0, 0, -0.48), plane: scnPlane)
+        toChildNode(name: "\(name)Node", position: self.item.location, plane: scnPlane)
     }
     
     private func createScene(name: String, size: CGSize) -> SKScene {
