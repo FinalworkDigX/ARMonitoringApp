@@ -139,13 +139,17 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     func stompRoomGet(roomForAR: RoomForARDto) {
-        if let node = sceneView.getNode(name: "RoomNode") {
+        // FIX: Workarround for 1 beacon -> 1 item:
+        //   Use itemId as room name
+        let roomName: String = roomForAR.getFirstItemId()!
+        
+        if let node = sceneView.getNode(name: roomName) {
             node.removeFromParentNode()
         }
         
         let roomNode: SCNNode = SCNNode()
         roomNode.position = roomForAR.roomLocation.toSCNVector3()
-        roomNode.name = "RoomNode"
+        roomNode.name = roomName
         
 
         let room: Room = roomForAR.room
@@ -167,7 +171,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     func stompDataLogGet(dataLog: DataLog) {
         
         print(dataLog.toLog())
-        if let node = sceneView.getNodeInRoom(name: dataLog.itemId) {
+        // FIX: Workaround 1 beacon -> 1item
+        if let node = sceneView.getNodeInRoom(roomName: dataLog.itemId, nodeName: dataLog.itemId) {
             node.updateData(dataLog: dataLog)
         }
     }

@@ -16,9 +16,9 @@ extension ARSCNView {
         return self.scene.rootNode.childNode(withName: name, recursively: true)
     }
     
-    func getNodeInRoom(name: String) -> ItemNode? {
-        return self.scene.rootNode.childNode(withName: "RoomNode", recursively: true)?
-            .childNode(withName: name, recursively: true) as? ItemNode
+    func getNodeInRoom(roomName: String, nodeName: String) -> ItemNode? {
+        return self.scene.rootNode.childNode(withName: roomName, recursively: true)?
+            .childNode(withName: nodeName, recursively: true) as? ItemNode
     }
     
     func getCameraCoordinates() -> SCNVector3? {
