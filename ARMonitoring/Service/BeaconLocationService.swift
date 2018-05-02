@@ -65,55 +65,49 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
         let knownBeacons = beacons.filter{ $0.proximity != .unknown }
         let forgettableBeacons = beacons.filter{ $0.proximity == .unknown }
         
-        if !self.manualToggle {
-            if knownBeacons.count > 0 {
-                for beacon in knownBeacons {
-                    
-                    
-                    
-    //                print("------------")
-    //                print(beacon.accuracy)
-    //                print(beacon.proximity.hashValue)
-    //                print(beacon.rssi)
-    //                print("------------")
-    //                print(pow(Decimal((beacon.rssi-(-70))/(10 * 2)), 10))
-    //                print("==")
-                    
-                    
-                    // Get Beacon from activeBeacons OR localDB beacons
-                    aBeacon = Beacon()
-                    if let activeBeaconIndex = beaconActive(beacon: beacon) {
-                        aBeacon = activeBeacons[activeBeaconIndex]
+        
+        if knownBeacons.count > 0 {
+            for (index, beacon) in knownBeacons.enumerated() {
+                
+                // Get Beacon from activeBeacons OR localDB beacons
+                var beacon_ = Beacon()
+                if let activeBeaconIndex = beaconActive(beacon: beacon) {
+                    beacon_ = activeBeacons[activeBeaconIndex]
+                }
+                else {
+                    if let localBeacon = beaconService.getByMajorMinor(
+                        major: Int(truncating: beacon.major),
+                        minor: Int(truncating: beacon.minor)
+                    ) {
+                        beacon_ = localBeacon
                     }
                     else {
-                        if let localBeacon = beaconService.getByMajorMinor(
-                            major: Int(truncating: beacon.major),
-                            minor: Int(truncating: beacon.minor)
-                        ) {
-                            aBeacon = localBeacon
-                        }
-                        else {
-                            print("ERROR: beacon not in localDB")
-                            break;
-                        }
+                        print("ERROR: beacon not in localDB")
+                        break;
                     }
+                }
+                // Set activebeacon as closest beacon
+                if index == 0 {
+                    aBeacon = beacon_;
+                }
+                
+                if !self.manualToggle {
                     
                     // Get cameraCoordinates for average calcualtion
                     if let cameraCoordinates = sceneView.getCameraCoordinates()?.toVector3() {
                         // Add to arrays for later average calculation
-                        aBeacon.coordinatesAverage.append(cameraCoordinates)
-                        aBeacon.distanceAverage.append(beacon.accuracy)
-                        //print("count: \(aBeacon.distanceAverage.count)")
+                        beacon_.coordinatesAverage.append(cameraCoordinates)
+                        beacon_.distanceAverage.append(beacon.accuracy)
                         
                         // If enough entries, calculate average
-                        if (aBeacon.distanceAverage.count > 3) {
+                        if (beacon_.distanceAverage.count > 3) {
                             
                             // Random factor test
                             let rFactor:Double = 2;
                             
                             //Calculate averages
-                            let rangeA: Float = Float(aBeacon.getAndStoreAverageDistance() * rFactor)
-                            let cameraCoordinateA = aBeacon.getAndStoreAverageCoordinates()
+                            let rangeA: Float = Float(beacon_.getAndStoreAverageDistance() * rFactor)
+                            let cameraCoordinateA = beacon_.getAndStoreAverageCoordinates()
                             
                            
                             // Create Position
@@ -122,11 +116,11 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                                 range: rangeA)
                             
                             //print("Range: \(beaconPos.range)")
-                            aBeacon.pastUserPositions?.append(beaconPos)
+                            beacon_.pastUserPositions?.append(beaconPos)
                             
                             // Trilaterate if enough positions known
-                            // If aBeacon.pastUserPositions.count >= 3 trilaterate and add room to Scene
-                            if let userPastPos = aBeacon.pastUserPositions {
+                            // If beacon_.pastUserPositions.count >= 3 trilaterate and add room to Scene
+                            if let userPastPos = beacon_.pastUserPositions {
                                 // print("coord+range: r: \(userPastPos.last?.range), v:\(userPastPos.last?.loc)")
                                 if userPastPos.count <= 4 {
                                     //debug
@@ -134,22 +128,6 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                                 }
                                 if userPastPos.count == 4 {
                                     let posCount = userPastPos.count
-                                    
-    //                                let tril_ = TrilatTests.trilat2(
-    //                                    p1: userPastPos[posCount-4],
-    //                                    p2: userPastPos[posCount-3],
-    //                                    p3: userPastPos[posCount-2],
-    //                                    p4: userPastPos[posCount-1])
-    //
-    //                                debug(pos: tril_, tril: false)
-    //
-    //
-    //                                let roomForAR: RoomForARDto = RoomForARDto()
-    //                                roomForAR.roomLocation = tril_
-    //                                stompClient.sendMessage(
-    //                                    destination: ["/app/room", "/\(aBeacon.roomId!)"],
-    //                                    json: roomForAR.toJSON(),
-    //                                    usingPrivateChannel: true)
                                     
                                     if let tril = trilaterate(
                                         p1: userPastPos[posCount-3],
@@ -163,45 +141,39 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                                         debug(pos: tril[0], tril: false)
 
                                         callWebSocketSetRoom(tril.first!)
-
-    //                                    let roomForAR: RoomForARDto = RoomForARDto()
-    //                                    roomForAR.roomLocation = tril.first
-    //                                    stompClient.sendMessage(
-    //                                        destination: ["/app/room", "/\(aBeacon.roomId!)"],
-    //                                        json: roomForAR.toJSON(),
-    //                                        usingPrivateChannel: true)
                                     }
-                                    // aBeacon.pastUserPositions.removeFirst()
                                 }
                             }
                             // print("==========================")
                         }
                         // Add Beacon to activeBeacons
-                        activeBeacons.append(aBeacon)
+                        activeBeacons.append(beacon_)
                     
                     } // End of averages
                     else {
                         print("Coordiantes too close to origin (0, 0, 0)")
                     }
                 }
-            }
             
-            if forgettableBeacons.count != 0 && activeBeacons.count != 0 {
-                for fBeacon in forgettableBeacons {
-                    if let activeBeaconIndex = beaconActive(beacon: fBeacon) {
-                        activeBeacons.remove(at: activeBeaconIndex)
+                if forgettableBeacons.count != 0 && activeBeacons.count != 0 {
+                    for fBeacon in forgettableBeacons {
+                        if let activeBeaconIndex = beaconActive(beacon: fBeacon) {
+                            activeBeacons.remove(at: activeBeaconIndex)
+                        }
                     }
                 }
+            // End beacons iteration
             }
+        // End if beacon present
         }
     }
     
     private func beaconActive(beacon: CLBeacon) -> Int? {
         
-        for (aIndex, aBeacon) in activeBeacons.enumerated() {
+        for (aIndex, beacon_) in activeBeacons.enumerated() {
             
-            if Int(truncating: beacon.major) == aBeacon.major,
-                Int(truncating: beacon.minor) == aBeacon.minor {
+            if Int(truncating: beacon.major) == beacon_.major,
+                Int(truncating: beacon.minor) == beacon_.minor {
                 return aIndex
             }
         }
