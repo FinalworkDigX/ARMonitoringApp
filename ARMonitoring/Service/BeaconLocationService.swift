@@ -50,7 +50,8 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
         print("===============")
         print("start observing")
         print("===============")
-        if CLLocationManager.authorizationStatus() != .authorizedAlways {
+        if CLLocationManager.authorizationStatus() != .authorizedAlways &&
+            CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
             failed(NSError(
                 domain: "EHB.ARMonitoring.BeaconLocationService",
                 code: -50,

@@ -101,12 +101,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     // MARK: - RoomShizzle
-    @IBAction func resetRoomButton(_ sender: Any) {
-//        print("beacon: \(String(describing: sceneView.getCameraCoordinates()))")
-//        if let beaconLocClient = self.beaconLocationClient {
-//            beaconLocClient.activeBeacons = [Beacon]()
-//        }
-        
+    @IBAction func resetRoomButton(_ sender: Any) {        
         if let beaconLocClient = self.beaconLocationClient,
             let position = sceneView.getCameraCoordinates() {
             beaconLocClient.manualToggle = true;
@@ -118,18 +113,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     // Test Func. To BE DELETED
     func generateRoom() {
         
-        print("\(String(describing: sceneView.getCameraCoordinates()))")
-        
+        print("generate")
+        beaconLocationClient?.manualToggle = true
         // =========================
-        // Generate usign WebSockets
+        // Generate using WebSockets
         // =========================
-//        let roomForAR: RoomForARDto = RoomForARDto()
-//        roomForAR.roomLocation = Vector3(x: 0.195782185, y: 0.0673767626, z: 0.0634026974)
-//
-//        stompClient?.sendMessage(
-//            destination: ["/app/room", "/3fbf0f08-ae52-4529-8da7-731773a83a72"],
-//            json: roomForAR.toJSON(),
-//            usingPrivateChannel: true)
+        let roomForAR: RoomForARDto = RoomForARDto()
+        roomForAR.roomLocation = Vector3(x: 0, y: 0, z: 0)
+
+        stompClient?.sendMessage(
+            destination: ["/app/room", "/d5182fb3-d68c-4a9e-994d-c004b003ebe4"],
+            json: roomForAR.toJSON(),
+            usingPrivateChannel: true)
     }
     
     // MARK: - WebSockets & StompClientDelegate
@@ -161,11 +156,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         //DEBUG
         
         
-        let sphereGeo = SCNSphere(radius: 0.01)
-        sphereGeo.firstMaterial?.diffuse.contents = UIColor.cyan
-        let sphereNode = SCNNode(geometry: sphereGeo)
-        sphereNode.position = roomForAR.roomLocation.toSCNVector3()
-        sceneView.scene.rootNode.addChildNode(sphereNode)
+//        let sphereGeo = SCNSphere(radius: 0.01)
+//        sphereGeo.firstMaterial?.diffuse.contents = UIColor.cyan
+//        let sphereNode = SCNNode(geometry: sphereGeo)
+//        sphereNode.position = roomForAR.roomLocation.toSCNVector3()
+//        sceneView.scene.rootNode.addChildNode(sphereNode)
     }
 
     func stompDataLogGet(dataLog: DataLog) {
