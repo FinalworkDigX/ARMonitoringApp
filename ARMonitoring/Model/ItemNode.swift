@@ -52,6 +52,7 @@ class ItemNode: SCNNode {
     private func setup(item: Item) {
         self.createBackground()
         self.createNameText(name: item.name)
+        self.createNameTextSeparator()
     }
     
     public func updateData(dataLog: DataLog) {
@@ -68,7 +69,7 @@ class ItemNode: SCNNode {
         rectShape.name = "backgroundShape"
         rectShape.fillColor = FILL_COLOR
         rectShape.strokeColor = BORDER_COLOR
-        rectShape.lineWidth = 0.1
+        rectShape.lineWidth = 1
         rectShape.zPosition = -1
         
         // Add SubNode to ItemNode
@@ -86,7 +87,7 @@ class ItemNode: SCNNode {
         let nameTextNode = SKLabelNode(text: name)
         nameTextNode.name = name
         nameTextNode.fontSize = FONT_SIZE_1
-        nameTextNode.fontName = FONT_NAME
+        nameTextNode.fontName = String(FONT_NAME + "-Bold")
         nameTextNode.fontColor = FONT_COLOR
         nameTextNode.position = CGPoint(
             x: (PLANE_SIZE - PLANE_PADDING) / 2,
@@ -104,6 +105,33 @@ class ItemNode: SCNNode {
         
         let scnPlane = toPlane(name: "TitlePlane", skScene: skScene)
         toChildNode(name: "TitleNode", position: self.item.location, plane: scnPlane)
+    }
+    
+    private func createNameTextSeparator() {
+        let rect = CGRect(
+            x: 0,
+            y: 0,
+            width: (PLANE_SIZE - (PLANE_PADDING * 2)),
+            height: 10
+        )
+        let rectShape = SKShapeNode(rect: rect)
+        rectShape.name = "titleSeparator"
+        rectShape.fillColor = UIColor.white
+        rectShape.position = CGPoint(
+            x: PLANE_PADDING,
+            y: ((PLANE_SIZE - PLANE_PADDING) / PLANE_ICOUNT * 6) - 10
+        )
+        rectShape.zPosition = 0
+        
+        // Add SubNode to ItemNode
+        let skScene = createScene(
+            name: "TitleSeparatorScene",
+            size: CGSize(width: PLANE_SIZE, height: PLANE_SIZE)
+        )
+        skScene.addChild(rectShape)
+        
+        let scnPlane = toPlane(name: "TitleSeparatorPlane", skScene: skScene)
+        toChildNode(name: "TitleSeparatorNode", position: self.item.location, plane: scnPlane)
     }
     
     private func createInfoText(name:String, info: String, index:Int) {

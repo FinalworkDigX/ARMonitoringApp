@@ -152,7 +152,7 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
                     
                     } // End of averages
                     else {
-                        print("Coordiantes too close to origin (0, 0, 0)")
+                        // print("Coordiantes too close to origin (0, 0, 0)")
                     }
                 }
             
