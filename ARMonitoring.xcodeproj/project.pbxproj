@@ -12,6 +12,8 @@
 		4F507E51665F2DC8178B77D7 /* Pods_ARMonitoringUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97C7D1DFB315EB0C5BB167F /* Pods_ARMonitoringUITests.framework */; };
 		8217CF3020A494F600F60F48 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8217CF2F20A494F600F60F48 /* RequestViewController.swift */; };
 		8217CF3220A49B7400F60F48 /* ModalMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8217CF3120A49B7400F60F48 /* ModalMenuViewController.swift */; };
+		8217CF3420A4D7A300F60F48 /* DataItemRequestRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8217CF3320A4D7A300F60F48 /* DataItemRequestRestService.swift */; };
+		8217CF3620A4D7E400F60F48 /* DataItemRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8217CF3520A4D7E400F60F48 /* DataItemRequestDto.swift */; };
 		822C63AA2090FDF200FDA91A /* SCNGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822C63A92090FDF200FDA91A /* SCNGeometry.swift */; };
 		82816B9C205ADB9400371E3B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9B205ADB9400371E3B /* User.swift */; };
 		82816B9F205AF05E00371E3B /* AuthenticationRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9E205AF05E00371E3B /* AuthenticationRestService.swift */; };
@@ -79,6 +81,8 @@
 		7C61C4D095806F94943F2FA7 /* Pods_ARMonitoringTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMonitoringTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8217CF2F20A494F600F60F48 /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		8217CF3120A49B7400F60F48 /* ModalMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalMenuViewController.swift; sourceTree = "<group>"; };
+		8217CF3320A4D7A300F60F48 /* DataItemRequestRestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemRequestRestService.swift; sourceTree = "<group>"; };
+		8217CF3520A4D7E400F60F48 /* DataItemRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemRequestDto.swift; sourceTree = "<group>"; };
 		822C63A92090FDF200FDA91A /* SCNGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNGeometry.swift; sourceTree = "<group>"; };
 		82816B9B205ADB9400371E3B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		82816B9E205AF05E00371E3B /* AuthenticationRestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRestService.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				82816BB3205D088A00371E3B /* BeaconCalibrationDto.swift */,
 				82816BC02061D0D600371E3B /* BeaconSqliteDto.swift */,
 				82B97EB0206AD171004E91D7 /* RoomForARDto.swift */,
+				8217CF3520A4D7E400F60F48 /* DataItemRequestDto.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				82816B9E205AF05E00371E3B /* AuthenticationRestService.swift */,
+				8217CF3320A4D7A300F60F48 /* DataItemRequestRestService.swift */,
 			);
 			path = Rest;
 			sourceTree = "<group>";
@@ -672,6 +678,7 @@
 				82E53527200FEFE50049C5B4 /* StompClientService.swift in Sources */,
 				82EBE7BE201DFF8F003DCB7E /* UIImageViewExtension.swift in Sources */,
 				82816BBD2061CAFC00371E3B /* BeaconDaoImpl.swift in Sources */,
+				8217CF3620A4D7E400F60F48 /* DataItemRequestDto.swift in Sources */,
 				82816BBB2061CAE400371E3B /* BeaconDao.swift in Sources */,
 				8217CF3220A49B7400F60F48 /* ModalMenuViewController.swift in Sources */,
 				82816BA6205B41B800371E3B /* LoginViewController.swift in Sources */,
@@ -683,6 +690,7 @@
 				82EBE7B5201107D5003DCB7E /* Item.swift in Sources */,
 				82E53520200FED2F0049C5B4 /* SCNVector3Extension.swift in Sources */,
 				82A917D020913986002B17CB /* CGPointExtension.swift in Sources */,
+				8217CF3420A4D7A300F60F48 /* DataItemRequestRestService.swift in Sources */,
 				82E91D1320002ABC00005705 /* AppDelegate.swift in Sources */,
 				82816B9F205AF05E00371E3B /* AuthenticationRestService.swift in Sources */,
 				82E5351A200FE4520049C5B4 /* ARViewController.swift in Sources */,
