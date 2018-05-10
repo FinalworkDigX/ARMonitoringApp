@@ -64,44 +64,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "beaconListSegue" {
-            let destinationVC = segue.destination as! BeaconsTableViewController
+        if segue.identifier == "modalMenuSegue",
+            let destinationVC = segue.destination as? RequestViewController {
+            
             destinationVC.beaconLocationClient = self.beaconLocationClient
         }
     }
     
     // MARK: - Buttons
-    @IBAction func toBeaconList(_ sender: Any) {
-    }
-    
-    // MARK: - ARSCNViewDelegate
-    
-    /*
-     // Override to create and configure nodes for anchors added to the view's session.
-     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-     let node = SCNNode()
-     
-     return node
-     }
-     */
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
-    
-    // MARK: - RoomShizzle
-    @IBAction func resetRoomButton(_ sender: Any) {        
+    @IBAction func manualBeaconSetButton(_ sender: Any) {
         if let beaconLocClient = self.beaconLocationClient,
             let position = sceneView.getCameraCoordinates() {
             beaconLocClient.manualToggle = true;
@@ -152,15 +123,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
             roomNode.addChildNode(ItemNode(withItem: item))
         }
         sceneView.scene.rootNode.addChildNode(roomNode)
-        
-        //DEBUG
-        
-        
-//        let sphereGeo = SCNSphere(radius: 0.01)
-//        sphereGeo.firstMaterial?.diffuse.contents = UIColor.cyan
-//        let sphereNode = SCNNode(geometry: sphereGeo)
-//        sphereNode.position = roomForAR.roomLocation.toSCNVector3()
-//        sceneView.scene.rootNode.addChildNode(sphereNode)
     }
 
     func stompDataLogGet(dataLog: DataLog) {
