@@ -7,25 +7,41 @@
 //
 
 import UIKit
+import Toast_Swift
 
 class RequestViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dataItemNameTbx: UITextField!
     @IBOutlet weak var beaconMajorLbl: UILabel!
     @IBOutlet weak var beaconMinorLbl: UILabel!
+    @IBOutlet weak var sendRequestButton: UIButton!
     
     var beaconLocationClient: BeaconLocationService?
     var aBeacon: Beacon?
+    
+    var enabledButtonColor: UIColor?
+    var disabledButtonColor: UIColor?
     
     override func viewDidLoad() {
         //super.viewDidLoad()
 
         view.isOpaque = false
         view.backgroundColor = .clear
+        
+        // Keyboard hide on tap around & 'done'
         self.hideKeyboardWhenTappedAround()
-        dataItemNameTbx.delegate = self
+        self.dataItemNameTbx.delegate = self
+        
+        // Set submitButton
+        self.enabledButtonColor = UIColor(red: 82.0/255.0, green: 179.0/255.0, blue: 217.0/255.0, alpha: 1.0)
+        self.disabledButtonColor = UIColor(red: 178.0/255.0, green: 211.0/255.0, blue: 238.0/255.0, alpha: 1.0)
+        
+        if let dataItemText = self.dataItemNameTbx.text,
+            dataItemText.isEmpty {
+            self.sendRequestButton.isEnabled = false
+            self.sendRequestButton.backgroundColor = disabledButtonColor
+        }
         
         self.refreshActiveBeacon("")
-        beaconLocationClient?.pom()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +51,21 @@ class RequestViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ scoreText: UITextField) -> Bool {
         self.view.endEditing(true)
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let value = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
+        
+        if value.count > 0 {
+            self.sendRequestButton.isEnabled = true
+            self.sendRequestButton.backgroundColor = enabledButtonColor
+        } else {
+            self.sendRequestButton.isEnabled = false
+            self.sendRequestButton.backgroundColor = disabledButtonColor
+        }
+        
         return true
     }
     
@@ -71,7 +102,7 @@ class RequestViewController: UIViewController, UITextFieldDelegate {
         
         requestService.sendRequest(dataItemRequest: requestDto, success: {success in
             //Toast to signall success
-            self.sendToast(message: "Success")
+            self.sendToast(message: "Success", success: true)
             
             if let presenting = self.presentingViewController {
                 self.dismiss(animated: false, completion: {
@@ -100,11 +131,21 @@ class RequestViewController: UIViewController, UITextFieldDelegate {
                 break;
             }
             // Toast to signal error
-            self.sendToast(message: errorMessage)
+            self.sendToast(message: errorMessage, success: false)
         })
     }
     
-    private func sendToast(message: String) {
-        print(message)
+    private func sendToast(message: String, success: Bool) {
+        if let presentingView = self.presentingViewController?.presentingViewController {
+            var style = ToastStyle()
+            if success {
+                style.backgroundColor = UIColor(red: 46.0/255.0, green: 204.0/255.0, blue: 113.0/255.0, alpha: 1.0)
+            }
+            else {
+                style.backgroundColor = UIColor(red: 239.0/255.0, green: 72.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+            }
+            presentingView.view.makeToast(message, duration: 3.0, position: .top, style: style)
+        }
+        
     }
 }

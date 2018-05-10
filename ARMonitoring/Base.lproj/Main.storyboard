@@ -493,6 +493,7 @@
                         <outlet property="beaconMajorLbl" destination="m2M-5U-g2o" id="fYA-hO-HhG"/>
                         <outlet property="beaconMinorLbl" destination="XI9-7f-WFT" id="knE-TB-EFr"/>
                         <outlet property="dataItemNameTbx" destination="O8k-Ki-3AT" id="QR8-ut-oFU"/>
+                        <outlet property="sendRequestButton" destination="Fih-XN-AJA" id="syP-Rr-J0H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cu5-MT-Jne" userLabel="First Responder" sceneMemberID="firstResponder"/>

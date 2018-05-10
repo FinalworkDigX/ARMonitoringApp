@@ -18,6 +18,7 @@ target 'ARMonitoring' do
   pod 'SwiftKeychainWrapper'
   pod 'Trilateration3D'
   pod 'SQLite.swift', '~> 0.11.4'
+  pod 'Toast-Swift', '~> 3.0.1'
 
   target 'ARMonitoringTests' do
     inherit! :search_paths
