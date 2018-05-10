@@ -14,6 +14,7 @@
 		8217CF3220A49B7400F60F48 /* ModalMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8217CF3120A49B7400F60F48 /* ModalMenuViewController.swift */; };
 		8217CF3420A4D7A300F60F48 /* DataItemRequestRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8217CF3320A4D7A300F60F48 /* DataItemRequestRestService.swift */; };
 		8217CF3620A4D7E400F60F48 /* DataItemRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8217CF3520A4D7E400F60F48 /* DataItemRequestDto.swift */; };
+		8217CF3820A4FB5F00F60F48 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8217CF3720A4FB5F00F60F48 /* UIViewControllerExtension.swift */; };
 		822C63AA2090FDF200FDA91A /* SCNGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822C63A92090FDF200FDA91A /* SCNGeometry.swift */; };
 		82816B9C205ADB9400371E3B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9B205ADB9400371E3B /* User.swift */; };
 		82816B9F205AF05E00371E3B /* AuthenticationRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816B9E205AF05E00371E3B /* AuthenticationRestService.swift */; };
@@ -83,6 +84,7 @@
 		8217CF3120A49B7400F60F48 /* ModalMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalMenuViewController.swift; sourceTree = "<group>"; };
 		8217CF3320A4D7A300F60F48 /* DataItemRequestRestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemRequestRestService.swift; sourceTree = "<group>"; };
 		8217CF3520A4D7E400F60F48 /* DataItemRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemRequestDto.swift; sourceTree = "<group>"; };
+		8217CF3720A4FB5F00F60F48 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		822C63A92090FDF200FDA91A /* SCNGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNGeometry.swift; sourceTree = "<group>"; };
 		82816B9B205ADB9400371E3B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		82816B9E205AF05E00371E3B /* AuthenticationRestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRestService.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				822C63A92090FDF200FDA91A /* SCNGeometry.swift */,
 				82A917CD20912BDC002B17CB /* TrilatTests.swift */,
 				82A917CF20913986002B17CB /* CGPointExtension.swift */,
+				8217CF3720A4FB5F00F60F48 /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				82A917D220913B5B002B17CB /* Position2.swift in Sources */,
 				82816BA4205B2A6B00371E3B /* UserInfo.swift in Sources */,
 				8217CF3020A494F600F60F48 /* RequestViewController.swift in Sources */,
+				8217CF3820A4FB5F00F60F48 /* UIViewControllerExtension.swift in Sources */,
 				82816BB92061C65600371E3B /* DBInitializer.swift in Sources */,
 				82816BBF2061CC3500371E3B /* ConnectionFactory.swift in Sources */,
 				822C63AA2090FDF200FDA91A /* SCNGeometry.swift in Sources */,

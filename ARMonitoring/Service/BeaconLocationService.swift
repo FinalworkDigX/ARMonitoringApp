@@ -213,4 +213,9 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
             json: roomForAR.toJSON(),
             usingPrivateChannel: true)
     }
+    
+    public func pom() {
+        print("pom")
+        print(aBeacon.id)
+    }
 }

@@ -65,7 +65,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "modalMenuSegue",
-            let destinationVC = segue.destination as? RequestViewController {
+            let destinationVC = segue.destination as? ModalMenuViewController {
             
             destinationVC.beaconLocationClient = self.beaconLocationClient
         }

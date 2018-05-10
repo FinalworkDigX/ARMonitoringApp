@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="0V2-T6-QyY">
+                                <rect key="frame" x="0.0" y="151" width="375" height="546"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deG-Yk-UNt" userLabel="LoginView">
                                 <rect key="frame" x="59" y="183" width="256" height="300"/>
                                 <subviews>
@@ -86,10 +90,6 @@
                                     <constraint firstAttribute="width" constant="250" id="lAE-oB-CVs"/>
                                     <constraint firstAttribute="height" constant="235" id="n0C-av-FyX"/>
                                 </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="0V2-T6-QyY">
-                                <rect key="frame" x="0.0" y="151" width="375" height="546"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -166,7 +166,7 @@
                                 </constraints>
                                 <state key="normal" title="Beacons"/>
                                 <connections>
-                                    <segue destination="6cu-pp-3rH" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Ykp-Bt-gfr"/>
+                                    <segue destination="6cu-pp-3rH" kind="presentation" identifier="modalMenuSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Ykp-Bt-gfr"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -214,7 +214,7 @@
                                         </constraints>
                                         <state key="normal" title="Request new"/>
                                         <connections>
-                                            <segue destination="Ecd-kp-Qi0" kind="presentation" identifier="requestNewItemSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Vxg-rm-v7m"/>
+                                            <segue destination="Ecd-kp-Qi0" kind="presentation" identifier="newItemRequestSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Vxg-rm-v7m"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PO1-vL-oTo">
@@ -387,8 +387,7 @@
                                                         </constraints>
                                                         <state key="normal" title="Refresh"/>
                                                         <connections>
-                                                            <action selector="sendBeaconRequestButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="AyZ-Wv-1x3"/>
-                                                            <action selector="sendRequestButton:" destination="Ecd-kp-Qi0" eventType="touchUpInside" id="Se5-Vh-Qlh"/>
+                                                            <action selector="refreshActiveBeacon:" destination="Ecd-kp-Qi0" eventType="touchUpInside" id="kaY-PP-cY0"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -439,8 +438,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="sendBeaconRequestButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="l5w-Qd-fQV"/>
-                                            <action selector="sendRequestButton:" destination="Ecd-kp-Qi0" eventType="touchUpInside" id="0Ft-6d-Nt6"/>
+                                            <action selector="sendRequestButton:" destination="Ecd-kp-Qi0" eventType="touchUpInside" id="tY5-Qm-ubF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hR-4m-dTZ">
@@ -453,8 +451,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="cancelBeaconSetupView:" destination="BV1-FR-VrT" eventType="touchUpInside" id="B54-VB-gIt"/>
-                                            <action selector="cancelButton:" destination="Ecd-kp-Qi0" eventType="touchUpInside" id="7OY-BY-U6j"/>
+                                            <action selector="cancelButton:" destination="Ecd-kp-Qi0" eventType="touchUpInside" id="qOr-hW-5Cx"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -493,10 +490,9 @@
                         <viewLayoutGuide key="safeArea" id="ZWN-XP-so6"/>
                     </view>
                     <connections>
-                        <outlet property="beaconInfoView" destination="ccA-aI-6KM" id="zmZ-hU-u9m"/>
-                        <outlet property="cancelButton" destination="4hR-4m-dTZ" id="hsB-Mp-Dv3"/>
-                        <outlet property="itemInfoView" destination="8ae-es-Gwl" id="Ad4-TV-GAr"/>
-                        <outlet property="sendButton" destination="Fih-XN-AJA" id="udF-yG-CGi"/>
+                        <outlet property="beaconMajorLbl" destination="m2M-5U-g2o" id="fYA-hO-HhG"/>
+                        <outlet property="beaconMinorLbl" destination="XI9-7f-WFT" id="knE-TB-EFr"/>
+                        <outlet property="dataItemNameTbx" destination="O8k-Ki-3AT" id="QR8-ut-oFU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cu5-MT-Jne" userLabel="First Responder" sceneMemberID="firstResponder"/>

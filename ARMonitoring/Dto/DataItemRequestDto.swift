@@ -11,9 +11,11 @@ import Foundation
 class DataItemRequestDto {
     let beaconId: String!
     let dataItemName: String!
+    let requester: String!
     
-    init(beaconId: String, dataItemName: String) {
+    init(beaconId: String, dataItemName: String, requester: String) {
         self.beaconId = beaconId
         self.dataItemName = dataItemName
+        self.requester = requester
     }
 }

@@ -28,7 +28,7 @@ class ModalMenuViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "requestNewItemSegue",
+        if segue.identifier == "newItemRequestSegue",
             let destinationVC = segue.destination as? RequestViewController {
             
             destinationVC.beaconLocationClient = self.beaconLocationClient

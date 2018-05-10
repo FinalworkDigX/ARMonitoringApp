@@ -20,7 +20,8 @@ class DataItemRequestRestService {
         
         let testParameters: Parameters = [
             "beaconId": dataItemRequest.beaconId,
-            "dataItemName": dataItemRequest.dataItemName
+            "dataItemName": dataItemRequest.dataItemName,
+            "requester": dataItemRequest.requester
         ]
         
         Alamofire.request(
@@ -33,7 +34,7 @@ class DataItemRequestRestService {
             .responseJSON { response in
                 if let statusCode = response.response?.statusCode {
                     if statusCode == 200 {
-                        
+                        success(true)
                     }
                     else {
                         failed(NSError(
