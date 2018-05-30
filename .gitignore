@@ -2,3 +2,5 @@
 Podfile\.lock
 
 Pods/
+
+ARMonitoring/Properties\.plist

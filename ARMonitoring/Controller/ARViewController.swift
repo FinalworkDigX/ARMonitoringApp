@@ -111,7 +111,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     // MARK: - WebSockets & StompClientDelegate
     func startWebsocketService() {
-        self.stompClient = StompClientService(delegate: self, socketUrl: SessionService.WS_URL)
+        self.stompClient = StompClientService(delegate: self, socketUrl: SessionService.sharedInstance.WS_URL)
         self.stompClient?.openSocket()
     }
     
@@ -179,7 +179,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     func startBeaconLocationService() {
         if let sceneView_ = self.sceneView, let stompClient_ = self.stompClient {
             self.beaconLocationClient = BeaconLocationService(
-                uuid: SessionService.BEACON_UUID,
+                uuid: SessionService.sharedInstance.BEACON_UUID,
                 sceneView: sceneView_,
                 stompClient: stompClient_,
                 toastView: self.view

@@ -11,15 +11,31 @@ import Foundation
 class SessionService {
     static let sharedInstance = SessionService()
     
-    public static let API_URL: String = "https://fw.ludovicmarchand.be/api/v1/";
-    public static let WS_URL: URL = URL(string: "https://fw.ludovicmarchand.be/api/managerWS/websocket")!
-    public static let BEACON_UUID: String = "4AFECBF0-E8A4-0135-7D93-7E27D0FEF627"
+    public let API_URL: String!
+    public let WS_URL: URL!
+    public let BEACON_UUID: String!
     
     private var userAccount: User?
     public var userSet: Bool!
     
     private init() {
         userSet = false
+        
+        if let path = Bundle.main.path(forResource: "Properties", ofType: "plist"),
+            let myDict: NSDictionary = NSDictionary(contentsOfFile: path),
+            let api_url: String = myDict.object(forKey: "api_url") as? String,
+            let ws_url: String = myDict.object(forKey: "ws_url") as? String,
+            let beacon_uuid: String = myDict.object(forKey: "beacon_uuid") as? String
+        {
+            self.API_URL = api_url
+            self.WS_URL = URL(string: ws_url)
+            self.BEACON_UUID = beacon_uuid
+        }
+        else {
+            self.API_URL = ""
+            self.WS_URL = URL(string: "")
+            self.BEACON_UUID = ""
+        }
     }
     
     public func setUserAccount(user: User) {

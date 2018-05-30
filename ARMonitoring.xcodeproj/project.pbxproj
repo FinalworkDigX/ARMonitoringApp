@@ -31,6 +31,8 @@
 		82816BBD2061CAFC00371E3B /* BeaconDaoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BBC2061CAFC00371E3B /* BeaconDaoImpl.swift */; };
 		82816BBF2061CC3500371E3B /* ConnectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BBE2061CC3500371E3B /* ConnectionFactory.swift */; };
 		82816BC12061D0D600371E3B /* BeaconSqliteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BC02061D0D600371E3B /* BeaconSqliteDto.swift */; };
+		82939AD520BF522000FD9689 /* Properties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82939AD420BF522000FD9689 /* Properties.plist */; };
+		82939AD720BF5F8700FD9689 /* Example.Properties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82939AD620BF5F8700FD9689 /* Example.Properties.plist */; };
 		829422DA2069665A003936D7 /* BeaconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829422D92069665A003936D7 /* BeaconService.swift */; };
 		82A917CE20912BDC002B17CB /* TrilatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A917CD20912BDC002B17CB /* TrilatTests.swift */; };
 		82A917D020913986002B17CB /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A917CF20913986002B17CB /* CGPointExtension.swift */; };
@@ -100,6 +102,8 @@
 		82816BBC2061CAFC00371E3B /* BeaconDaoImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconDaoImpl.swift; sourceTree = "<group>"; };
 		82816BBE2061CC3500371E3B /* ConnectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionFactory.swift; sourceTree = "<group>"; };
 		82816BC02061D0D600371E3B /* BeaconSqliteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconSqliteDto.swift; sourceTree = "<group>"; };
+		82939AD420BF522000FD9689 /* Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Properties.plist; sourceTree = "<group>"; };
+		82939AD620BF5F8700FD9689 /* Example.Properties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Example.Properties.plist; sourceTree = "<group>"; };
 		829422D92069665A003936D7 /* BeaconService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconService.swift; sourceTree = "<group>"; };
 		82A917CD20912BDC002B17CB /* TrilatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrilatTests.swift; sourceTree = "<group>"; };
 		82A917CF20913986002B17CB /* CGPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
@@ -308,6 +312,8 @@
 				82E91D1B20002ABC00005705 /* Assets.xcassets */,
 				82E91D1D20002ABC00005705 /* LaunchScreen.storyboard */,
 				82E91D2020002ABC00005705 /* Info.plist */,
+				82939AD420BF522000FD9689 /* Properties.plist */,
+				82939AD620BF5F8700FD9689 /* Example.Properties.plist */,
 			);
 			path = ARMonitoring;
 			sourceTree = "<group>";
@@ -463,9 +469,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				82E91D1520002ABC00005705 /* art.scnassets in Resources */,
+				82939AD720BF5F8700FD9689 /* Example.Properties.plist in Resources */,
 				82E91D1F20002ABC00005705 /* LaunchScreen.storyboard in Resources */,
 				82E91D1C20002ABC00005705 /* Assets.xcassets in Resources */,
 				82E91D1A20002ABC00005705 /* Main.storyboard in Resources */,
+				82939AD520BF522000FD9689 /* Properties.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

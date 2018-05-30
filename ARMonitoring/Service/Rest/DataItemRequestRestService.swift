@@ -25,7 +25,7 @@ class DataItemRequestRestService {
         ]
         
         Alamofire.request(
-            "\(SessionService.API_URL)/request",
+            "\(SessionService.sharedInstance.API_URL)/request",
             method: .post,
             parameters: testParameters,
             encoding: JSONEncoding.default,
