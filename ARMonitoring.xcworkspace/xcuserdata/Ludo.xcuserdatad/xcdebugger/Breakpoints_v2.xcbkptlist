@@ -7,42 +7,10 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
-            ignoreCount = "1"
-            continueAfterRunningActions = "No"
-            filePath = "ARMonitoring/Service/StompClientService.swift"
-            timestampString = "543886728.59788"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "stompClientJSONBody(client:didReceiveMessageWithJSONBody:withHeader:withDestination:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ARMonitoring/Service/BeaconLocationService.swift"
-            timestampString = "543942409.189153"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "beaconActive(beacon:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARMonitoring/Model/Room.swift"
-            timestampString = "543942409.189234"
+            timestampString = "543948208.186607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
@@ -58,11 +26,11 @@
             ignoreCount = "1"
             continueAfterRunningActions = "No"
             filePath = "ARMonitoring/Service/StompClientService.swift"
-            timestampString = "543886728.598429"
+            timestampString = "546386111.078335"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "sendMessage(destination:json:usingPrivateChannel:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARMonitoring/Service/StompClientService.swift"
-            timestampString = "543886728.598838"
+            timestampString = "546386111.0785789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -90,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARMonitoring/Dto/RoomForARDto.swift"
-            timestampString = "543886728.599162"
+            timestampString = "547682609.417254"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -106,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARMonitoring/Dto/RoomForARDto.swift"
-            timestampString = "543886728.599216"
+            timestampString = "547682609.417316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
@@ -121,13 +89,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ARMonitoring/Service/BeaconLocationService.swift"
-            timestampString = "543942409.189378"
+            filePath = "ARMonitoring/Extensions/Vector3Extension.swift"
+            timestampString = "546389371.804424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "locationManager(_:didRangeBeacons:in:)"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "init(fromJson:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARMonitoring/Controller/ARViewController.swift"
-            timestampString = "543942409.1894439"
+            timestampString = "549412738.773404"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "stompRoomGet(roomForAR:)"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "startWebsocketService()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -9,7 +9,7 @@
 import Foundation
 import ARKit
 import SceneKit
-// import SwiftKeychainWrapper
+import Toast_Swift
 import Trilateration3D
 
 class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate {
@@ -18,8 +18,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     private var stompClient: StompClientService?
     private var beaconLocationClient: BeaconLocationService?
-    
-    // TODO: make delegate for room detection (Beacons)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +32,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        //---------
+        // Start services
         startWebsocketService()
         startBeaconLocationService()
     }
@@ -65,131 +63,84 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     // MARK: - Navigation
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // Check for beacons
+        if let beaconLocClient = self.beaconLocationClient {
+            if !beaconLocClient.bleutoothToastCheck() {
+                return false
+            }
+        }
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "beaconListSegue" {
-            let destinationVC = segue.destination as! BeaconsTableViewController
+        if segue.identifier == "modalMenuSegue",
+            let destinationVC = segue.destination as? ModalMenuViewController {
+            
             destinationVC.beaconLocationClient = self.beaconLocationClient
         }
     }
     
     // MARK: - Buttons
-    @IBAction func toBeaconList(_ sender: Any) {
-    }
-    
-    
-    func addItemToScene() {
-        // Temp disable.
+    @IBAction func manualBeaconSetButton(_ sender: Any) {
+        if let beaconLocClient = self.beaconLocationClient,
+            let position = sceneView.getCameraCoordinates() {
+            
+            beaconLocClient.manualToggle = true;
+            beaconLocClient.callWebSocketSetRoom(position.toVector3())
+        }
         
-        //        let itemJSON = "{ \"id\": \"test_item_btnAdded\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"row_list\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}"
-        //        let myItem = Item(JSONString: itemJSON)!
-        //        let testItem = ItemNode(withItem: myItem)
-        //        let cc = sceneView.getCameraCoordinates()
-        //
-        //        testItem.position = SCNVector3(cc.x, cc.y, cc.z-1)
-        //
-        //        // Add testItem to RoomNode
-        //        // RoomNode needs to be add programmatically by beacon position
-        //        // sceneView.getNode(name: "RoomNode")?.addChildNode(testItem)
-        //
-        //        sceneView.scene.rootNode.addChildNode(testItem)
-    }
-    
-    // MARK: - ARSCNViewDelegate
-    
-    /*
-     // Override to create and configure nodes for anchors added to the view's session.
-     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-     let node = SCNNode()
-     
-     return node
-     }
-     */
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
-    
-    // MARK: - RoomShizzle
-    //tmp function to add testRoom
-    @IBAction func resetRoomButton(_ sender: Any) {
-//        generateRoom()
-        
-        let roomForAR: RoomForARDto = RoomForARDto()
-        roomForAR.roomLocation = Vector3(x: 0.195782185, y: 0.0673767626, z: 0.0634026974)
-        
-        // ===============================
-        // AUTOMATE DESTINATION ROOM ID
-        // ===============================
-        
-        stompClient?.sendMessage(
-            destination: ["/app/room", "/3fbf0f08-ae52-4529-8da7-731773a83a72"],
-            json: roomForAR.toJSON(),
-            usingPrivateChannel: true)
     }
     
     // Test Func. To BE DELETED
     func generateRoom() {
-        if let node = sceneView.getNode(name: "RoomNode") {
-            node.removeFromParentNode()
-        }
-        // TODO: Set room at coordinates with beacons
-        //tmp fix
-        let roomNode: SCNNode = SCNNode()
-        roomNode.position = sceneView.getCameraCoordinates()
-        roomNode.name = "RoomNode"
         
-        // TODO: Itterate over 'Room' model to add items at correct coordinates inside the Room
-        let roomJSON = "{\"id\": \"room_test_id\", \"name\": \"test_room\", \"description\": \"where is the room located in the building, ex A.2.204\", \"itemList\": [{ \"id\": \"test_item\", \"name\": \"HDD Server Rack 312\", \"location\": { \"x\": 0.0, \"y\": 0.0, \"z\": 10.0 }, \"room_id\": \"room_test_id\"}]}"
-        // , \"rowList\": [\"first_row\", \"second_row\", \"third_row\"], \"room_id\": \"room_test_id\"}]
-        let room: Room = Room(JSONString: roomJSON)!
-        for item: Item in room.itemList {
-            roomNode.addChildNode(ItemNode(withItem: item))
-        }
-        
-        sceneView.scene.rootNode.addChildNode(roomNode)
+        print("generate")
+        beaconLocationClient?.manualToggle = true
+        // =========================
+        // Generate using WebSockets
+        // =========================
+        let roomForAR: RoomForARDto = RoomForARDto()
+        roomForAR.roomLocation = Vector3(x: 0, y: 0, z: 0)
+
+        stompClient?.sendMessage(
+            destination: ["/app/room", "/d5182fb3-d68c-4a9e-994d-c004b003ebe4"],
+            json: roomForAR.toJSON(),
+            usingPrivateChannel: true)
     }
     
     // MARK: - WebSockets & StompClientDelegate
     func startWebsocketService() {
-        let url = URL(string: "https://fw.ludovicmarchand.be/managerWS/websocket")!
-        
-        self.stompClient = StompClientService(delegate: self, socketUrl: url)
+        self.stompClient = StompClientService(delegate: self, socketUrl: SessionService.sharedInstance.WS_URL)
         self.stompClient?.openSocket()
     }
     
     func stompRoomGet(roomForAR: RoomForARDto) {
-        if let node = sceneView.getNode(name: "RoomNode") {
+        // FIX: Workarround for 1 beacon -> 1 item:
+        //   Use itemId as room name
+        let roomName: String = roomForAR.getFirstItemId()!
+        
+        if let node = sceneView.getNode(name: roomName) {
             node.removeFromParentNode()
         }
         
         let roomNode: SCNNode = SCNNode()
         roomNode.position = roomForAR.roomLocation.toSCNVector3()
-        roomNode.name = "RoomNode"
+        roomNode.name = roomName
+        
 
         let room: Room = roomForAR.room
         for item: Item in room.itemList {
-            print(item.location)
             roomNode.addChildNode(ItemNode(withItem: item))
         }
-
         sceneView.scene.rootNode.addChildNode(roomNode)
     }
 
     func stompDataLogGet(dataLog: DataLog) {
         
         print(dataLog.toLog())
-        if let node = sceneView.getNodeInRoom(name: dataLog.itemId) {
+        // FIX: Workaround 1 beacon -> 1item
+        if let node = sceneView.getNodeInRoom(roomName: dataLog.itemId, nodeName: dataLog.itemId) {
             node.updateData(dataLog: dataLog)
         }
     }
@@ -226,12 +177,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     //
     func startBeaconLocationService() {
-        let uuid_ = "4AFECBF0-E8A4-0135-7D93-7E27D0FEF627"
         if let sceneView_ = self.sceneView, let stompClient_ = self.stompClient {
             self.beaconLocationClient = BeaconLocationService(
-                uuid: uuid_,
+                uuid: SessionService.sharedInstance.BEACON_UUID,
                 sceneView: sceneView_,
-                stompClient: stompClient_)
+                stompClient: stompClient_,
+                toastView: self.view
+            )
             
             self.beaconLocationClient?.startObserving(failed: { error in 
                 print(error)

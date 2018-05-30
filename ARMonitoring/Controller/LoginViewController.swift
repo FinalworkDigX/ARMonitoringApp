@@ -76,7 +76,12 @@ class LoginViewController: UIViewController {
             case -20:
                 // Connection error
                 print(error.userInfo)
-                errorMessage = "Connection error, please check your connection"
+                errorMessage = "Connection error"
+                break;
+            case -100:
+                // Connection error
+                print(error.userInfo)
+                errorMessage = "Properties.plist not set"
                 break;
             default:
                 print("unexpected error..")

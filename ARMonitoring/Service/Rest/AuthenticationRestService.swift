@@ -16,49 +16,53 @@ class AuthenticationRestService {
         "Accept": "application/json"
     ]
     
-    let baseUrl: String = "https://fw.ludovicmarchand.be/v1/"
-    
     func authenticate(loginDto: LoginDto, success: @escaping (User) -> (), failed: @escaping (NSError)->()) {
         
         let testParameters: Parameters = [
             "email": loginDto.email,
             "password": loginDto.password
         ]
-        
-        Alamofire.request(
-            "\(self.baseUrl)/auth/login",
-            method: .post,
-            parameters: testParameters,
-            encoding: JSONEncoding.default,
-            headers: headers
-            )
-            .responseJSON { response in
-                
-                if let json = response.result.value {
-                    if let user: User = Mapper<User>().map(JSONObject: json) {
-                        if user.accessToken != nil || user.idToken != nil {
-                           success(user)
+        if let api_url = SessionService.sharedInstance.API_URL {
+            Alamofire.request(
+                "\(api_url)/auth/user/login",
+                method: .post,
+                parameters: testParameters,
+                encoding: JSONEncoding.default,
+                headers: headers
+                )
+                .responseJSON { response in
+                    
+                    if let json = response.result.value {
+                        if let user: User = Mapper<User>().map(JSONObject: json) {
+                            if user.accessToken != nil || user.idToken != nil {
+                               success(user)
+                            }
+                            else {
+                                failed(NSError(
+                                    domain: "EHB.ARMonitoring",
+                                    code: -10,
+                                    userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.wrong.credentials"]))
+                            }
                         }
                         else {
                             failed(NSError(
                                 domain: "EHB.ARMonitoring",
-                                code: -10,
-                                userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.wrong.credentials"]))
+                                code: -15,
+                                userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.mapping.error"]))
                         }
                     }
                     else {
                         failed(NSError(
                             domain: "EHB.ARMonitoring",
-                            code: -15,
-                            userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.mapping.error"]))
+                            code: -20,
+                            userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.connection.error"]))
                     }
-                }
-                else {
-                    failed(NSError(
-                        domain: "EHB.ARMonitoring",
-                        code: -20,
-                        userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.connection.error"]))
-                }
+            }
+        } else {
+            failed(NSError(
+                domain: "EHB.ARMonitoring",
+                code: -100,
+                userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.plist.not.set"]))
         }
     }
 }

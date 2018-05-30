@@ -42,4 +42,9 @@ class RoomForARDto: Mappable {
         }
         return nil
     })
+    
+    // Workarround without true north (1 item / beacon)
+    func getFirstItemId() -> String? {
+        return self.room.itemList.first?.itemId
+    }
 }

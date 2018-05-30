@@ -13,6 +13,7 @@ import ObjectMapper
 class Item: Mappable {
     var id: String!
     var name: String!
+    var itemId: String!
     var location: SCNVector3 = SCNVector3()
     var roomId: String!
     
@@ -20,11 +21,12 @@ class Item: Mappable {
     
     func mapping(map: Map) {
         id          <- map["id"]
+        itemId      <- map["itemId"]
         name        <- map["name"]
         location.x  <- map["location.x"]
         location.y  <- map["location.y"]
         location.z  <- map["location.z"]
-        roomId     <- map["roomId"]
+        roomId      <- map["roomId"]
         
         name.captitalizeFirstLetter()
     }
@@ -32,6 +34,7 @@ class Item: Mappable {
     func toString() -> String {
         var message: String = ""
         message += "[id: \(id), "
+        message += "itemId: \(itemId), "
         message += "name: \(name), "
         message += "location: [x: \(location.x), y:\(location.y), z:\(location.z)], "
         message += "roomId: \(roomId)]"

@@ -80,6 +80,7 @@ class StompClientService: StompClientLibDelegate {
             }
             break;
         case rfarDestination:
+            // Incomming cant cast NSNumber toFloat in RoomLocation
             if let rfar = RoomForARDto(JSONString: jsonBody!) {
                 delegate.stompRoomGet(roomForAR: rfar)
             }
