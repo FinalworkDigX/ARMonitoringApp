@@ -22,7 +22,6 @@
 		82816BA4205B2A6B00371E3B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA3205B2A6B00371E3B /* UserInfo.swift */; };
 		82816BA6205B41B800371E3B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA5205B41B800371E3B /* LoginViewController.swift */; };
 		82816BAA205BEF7D00371E3B /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BA9205BEF7D00371E3B /* SessionService.swift */; };
-		82816BAC205BF72700371E3B /* BeaconsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BAB205BF72700371E3B /* BeaconsTableViewController.swift */; };
 		82816BAE205BF88A00371E3B /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BAD205BF88A00371E3B /* Beacon.swift */; };
 		82816BB0205C073100371E3B /* BeaconLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BAF205C073100371E3B /* BeaconLocationService.swift */; };
 		82816BB2205C087300371E3B /* Vector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82816BB1205C087300371E3B /* Vector3Extension.swift */; };
@@ -92,7 +91,6 @@
 		82816BA3205B2A6B00371E3B /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		82816BA5205B41B800371E3B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		82816BA9205BEF7D00371E3B /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
-		82816BAB205BF72700371E3B /* BeaconsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconsTableViewController.swift; sourceTree = "<group>"; };
 		82816BAD205BF88A00371E3B /* Beacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
 		82816BAF205C073100371E3B /* BeaconLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconLocationService.swift; sourceTree = "<group>"; };
 		82816BB1205C087300371E3B /* Vector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector3Extension.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 			children = (
 				82E53519200FE4520049C5B4 /* ARViewController.swift */,
 				82816BA5205B41B800371E3B /* LoginViewController.swift */,
-				82816BAB205BF72700371E3B /* BeaconsTableViewController.swift */,
 				8217CF2F20A494F600F60F48 /* RequestViewController.swift */,
 				8217CF3120A49B7400F60F48 /* ModalMenuViewController.swift */,
 			);
@@ -675,7 +672,6 @@
 				82E53524200FED8E0049C5B4 /* SCNodeExtension.swift in Sources */,
 				82EBE7B720110DE9003DCB7E /* Room.swift in Sources */,
 				829422DA2069665A003936D7 /* BeaconService.swift in Sources */,
-				82816BAC205BF72700371E3B /* BeaconsTableViewController.swift in Sources */,
 				82816BB2205C087300371E3B /* Vector3Extension.swift in Sources */,
 				82816BC12061D0D600371E3B /* BeaconSqliteDto.swift in Sources */,
 				82B97EB1206AD171004E91D7 /* RoomForARDto.swift in Sources */,

@@ -9,7 +9,7 @@
 import Foundation
 import ARKit
 import SceneKit
-// import SwiftKeychainWrapper
+import Toast_Swift
 import Trilateration3D
 
 class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate {
@@ -63,6 +63,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     // MARK: - Navigation
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // Check for beacons
+        if let beaconLocClient = self.beaconLocationClient {
+            if !beaconLocClient.bleutoothToastCheck() {
+                return false
+            }
+        }
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "modalMenuSegue",
             let destinationVC = segue.destination as? ModalMenuViewController {
@@ -75,6 +85,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     @IBAction func manualBeaconSetButton(_ sender: Any) {
         if let beaconLocClient = self.beaconLocationClient,
             let position = sceneView.getCameraCoordinates() {
+            
             beaconLocClient.manualToggle = true;
             beaconLocClient.callWebSocketSetRoom(position.toVector3())
         }
@@ -170,7 +181,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
             self.beaconLocationClient = BeaconLocationService(
                 uuid: SessionService.BEACON_UUID,
                 sceneView: sceneView_,
-                stompClient: stompClient_)
+                stompClient: stompClient_,
+                toastView: self.view
+            )
             
             self.beaconLocationClient?.startObserving(failed: { error in 
                 print(error)

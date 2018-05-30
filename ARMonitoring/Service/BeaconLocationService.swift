@@ -8,12 +8,13 @@
 
 import Foundation
 import CoreLocation
+import CoreBluetooth
 import ARKit
 import Trilateration3D
 import Darwin
+import Toast_Swift
 
-class BeaconLocationService: NSObject, CLLocationManagerDelegate {
-    
+class BeaconLocationService: NSObject, CLLocationManagerDelegate, CBCentralManagerDelegate {
     var locationManager: CLLocationManager!
     var region: CLBeaconRegion!
     var stompClient: StompClientService!
@@ -21,14 +22,21 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
     var activeBeacons: [Beacon]!
     
     var sceneView: ARSCNView!
-    var aBeacon: Beacon;
+    var aBeacon: Beacon?;
     var manualToggle: Bool = false;
     
-    init(uuid:String, sceneView: ARSCNView, stompClient: StompClientService) {
-        self.aBeacon = Beacon();
-        
+    var bleutoothManager: CBCentralManager!
+    var toastView: UIView?
+    
+    init(uuid:String, sceneView: ARSCNView, stompClient: StompClientService, toastView: UIView) {
         super.init()
         
+        // Bleutooth Manager
+        self.bleutoothManager = CBCentralManager()
+        bleutoothManager.delegate = self
+        self.toastView = toastView
+        
+        // Bleutooth Location
         self.sceneView = sceneView
         self.stompClient = stompClient
         self.activeBeacons = [Beacon]()
@@ -168,7 +176,14 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
         // End if beacon present
         }
     }
+    // CoreBleutooth
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state == .poweredOff {
+            self.sendToast(message: "Please enable Bleutooth!")
+        }
+    }
     
+    // Private functions
     private func beaconActive(beacon: CLBeacon) -> Int? {
         
         for (aIndex, beacon_) in activeBeacons.enumerated() {
@@ -206,11 +221,34 @@ class BeaconLocationService: NSObject, CLLocationManagerDelegate {
     }
     
     public func callWebSocketSetRoom(_ pos: Vector3) {
-        let roomForAR: RoomForARDto = RoomForARDto()
-        roomForAR.roomLocation = pos
-        stompClient.sendMessage(
-            destination: ["/app/room", "/\(aBeacon.roomId!)"],
-            json: roomForAR.toJSON(),
-            usingPrivateChannel: true)
+        if self.bleutoothToastCheck(),
+            let aBeacon_ = self.aBeacon {
+            let roomForAR: RoomForARDto = RoomForARDto()
+            roomForAR.roomLocation = pos
+            stompClient.sendMessage(
+                destination: ["/app/room", "/\(aBeacon_.roomId!)"],
+                json: roomForAR.toJSON(),
+                usingPrivateChannel: true)
+        }
+    }
+    
+    public func bleutoothToastCheck() -> Bool {
+        if self.bleutoothManager.state == .poweredOff {
+            self.sendToast(message: "Please enable Bleutooth!")
+            return false
+        } else if self.aBeacon == nil {
+            self.sendToast(message: "No Beacons in range!")
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    private func sendToast(message: String) {
+        if let toastView_ = self.toastView {
+            var style = ToastStyle()
+            style.backgroundColor = UIColor(red: 50.0/255.0, green: 50.0/255.0, blue: 50.0/255.0, alpha: 1.0)
+            toastView_.makeToast(message, duration: 3.0, position: .top, style: style)
+        }
     }
 }
