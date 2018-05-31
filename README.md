@@ -48,5 +48,5 @@ Known current issues:
     __WorkAround:__ "Room" button on main view, sets closest beacon manually
 * _Indoor location:_<br/>
     __Issue:__ Not looking for 'true north', to get full potential of product, code setup to get n-ammount of items with only 3 Beacons. For this to work, the north of the app has to be calibrated to always be the same, so loaded rooms (containg data items) always open in the same orientation. AKA always putting objects on the same place
-* _"Build not passing"<br/>
+* _"Build not passing"_<br/>
     __Issue:__ [sqlite pod](https://github.com/stephencelis/SQLite.swift) creates error in travis-ci caussing build to fail.
