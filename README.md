@@ -1,9 +1,12 @@
 [![Build Status](https://travis-ci.org/FinalworkDigX/ARMonitoringApp.svg?branch=master)](https://travis-ci.org/FinalworkDigX/ARMonitoringApp)
 
-# ARMonitoring
+<img src="https://i.imgur.com/hvj4iMi.png" alt="github_logo"/>
+
+
+# RAM - ARMonitoring
 
 Augmented Reality application that displays realtime information. This whole application uses Beacon based indoor-location to put the displayed information in the right place. (There are currently issues with the 3D trilateration).
-The displayed data comes from the [SpringbootManager](https://github.com/FinalworkDigX/SpringbootManager) which uses Web Sockets for realtiem data transfer. More information can be found at the Manager's documentation.
+The displayed data comes from the [SpringbootManager](https://github.com/FinalworkDigX/SpringbootManager) which uses Web Sockets for realtime data transfer. More information can be found at the Manager's documentation.
 
 
 ## Setup
@@ -29,13 +32,13 @@ cp Example.Properties.plist Properties.plist
 Needed information:
 * api_url: The URL to where the [SpringbootManager](https://github.com/FinalworkDigX/SpringbootManager) is deployed with api version<br/>
 __example:__ https://myAPI.com/v1/
-* ws_url: The URL for STOMP client to conenct to<br/>
+* ws_url: The URL for STOMP client to connect to<br/>
 __example:__ https://myAPI.com/managerWS/websocket
 * beacon_uuid: UUID for iOS' LocationManager to look for<br/>
 __example:__ 116e98d2-645d-11e8-adc0-fa7ae01bbebc
 
 ## Using the App
-User manual shouldn't be nescecary for this application. Once it has been setup it should be pretty straight forward
+User manual shouldn't be necessary for this application. Once it has been setup it should be pretty straightforward
 
 ## Current issues
 Known current issues:
@@ -45,5 +48,5 @@ Known current issues:
     __WorkAround:__ "Room" button on main view, sets closest beacon manually
 * _Indoor location:_<br/>
     __Issue:__ Not looking for 'true north', to get full potential of product, code setup to get n-ammount of items with only 3 Beacons. For this to work, the north of the app has to be calibrated to always be the same, so loaded rooms (containg data items) always open in the same orientation. AKA always putting objects on the same place
-* _"Build not passing"<br/>
+* _"Build not passing"_<br/>
     __Issue:__ [sqlite pod](https://github.com/stephencelis/SQLite.swift) creates error in travis-ci caussing build to fail.

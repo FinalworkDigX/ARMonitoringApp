@@ -146,7 +146,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     }
     
     func stompBeaconsGet(beacons: [Beacon]) {
-        print("Beacons: \(beacons.count)")
+        print("Recieved Beacons: \(beacons.count)")
+        print("Own Beacons: \(BeaconService().getAll().count)")
         let beaconService: BeaconService = BeaconService()
         beaconService.massInsertOrUpdate(beacons)
     }
@@ -194,7 +195,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, StompClientDelegate
     
     func firstInit() {
         if !UserDefaults.standard.bool(forKey: "launchedBefore") {
-            stompClient?.sendMessage(destination: ["/app/beacon"])
+            if let channel = SessionService.sharedInstance.getUserInfo()?.channel {
+                stompClient?.sendMessage(destination: ["/app/beacon/\(channel)"])
+            }
         }
     }
 }

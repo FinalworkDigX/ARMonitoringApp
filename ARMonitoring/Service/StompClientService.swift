@@ -23,8 +23,6 @@ class StompClientService: StompClientLibDelegate {
     private var socketUrlRequest: NSURLRequest
     private let channel: String
     
-    private let rfarDestination: String
-    
     init(delegate: StompClientDelegate, socketUrl: URL) {
         self.delegate = delegate
         self.socketUrlRequest = NSURLRequest(url: socketUrl)
@@ -32,11 +30,9 @@ class StompClientService: StompClientLibDelegate {
         
         if let channel = SessionService.sharedInstance.getUserInfo()?.channel {
             self.channel = channel
-            self.rfarDestination = "\(RoomForARDto.destination)\(channel)"
         }
         else {
             self.channel = "----"
-            self.rfarDestination = "----"
         }
     }
 
@@ -48,7 +44,7 @@ class StompClientService: StompClientLibDelegate {
     
     func stompClientDidConnect(client: StompClientLib!) {
         client.subscribe(destination: "/topic/dataLog")
-        client.subscribe(destination: "/topic/beacon")
+        client.subscribe(destination: "/topic/beacon/\(channel)")
         client.subscribe(destination: "/topic/room/\(channel)")
         
         delegate.connectionStatusUpdate(status: .CONNECTED)
@@ -74,12 +70,12 @@ class StompClientService: StompClientLibDelegate {
                 delegate.stompDataLogGet(dataLog: dl)
             }
             break;
-        case Beacon.destination:
+        case "\(Beacon.destination)/\(channel)":
             if let beacons: Array<Beacon> = Mapper<Beacon>().mapArray(JSONString: jsonBody!) {
                 delegate.stompBeaconsGet(beacons: beacons)
             }
             break;
-        case rfarDestination:
+        case "\(RoomForARDto.destination)/\(channel)":
             // Incomming cant cast NSNumber toFloat in RoomLocation
             if let rfar = RoomForARDto(JSONString: jsonBody!) {
                 delegate.stompRoomGet(roomForAR: rfar)
@@ -87,7 +83,7 @@ class StompClientService: StompClientLibDelegate {
             print("in roomAR case")
             break;
         default:
-            print("Destination not dound: \(destination);")
+            print("Destination not found: \(destination);")
             break;
         }
         

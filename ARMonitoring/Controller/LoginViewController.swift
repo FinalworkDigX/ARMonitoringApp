@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
         authService.authenticate(loginDto: loginDto, success: { user in
             // Authentication Succeeded
             SessionService.sharedInstance.setUserAccount(user: user)
-            print("sucess")
+            print("success")
             // Call segue?
             self.performSegue(withIdentifier: "arViewSegue", sender: self)
             

@@ -11,7 +11,7 @@ import ObjectMapper
 import Trilateration3D
 
 class RoomForARDto: Mappable {
-    static let destination: String = "/topic/room/"
+    static let destination: String = "/topic/room"
     var roomLocation: Vector3!
     var room: Room!
     
