@@ -23,32 +23,38 @@ class DataItemRequestRestService {
             "dataItemName": dataItemRequest.dataItemName,
             "requester": dataItemRequest.requester
         ]
-        
-        Alamofire.request(
-            "\(SessionService.sharedInstance.API_URL)/request",
-            method: .post,
-            parameters: testParameters,
-            encoding: JSONEncoding.default,
-            headers: headers
-            )
-            .responseJSON { response in
-                if let statusCode = response.response?.statusCode {
-                    if statusCode == 200 {
-                        success(true)
+        if let api_url = SessionService.sharedInstance.API_URL {
+            Alamofire.request(
+                "\(api_url)/request",
+                method: .post,
+                parameters: testParameters,
+                encoding: JSONEncoding.default,
+                headers: headers
+                )
+                .responseJSON { response in
+                    if let statusCode = response.response?.statusCode {
+                        if statusCode == 200 {
+                            success(true)
+                        }
+                        else {
+                            failed(NSError(
+                                domain: "EHB.ARMonitoring",
+                                code: -15,
+                                userInfo: [NSLocalizedFailureReasonErrorKey: "error.request.wrong.status.code"]))
+                        }
                     }
                     else {
                         failed(NSError(
                             domain: "EHB.ARMonitoring",
-                            code: -15,
-                            userInfo: [NSLocalizedFailureReasonErrorKey: "error.request.wrong.status.code"]))
+                            code: -20,
+                            userInfo: [NSLocalizedFailureReasonErrorKey: "error.request.connection.error"]))
                     }
-                }
-                else {
-                    failed(NSError(
-                        domain: "EHB.ARMonitoring",
-                        code: -20,
-                        userInfo: [NSLocalizedFailureReasonErrorKey: "error.request.connection.error"]))
-                }
+            }
+        } else {
+            failed(NSError(
+                domain: "EHB.ARMonitoring",
+                code: -100,
+                userInfo: [NSLocalizedFailureReasonErrorKey: "error.project.plist.not.set"]))
         }
     }
 }

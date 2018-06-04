@@ -125,6 +125,11 @@ class RequestViewController: UIViewController, UITextFieldDelegate {
                 print(error.userInfo)
                 errorMessage = "Connection error, please check your connection"
                 break;
+            case -100:
+                // Connection error
+                print(error.userInfo)
+                errorMessage = "PROJECT SETUP ERROR > Properties.plist"
+                break;
             default:
                 print("unexpected error..")
                 errorMessage = "An unexpected error has occurred.."
