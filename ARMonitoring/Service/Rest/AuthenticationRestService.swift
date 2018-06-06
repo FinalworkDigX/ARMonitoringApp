@@ -62,7 +62,7 @@ class AuthenticationRestService {
             failed(NSError(
                 domain: "EHB.ARMonitoring",
                 code: -100,
-                userInfo: [NSLocalizedFailureReasonErrorKey: "error.authentication.plist.not.set"]))
+                userInfo: [NSLocalizedFailureReasonErrorKey: "error.project.plist.not.set"]))
         }
     }
 }
